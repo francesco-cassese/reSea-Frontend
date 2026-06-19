@@ -1,6 +1,8 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
 
+import logo from '../assets/logoneutro.png'
+
 function Structure() {
     return (
         <>
@@ -16,12 +18,18 @@ function Structure() {
                 </Link>
             </nav>
 
-            <main>
+            <main className="appbg">
                 <Outlet />
             </main>
 
             <footer className="bg-secondary custom-footer px-4 py-4 mt-auto border-top">
         <div className="container-fluid d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+
+            <a className="navbar-brand d-flex align-items-center gap-3 text-decoration-none text-dark" href="/">
+            <div className="brand-text">
+              <img style={{ width: '200px', borderRadius: '50px' }} src={logo} alt="Logo BB" />
+            </div>
+          </a>
 
           <ul className="nav align-items-center gap-3 flex-wrap justify-content-center">
             <li className="nav-item">
