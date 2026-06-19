@@ -10,7 +10,7 @@ function Structure() {
         <Link to="/Homepage" className="nav-link-custom">
           <button className="nav-btn">Home</button>
         </Link>
-        <Link to="/ProductDetail" className="nav-link-custom">
+        <Link to="/Product" className="nav-link-custom">
           <button className="nav-btn">Prodotti</button>
         </Link>
         <Link to="/NotFound" className="nav-link-custom">
@@ -83,7 +83,6 @@ function Structure() {
       </footer>
     </>
   )
-main
 }
 
 export default Structure;
