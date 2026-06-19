@@ -15,7 +15,7 @@ function Product() {
                 {data && data.map((item) => (
                     < Link to={`/ProductDetail/${item.slug}`} className="text-decoration-none text-dark d-inline-block" key={item.id}>
                         <div className="card" style={{ cursor: "pointer", width: "18rem" }}>
-                            <img src="..." className="card-img-top" style={{ height: "250px", objectFit: "contain" }} />
+                            <img src={item.image} className="card-img-top" style={{ height: "250px", objectFit: "contain" }} />
                             <div className="card-body p-2">
                                 <h6 className="card-title mb-1">{item.name}</h6>
 
