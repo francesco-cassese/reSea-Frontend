@@ -10,12 +10,18 @@ import Structure from './Layout/Structure'
 import Homepage from './pages/Hompage'
 import ProductDetail from './pages/ProductDetail'
 import NotFound from './pages/NotFound'
+import Wishlist from './pages/Wishlist'
 import { AppProvider } from './Context/AppContext.jsx'
+
+
+
+
 function App() {
 
 
   return (
     <>
+
       <AppProvider>
         <BrowserRouter>
           <Routes>
