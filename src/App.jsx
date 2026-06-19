@@ -27,6 +27,7 @@ function App() {
             <Route path='/' element={<Structure />}>
               <Route index element={<Navigate to='/Homepage' replace />} />
               <Route path='/Homepage' element={<Homepage />} />
+              <Route path='/Product' element={<Product />} />
               <Route path='/ProductDetail' element={<ProductDetail />} />
               <Route path='/NotFound' element={<NotFound />} />
               <Route path="*" element={<NotFound />} />
