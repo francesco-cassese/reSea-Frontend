@@ -25,11 +25,10 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<Structure />}>
-              <Route index element={<Navigate to='/Homepage' replace />} />
-              <Route path='/Homepage' element={<Homepage />} />
-              <Route path='/Product' element={<Product />} />
-              <Route path='/ProductDetail' element={<ProductDetail />} />
-              <Route path='/NotFound' element={<NotFound />} />
+              <Route index element={<Navigate to='/homepage' replace />} />
+              <Route path='/homepage' element={<Homepage />} />
+              <Route path='/products' element={<Product />} />
+              <Route path='/products/:slug' element={<ProductDetail />} />
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>

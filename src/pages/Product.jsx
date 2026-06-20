@@ -13,14 +13,14 @@ function Product() {
         <>
             <div className="container py-3">
                 {data && data.map((item) => (
-                    < Link to={`/ProductDetail/${item.slug}`} className="text-decoration-none text-dark d-inline-block" key={item.id}>
+                    < Link to={`/products/${item.slug}`} className="text-decoration-none text-dark d-inline-block" key={item.id}>
                         <div className="card" style={{ cursor: "pointer", width: "18rem" }}>
                             <img src={item.image} className="card-img-top" style={{ height: "250px", objectFit: "contain" }} />
                             <div className="card-body p-2">
                                 <h6 className="card-title mb-1">{item.name}</h6>
 
                                 <div className="d-flex justify-content-between align-items-center">
-                                    <p className="card-text fw-bold mb-0 small">{item.price}</p>
+                                    <p className="card-text fw-bold mb-0 small">€{item.price.toFixed(2)}</p>
 
                                     <button
                                         type="button"
