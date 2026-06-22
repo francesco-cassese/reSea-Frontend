@@ -19,7 +19,7 @@
 
 .hero-banner1 {
   width: 100%;
-  min-height: 700px;       /* altezza dell'hero */
+  min-height: 700px;       
   background-image: url('./assets/hero2.png');
   background-size: cover;
   background-position: top;
@@ -27,11 +27,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  .container{
+  margin-right: 15rem;
+}
 }
 
 .hero-banner2 {
   width: 100%;
-  min-height: 700px;       /* altezza dell'hero */
+  min-height: 700px;    
   background-image: url('./assets/herobanner.png');
   background-size: cover;
   background-position: 50% 70%;
@@ -43,7 +47,7 @@
 
 .hero-banner3 {
   width: 100%;
-  min-height: 900px;       /* altezza dell'hero */
+  min-height: 900px;     
   background-image: url('./assets/hero1.png');
   background-size: cover;
   background-position: center;
@@ -51,6 +55,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  .container {
+    margin-left: 15rem;
+  }
 }
 
 /*==STILE NAVBAR==*/
