@@ -25,7 +25,7 @@ function CheckoutForm({ onNext }) {
     return (
 
         <form className={`${styles.form} needs-validation`} onSubmit={handleSubmit}>
-            <h2 className="mb-4">Dati di Spedizione</h2>
+            <h2 className="mb-4">Dove dobbiamo spedire?</h2>
 
             <div className="mb-3">
                 <input
@@ -73,7 +73,7 @@ function CheckoutForm({ onNext }) {
             </div>
 
             <button className={`${styles.coralButton} btn btn-lg w-100`} type="submit" disabled={loading}>
-                {loading ? "Invio in corso..." : "Paga ora"}
+                {loading ? "Invio in corso..." : "Continua"}
             </button>
 
             {error && <p className="text-danger mt-3">Errore: {error}</p>}

@@ -49,7 +49,7 @@ function CheckoutPage() {
     if (cartItems.length === 0) {
         return (
             <div className="container py-5">
-                <h1>Completa l'ordine</h1>
+                <h1>Riepilogo</h1>
                 <p>Il tuo carrello è vuoto!</p>
             </div>
         );
@@ -92,7 +92,7 @@ function CheckoutPage() {
 
     return (
         <div className={`container py-5 ${styles.container}`}>
-            <h1 className={`text-center mb-5 ${styles.title}`}>Completa l'ordine</h1>
+            <h1 className={`text-center mb-5 ${styles.title}`}>Completa il tuo acquisto</h1>
 
             <div className="row justify-content-center">
                 <div className="col-lg-8">
