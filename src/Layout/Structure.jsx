@@ -1,9 +1,11 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
-
+import { useAppContext } from "../Context/AppContext";
 import logo from '../assets/logoneutro.png'
 
 function Structure() {
+
+
   return (
     <>
       <header>
@@ -37,42 +39,24 @@ function Structure() {
                 <li className="nav-item">
                   <Link to="/about" className="nav-btn btn-sm btn-light text-dark">About</Link>
                 </li>
-
-                {/* WISHLIST - agganciare wishlistItems dal context quando pronto */}
-                <li className="nav-item">
-                  <Link to="/wishlist" className="nav-btn btn-sm btn-light text-dark position-relative">
-                    <i className="bi bi-heart-fill"></i>
-                    {/* {wishlistItems.length > 0 && (
-                                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                  {wishlistItems.length}
-                                    </span>
-                                      )} */}
-                  </Link>
-                </li>
               </ul>
             </div>
-            {/* SEARCH BAR - agganciare navSearch e handleNavbarSearch quando pronto */}
-            <div className="nav-item d-flex gap-2 mx-2">
-              <input
-                className="form-control form-control-sm border-0 text-dark rounded-pill"
-                type="search"
-                placeholder="Cerca..."
-                style={{ width: '200px' }}
-              // value={navSearch}
-              // onChange={e => setNavSearch(e.target.value)}
-              // onKeyDown={e => e.key === 'Enter' && handleNavbarSearch()}
-              />
-              <button
-                className="nav-btn btn-sm btn-light text-dark fw-bold"
-              // onClick={handleNavbarSearch}
-              >
-                Cerca
-              </button>
+
+
+            {/* WISHLIST - agganciare wishlistItems dal context quando pronto */}
+            <div className="nav-item">
+              <Link to="/wishlist" className="nav-btn btn-sm btn-light text-dark position-relative">
+                <i className="bi bi-heart-fill"></i>
+                {/* {wishlistItems.length > 0 && (
+                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {wishlistItems.length}
+                      </span>)} */}
+              </Link>
+              <Link to="" className="nav-btn btn-sm btn-light text-dark fw-bold">
+                Carrello
+              </Link>
             </div>
-
-
           </div>
-
         </nav>
       </header>
 
@@ -82,7 +66,6 @@ function Structure() {
 
       <footer className="bg-secondary custom-footer px-4 py-4 mt-auto border-top">
         <div className="container-fluid d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
-
           <a className="navbar-brand d-flex align-items-center gap-3 text-decoration-none text-dark" href="/">
             <div className="brand-text">
               <img style={{ width: '200px', borderRadius: '50px' }} src={logo} alt="Logo BB" />
