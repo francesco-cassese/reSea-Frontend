@@ -8,6 +8,7 @@ import useCheckout from '../hooks/useCeckout.js';
 function CheckoutPage() {
     const [step, setStep] = useState('shipping');
     const [shippingData, setShippingData] = useState(null);
+    const [orderDetails, setOrderDetail] = useState(null);
     const { processOrder } = useCheckout();
     const [isOrderPlaced, setIsOrderPlaced] = useState(false);
 
@@ -35,13 +36,20 @@ function CheckoutPage() {
             items: items
         };
 
-        await processOrder(orderPayload);
-        setIsOrderPlaced(true);
+        console.log("Dati inviati al server:", JSON.stringify(orderPayload, null, 2));
+
+        const response = await processOrder(orderPayload);
+
+        if (response && response.data) {
+            setOrderDetail(response.data);
+            setIsOrderPlaced(true);
+        }
+
     };
 
     const mockCart = [
-        { id: 1, name: 'Prodotto A', price: 10.00, quantity: 2 },
-        { id: 2, name: 'Prodotto B', price: 25.50, quantity: 1 }
+        { id: 1, name: 'Abisso Rigenerato', price: 99.99, quantity: 2 },
+        { id: 2, name: 'Poseidon Wave', price: 129.90, quantity: 1 }
     ];
 
     const cartItems = mockCart;
@@ -75,11 +83,25 @@ function CheckoutPage() {
 
                         <div className="bg-light p-3 rounded mb-4 text-start">
                             <p className="mb-1 small text-uppercase fw-bold text-secondary">Riferimento ordine</p>
-                            <p className="mb-0 font-monospace">#ORD-2026-{Math.floor(Math.random() * 10000)}</p>
+
+                            <p className="mb-0 font-monospace">
+                                #ORD-2026-{orderDetails?.id || 'In elaborazione...'}
+                            </p>
+                        </div>
+
+                        <div className="mt-4 p-4 border border-success rounded bg-light text-center">
+                            <i className="bi bi-heart-fill text-success" style={{ fontSize: '2rem' }}></i>
+                            <h5 className="text-success mt-2 mb-2">Un acquisto con un impatto reale</h5>
+                            <p className="mb-0 text-muted">
+                                Grazie per aver scelto di proteggere i nostri oceani. Con questo ordine,
+                                hai dato nuova vita a
+                                <strong>{orderDetails?.total_plastic} kg di plastica</strong> che
+                                non inquineranno più il mare.
+                            </p>
                         </div>
 
                         <button
-                            className="btn btn-outline-primary px-4 py-2"
+                            className="btn btn-outline-primary px-4 py-2 mt-4"
                             onClick={() => window.location.href = '/'}
                         >
                             Continua lo shopping
