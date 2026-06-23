@@ -154,6 +154,7 @@ function Homepage() {
                     <Link to={currentHero.ctaTo} className="btn btn-primary rounded-pill px-4">
                         {currentHero.ctaLabel}
                     </Link>
+
                 </div>
 
                 <div className="hero-dots">
