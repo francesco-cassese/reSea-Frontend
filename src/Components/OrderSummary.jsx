@@ -1,7 +1,13 @@
 import styles from './OrderSummary.module.css';
 
 function OrderSummary({ cartItems }) {
-    const total = cartItems.reduce((accumulator, item) => accumulator + (item.price * item.quantity), 0);
+    const subTotal = cartItems.reduce((accumulator, item) => accumulator + (item.price * item.quantity), 0);
+
+    const vatValue = 0.22;
+
+    const vatAmount = subTotal * vatValue;
+
+    const total = subTotal + vatAmount;
 
     return (
 
@@ -19,9 +25,15 @@ function OrderSummary({ cartItems }) {
 
             <hr />
 
-            <div className={`${styles.total} d-flex justify-content-between`}>
-                <span>Totale:</span>
+            <div className="d-flex justify-content-between fw-bold fs-5 mt-3">
+                <span>Totale Complessivo</span>
                 <span>€{total.toFixed(2)}</span>
+            </div>
+
+            <div className="text-end">
+                <span className="text-muted">
+                    di cui IVA: €{vatAmount.toFixed(2)}
+                </span>
             </div>
         </div>
     );

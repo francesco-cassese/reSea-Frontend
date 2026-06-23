@@ -24,14 +24,14 @@ function PaymentForm({ onBack, shippingData, onComplete }) {
 
     return (
         <div className={`p-4 border rounded ${styles.formContainer}`}>
-            <h2 className="mb-4">Dati di Pagamento</h2>
+            <h2 className="mb-4">Metodo di pagamento</h2>
 
             <div className="mb-3">
                 <input
                     className={`form-control ${styles.input}`}
                     placeholder="Numero carta (16 cifre)"
                     value={cardNumber}
-                    onChange={(e) => setCardNumber(e.target.value)}
+                    onChange={(event) => setCardNumber(event.target.value)}
                 />
             </div>
 
@@ -41,7 +41,7 @@ function PaymentForm({ onBack, shippingData, onComplete }) {
                         className={`form-control ${styles.input}`}
                         placeholder="MM/AA"
                         value={expiry}
-                        onChange={(e) => setExpiry(e.target.value)}
+                        onChange={(event) => setExpiry(event.target.value)}
                     />
                 </div>
                 <div className="col-md-6 mb-3">
@@ -49,7 +49,7 @@ function PaymentForm({ onBack, shippingData, onComplete }) {
                         className={`form-control ${styles.input}`}
                         placeholder="CVV"
                         value={cvv}
-                        onChange={(e) => setCvv(e.target.value)}
+                        onChange={(event) => setCvv(event.target.value)}
                     />
                 </div>
             </div>
