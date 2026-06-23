@@ -250,3 +250,29 @@
     margin-inline: auto;
   }
 }
+
+/*carrello*/
+.cart-card {
+    background: #f8f6f2;
+}
+
+.cart-img {
+    width: 200px;
+    height: 160px;
+}
+
+.cart-color-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #8B6914, #3a1f00);
+    border: 1.5px solid #ccc;
+    display: inline-block;
+}
+
+.cart-qty-btn {
+    width: 32px;
+    height: 32px;
+    background: #e0dbd3;
+    border: none;
+}
