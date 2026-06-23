@@ -39,6 +39,17 @@ function ProductDetails() {
         );
     }
 
+    const addToCartHandler = () => {
+        const cartData = localStorage.getItem('cart');
+        const currentCart = cartData ? JSON.parse(cartData) : [];
+
+        currentCart.push(product);
+
+        localStorage.setItem('cart', JSON.stringify(currentCart));
+
+        alert(`${product.name} aggiunto al carrello!`);
+    };
+
     return (
         <div className="container py-5">
             <div className="row">
@@ -61,7 +72,9 @@ function ProductDetails() {
                     {/* 'Lead': serve a risaltare un paragrafo specifico all'interno di una pagina.*/}
                     <p className="lead mb-4">{product.description}</p>
 
-                    <button className="btn btn-dark btn-lg px-4 me-md-2">
+                    <button
+                        className="btn btn-dark btn-lg px-4 me-md-2"
+                        onClick={addToCartHandler}>
                         Aggiungi al carrello
                     </button>
                     {/* 'outline': crea un bottone trasparente con solo il bordo colorato di rosso */}
