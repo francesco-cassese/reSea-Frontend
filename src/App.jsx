@@ -33,10 +33,8 @@ function App() {
                 <Route index element={<Navigate to='/homepage' replace />} />
                 <Route path='/homepage' element={<Homepage />} />
                 <Route path='/products' element={<Product />} />
-                <Route path='/cart' element={<Cart />} />
                 <Route path='/checkout' element={<CheckOutPage />} />
                 <Route path='/products/:slug' element={<ProductDetails />} />
-                <Route path="/checkout" element={<CheckoutPage />} />
                 <Route path='/cartpage' element={<CartPage />} />
                 <Route path="*" element={<NotFound />} />
               </Route>

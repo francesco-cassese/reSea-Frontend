@@ -48,7 +48,7 @@ function ProductDetails() {
         localStorage.setItem('cart', JSON.stringify(currentCart));
 
         alert(`${product.name} aggiunto al carrello!`);
-    };
+    }; 
 
     return (
         <div className="container py-5">
