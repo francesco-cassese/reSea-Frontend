@@ -16,7 +16,8 @@ function CategoriesProvider({ children }) {
                 setCategoriesLoading(true);
                 setCategoriesError(null);
                 const result = await fetchApi("/categories");
-                if (mounted) setCategories(result || []);
+                const categoriesData = Array.isArray(result?.data) ? result.data : [];
+                if (mounted) setCategories(categoriesData);
             } catch (error) {
                 if (mounted) setCategoriesError(error.message || "Errore categorie");
             } finally {
@@ -40,11 +41,11 @@ function CategoriesProvider({ children }) {
 }
 
 function useCategories() {
-    const context =useContext(CategoriesContext);
-    if(!context) {
+    const context = useContext(CategoriesContext);
+    if (!context) {
         throw new Error("useCategories deve essere usato dentro CategoriesProvider");
     }
     return context;
 }
 
-export {CategoriesProvider, useCategories};
+export { CategoriesProvider, useCategories };
