@@ -16,7 +16,8 @@ import Cart from './pages/Cart.jsx'
 import CheckOutPage from './pages/CheckOutPage.jsx'
 import { CategoriesProvider } from './Context/CategoriesContext.jsx'
 import ScrollToTop from './Components/ScrollToTop.jsx'
-import { AppProvider } from './Context/AppContext.jsx'
+import CheckoutPage from './pages/CheckOutPage.jsx'
+import { AppProvider } from './Context/AppContext.jsx';
 
 function App() {
 
@@ -46,4 +47,8 @@ function App() {
 }
 
 export default App
+
+
+
+
 
