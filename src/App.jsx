@@ -8,7 +8,7 @@ import {
 
 import Structure from './Layout/Structure'
 import Homepage from './pages/Hompage'
-import ProductDetail from './pages/ProductDetail'
+import ProductDetails from './pages/ProductDetails.jsx'
 import NotFound from './pages/NotFound'
 import Wishlist from './pages/Wishlist'
 import Product from './pages/Product'
