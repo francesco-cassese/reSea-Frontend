@@ -52,6 +52,7 @@ function Structure() {
                 {wishlistItems.length}
                       </span>)} */}
               </Link>
+
               {/* btn cart-list */}
               <div className="dropdown">
                 <button
@@ -83,11 +84,10 @@ function Structure() {
 
                   {/* btn pagina carrello */}
                   <li>
-                    <Link to="/cartpage" className="btn btn-primary w-100 btn-sm">
+                    <Link to="/cart" className="btn btn-primary w-100 btn-sm">
                       Vai al carrello
                     </Link>
                   </li>
-
                 </ul>
               </div>
             </div>

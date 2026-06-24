@@ -1,10 +1,12 @@
 import { useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
+import { useAppContext } from "../Context/AppContext";
 import { priceFormatter } from "../services/reseaServices";
 
 function ProductDetails() {
 
     const { slug } = useParams();
+    const { addHandler } = useAppContext();
 
     const risultato = useFetch(`/products/${slug}`);
     const product = risultato.data;
@@ -41,14 +43,8 @@ function ProductDetails() {
     }
 
     const addToCartHandler = () => {
-        const cartData = localStorage.getItem('cart');
-        const currentCart = cartData ? JSON.parse(cartData) : [];
-
-        currentCart.push(product);
-
-        localStorage.setItem('cart', JSON.stringify(currentCart));
-
-        alert(`${product.name} aggiunto al carrello!`);
+        addHandler(product);
+        alert(`${product.name} è stato aggiunto al carrello!`);
     };
 
     return (
