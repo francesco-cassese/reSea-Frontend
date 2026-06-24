@@ -6,20 +6,47 @@
   box-sizing: border-box;
 }
 
+:root {
+  --color-btn: #0DCAF0;;
+}
+
+
+/*structure*/
+.navbar {
+  position: fixed;
+  width: 100%;
+  height: 104px;
+  z-index: 100;
+  background-image: url('./assets/sand.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+main {
+  padding-top: 120px;
+}
+
+footer {
+  background-image: url('./assets/sand.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 .appbg {
-  background-image: url('./assets/bg.png');
+  background-image: url('./assets/sea.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   position: relative;
-  padding: 0;
   margin: 0;
   min-height: 100vh;
 }
 
 .hero-banner1 {
   width: 100%;
-  min-height: 700px;       
+  min-height: 700px;
   background-image: url('./assets/hero2.png');
   background-size: cover;
   background-position: top;
@@ -28,14 +55,14 @@
   align-items: center;
   justify-content: center;
 
-  .container{
-  margin-right: 15rem;
-}
+  .container {
+    margin-right: 15rem;
+  }
 }
 
 .hero-banner2 {
   width: 100%;
-  min-height: 700px;    
+  min-height: 700px;
   background-image: url('./assets/herobanner.png');
   background-size: cover;
   background-position: 50% 70%;
@@ -47,7 +74,7 @@
 
 .hero-banner3 {
   width: 100%;
-  min-height: 900px;     
+  min-height: 900px;
   background-image: url('./assets/hero1.png');
   background-size: cover;
   background-position: center;
@@ -107,10 +134,10 @@
   text-decoration: none;
 
   padding: 9px 16px;
-  border: none;
+  border: 1px solid rgba(0, 200, 255, 0.4);
   border-radius: 999px;
 
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  background: linear-gradient(135deg, #0077cc, #00c6ff);
   color: white !important;
   font-size: 0.9rem;
   font-weight: 700;
@@ -119,7 +146,8 @@
   cursor: pointer;
 
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(37, 117, 252, 0.35);
+  box-shadow: 0 4px 15px rgba(0, 150, 255, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
 
   position: relative;
   overflow: hidden;
@@ -128,7 +156,10 @@
 .nav-btn:hover {
   color: white !important;
   transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 8px 25px rgba(37, 117, 252, 0.5);
+  box-shadow: 0 8px 25px rgba(0, 150, 255, 0.65),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  border-color: rgba(255, 255, 255, 0.6);
+  background: linear-gradient(135deg, #005fa3, #00aadd);
 }
 
 .nav-btn:active {
@@ -144,7 +175,7 @@
   height: 100%;
   background: linear-gradient(90deg,
       transparent,
-      rgba(255, 255, 255, 0.4),
+      rgba(255, 255, 255, 0.55),
       transparent);
   transition: 0.6s;
 }
@@ -253,30 +284,74 @@
 
 /*carrello*/
 .cart-card {
-    background: #f8f6f2;
+  background: #f8f6f2;
 }
 
 .cart-img {
-    width: 200px;
-    height: 160px;
+  width: 200px;
+  height: 160px;
 }
 
 .cart-color-dot {
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, #8B6914, #3a1f00);
-    border: 1.5px solid #ccc;
-    display: inline-block;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #8B6914, #3a1f00);
+  border: 1.5px solid #ccc;
+  display: inline-block;
 }
 
 .cart-qty-btn {
-    width: 32px;
-    height: 32px;
-    background: #e0dbd3;
-    border: none;
+  width: 32px;
+  height: 32px;
+  background: #e0dbd3;
+  border: none;
 }
 
-.sidebarp{
+.sidebarp {
   margin-top: 37px;
+}
+
+.card-product {
+  border-radius: 0;
+  border: none;
+  background-image: url('./assets/bgcard2.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+
+.home-card {
+  border: none;
+
+  .card-img-top {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+  }
+}
+
+.sidebar-filter {
+
+  .btn {
+    background-color: var(--color-btn);
+    color: black;
+    border: none;
+  }
+}
+
+.page-item.active .page-link {
+    background-color: var(--color-btn) !important;
+    border-color: var(--color-btn) !important;
+    color: white !important;
 }

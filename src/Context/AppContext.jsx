@@ -3,6 +3,23 @@ import { useState, createContext, useContext, useEffect } from "react";
 const AppContext = createContext();
 
 function AppProvider({ children }) {
+  
+    const [search, setSearch] = useState("");
+    const [wishlist, setWishlist] = useState([]);
+    const [cart, setCart] = useState(initialCart);
+
+    //btn carrello e wishlist
+    const toggleWishlist = (id) => {
+        setWishlist(prev =>
+            prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]
+        );
+    };
+
+    const toggleCart = (id) => {
+        setCart(prev =>
+            prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]
+        );
+    };
 
     const cartData = localStorage.getItem('cart');
 
@@ -12,8 +29,6 @@ function AppProvider({ children }) {
     } else {
         initialCart = [];
     }
-
-    const [cart, setCart] = useState(initialCart);
 
     const addHandler = (productToAdd) => {
         const newProduct = {
@@ -71,6 +86,11 @@ function AppProvider({ children }) {
     return (
         <AppContext.Provider value={{
             cart,
+            search, 
+            setSearch,
+            wishlist, 
+            toggleWishlist,
+            toggleCart,
             addHandler,
             removeHandler,
             updateQuantity,
@@ -87,7 +107,4 @@ function useAppContext() {
     return useContext(AppContext);
 }
 
-export {
-    useAppContext,
-    AppProvider
-};
+export { useAppContext, AppProvider };

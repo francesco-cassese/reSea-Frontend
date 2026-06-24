@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from './CheckoutForm.module.css';
 
-function PaymentForm({ onBack, shippingData, onComplete }) {
+function PaymentForm({ onBack, shippingData, onComplete, isSubmitting }) {
     const [cardNumber, setCardNumber] = useState('');
     const [expiry, setExpiry] = useState('');
     const [cvv, setCvv] = useState('');
@@ -58,7 +58,7 @@ function PaymentForm({ onBack, shippingData, onComplete }) {
 
             <div className="d-flex gap-2">
                 <button className="btn btn-secondary" onClick={onBack}>Indietro</button>
-                <button className={`btn w-100 ${styles.coralButton}`} onClick={handlePayment}>
+                <button className={`btn w-100 ${styles.coralButton}`} onClick={handlePayment} disabled={isSubmitting}>
                     Paga ora
                 </button>
             </div>

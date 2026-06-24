@@ -9,7 +9,7 @@ function Structure() {
   return (
     <>
       <header>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-secondary px-4">
+        <nav className="navbar navbar-expand-lg navbar-white px-4">
 
           <Link className="navbar-brand" to="/homepage">
             <img className="logo-nav" src={logo} alt="Logo" />
@@ -44,7 +44,7 @@ function Structure() {
 
 
             {/* WISHLIST - agganciare wishlistItems dal context quando pronto */}
-            <div className="nav-item">
+            <div className="nav-item d-flex gap-3">
               <Link to="/wishlist" className="nav-btn btn-sm btn-light text-dark position-relative">
                 <i className="bi bi-heart-fill"></i>
                 {/* {wishlistItems.length > 0 && (
@@ -52,9 +52,44 @@ function Structure() {
                 {wishlistItems.length}
                       </span>)} */}
               </Link>
-              <Link to="/cart" className="nav-btn btn-sm btn-light text-dark fw-bold">
-                <i className="bi bi-cart-fill"></i>
-              </Link>
+
+              {/* btn cart-list */}
+              <div className="dropdown">
+                <button
+                  className="nav-btn btn-sm dropdown-toggle"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <i className="bi bi-cart-fill"></i>
+                </button>
+
+                <ul className="dropdown-menu dropdown-menu-end p-3" style={{ minWidth: "280px" }}>
+
+                  {/* lista prodotti */}
+                  <li className="dropdown-item-text text-muted small mb-2">Il tuo carrello</li>
+
+                  {/* placeholder per i prodotti */}
+                  <li className="dropdown-item-text">
+                    <div className="d-flex align-items-center gap-2 py-1">
+                      <img src="" alt="" style={{ width: "40px", height: "40px", objectFit: "cover" }} />
+                      <div>
+                        <p className="mb-0 small fw-bold">Nome prodotto</p>
+                        <p className="mb-0 small text-muted">€ 00.00</p>
+                      </div>
+                    </div>
+                  </li>
+
+                  <li><hr className="dropdown-divider" /></li>
+
+                  {/* btn pagina carrello */}
+                  <li>
+                    <Link to="/cart" className="btn btn-primary w-100 btn-sm">
+                      Vai al carrello
+                    </Link>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </nav>
@@ -64,7 +99,7 @@ function Structure() {
         <Outlet />
       </main>
 
-      <footer className="bg-secondary custom-footer px-4 py-4 mt-auto border-top">
+      <footer className="custom-footer px-4 py-4 mt-auto border-top">
         <div className="container-fluid d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
           <a className="navbar-brand d-flex align-items-center gap-3 text-decoration-none text-dark" href="/">
             <div className="brand-text">
@@ -73,27 +108,27 @@ function Structure() {
           </a>
           <ul className="nav align-items-center gap-3 flex-wrap justify-content-center">
             <li className="nav-item">
-              <Link to="/privacy" className="text-decoration-none text-white fw-medium small px-2">
+              <Link to="/privacy" className="text-decoration-none text-dark fw-medium small px-2">
                 Privacy Policy
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/AboutUs" className="text-decoration-none text-white fw-medium small px-2">
+              <Link to="/AboutUs" className="text-decoration-none text-dark fw-medium small px-2">
                 About Us
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/terms" className="text-decoration-none text-white fw-medium small px-2">
+              <Link to="/terms" className="text-decoration-none text-dark fw-medium small px-2">
                 Terms of Service
               </Link>
             </li>
-            <li className="nav-item d-flex align-items-center gap-1 text-white fw-medium small px-2">
-              <i className="bi bi-globe2 text-white"></i>
+            <li className="nav-item d-flex align-items-center gap-1 text-dark fw-medium small px-2">
+              <i className="bi bi-globe2 text-dark"></i>
               <span>Florence, Italy</span>
             </li>
           </ul>
 
-          <div className="text-white small">
+          <div className="text-dark small">
             <span>© {new Date().getFullYear()} reSea.</span>
           </div>
 
