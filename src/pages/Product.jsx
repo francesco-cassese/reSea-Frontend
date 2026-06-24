@@ -3,6 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import { useCategories } from "../Context/CategoriesContext";
 import ProductSidebar from "../components/ProductSidebar";
+import { priceFormatter } from "../services/reseaServices";
 
 function Product() {
     const { categories, categoriesLoading, categoriesError } = useCategories();
@@ -77,45 +78,39 @@ function Product() {
         <div className="container py-4">
             <div className="d-flex gap-4 align-items-start">
                 <div className="sidebarp">
-                {/* sidebar */}
-                <ProductSidebar
-                    searchInput={searchInput}
-                    setSearchInput={setSearchInput}
-                    applySearch={applySearch}
-                    handleSearchKeyDown={handleSearchKeyDown}
-                    selectedCategory={selectedCategory}
-                    handleCategoryChange={handleCategoryChange}
-                    safeCategories={safeCategories}
-                    categoriesLoading={categoriesLoading}
-                    categoriesError={categoriesError}
-                    minPriceInput={minPriceInput}
-                    setMinPriceInput={setMinPriceInput}
-                    maxPriceInput={maxPriceInput}
-                    setMaxPriceInput={setMaxPriceInput}
-                    sortBy={sortBy}
-                    handleSortChange={handleSortChange}
-                    limit={limit}
-                    handleLimitChange={handleLimitChange}
-                    handlePriceFilters={handlePriceFilters}
-                    clearAllFilters={clearAllFilters}
-                />
-            </div>
-            {/* prodotti */}
-            <div className="flex-grow-1">
-                {products.length === 0 ? (
+                    {/* sidebar */}
+                    <ProductSidebar
+                        searchInput={searchInput}
+                        setSearchInput={setSearchInput}
+                        applySearch={applySearch}
+                        handleSearchKeyDown={handleSearchKeyDown}
+                        selectedCategory={selectedCategory}
+                        handleCategoryChange={handleCategoryChange}
+                        safeCategories={safeCategories}
+                        categoriesLoading={categoriesLoading}
+                        categoriesError={categoriesError}
+                        minPriceInput={minPriceInput}
+                        setMinPriceInput={setMinPriceInput}
+                        maxPriceInput={maxPriceInput}
+                        setMaxPriceInput={setMaxPriceInput}
+                        sortBy={sortBy}
+                        handleSortChange={handleSortChange}
+                        limit={limit}
+                        handleLimitChange={handleLimitChange}
+                        handlePriceFilters={handlePriceFilters}
+                        clearAllFilters={clearAllFilters}
+                    />
+                </div>
+                {/* prodotti */}
+                <div className="flex-grow-1">
+                    {products.length === 0 ? (
 
-                    <div className="d-flex flex-column align-items-center justify-content-center py-5">
-                        <i className="bi bi-sunglasses text-warning" style={{ fontSize: '4rem' }}></i>
-                        <h4 className="mt-3 text-dark">Nessun prodotto trovato</h4>
-                    </div>
-
-                ) : (
-                    <>
-                        <div className="d-flex justify-content-between align-items-center mb-3">
-                            <small className="text-muted ms-auto">Totale prodotti: {total}</small>
-                            {isFetching && <small className="text-muted">Aggiornamento risultati...</small>}
+                        <div className="d-flex flex-column align-items-center justify-content-center py-5">
+                            <i className="bi bi-sunglasses text-warning" style={{ fontSize: '4rem' }}></i>
+                            <h4 className="mt-3 text-dark">Nessun prodotto trovato</h4>
                         </div>
-
+                       ) : ( 
+                         <>
                         <div className="d-flex flex-wrap gap-3 justify-content-center">
                             {products.map((item) => (
                                 <Link
@@ -150,10 +145,9 @@ function Product() {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </Link>
-                            ))}
-                        </div>
+                                    </Link>
+                                ))}
+                            </div>
 
                         {/* paginazione */}
                         <div className="d-flex flex-column align-items-center gap-2 mt-4">
@@ -182,7 +176,6 @@ function Product() {
                         </div>
                     </>)}
             </div>
-        </div>
         </div >
     );
 }

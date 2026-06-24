@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import { heroSlides, HERO_INTERVAL_MS } from "../data/heroSlides";
+import { priceFormatter } from "../services/reseaServices";
 
 function ProductCarouselSection({ title, products, loading, error }) {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -106,7 +107,7 @@ function ProductCarouselSection({ title, products, loading, error }) {
                                     />
                                     <div className="card-body">
                                         <h6 className="card-title">{item.name}</h6>
-                                        <p className="card-text fw-bold mb-0">€ {Number(item.price).toFixed(2)}</p>
+                                        <p className="card-text fw-bold mb-0">{priceFormatter(item.price)}</p>
                                     </div>
                                 </div>
                             </Link>
