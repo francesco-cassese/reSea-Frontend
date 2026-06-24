@@ -9,7 +9,7 @@ function Structure() {
   return (
     <>
       <header>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-secondary px-4">
+        <nav className="navbar navbar-expand-lg navbar-dark px-4">
 
           <Link className="navbar-brand" to="/homepage">
             <img className="logo-nav" src={logo} alt="Logo" />
@@ -64,7 +64,7 @@ function Structure() {
         <Outlet />
       </main>
 
-      <footer className="bg-secondary custom-footer px-4 py-4 mt-auto border-top">
+      <footer className="custom-footer px-4 py-4 mt-auto border-top">
         <div className="container-fluid d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
           <a className="navbar-brand d-flex align-items-center gap-3 text-decoration-none text-dark" href="/">
             <div className="brand-text">
@@ -73,27 +73,27 @@ function Structure() {
           </a>
           <ul className="nav align-items-center gap-3 flex-wrap justify-content-center">
             <li className="nav-item">
-              <Link to="/privacy" className="text-decoration-none text-white fw-medium small px-2">
+              <Link to="/privacy" className="text-decoration-none text-dark fw-medium small px-2">
                 Privacy Policy
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/AboutUs" className="text-decoration-none text-white fw-medium small px-2">
+              <Link to="/AboutUs" className="text-decoration-none text-dark fw-medium small px-2">
                 About Us
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/terms" className="text-decoration-none text-white fw-medium small px-2">
+              <Link to="/terms" className="text-decoration-none text-dark fw-medium small px-2">
                 Terms of Service
               </Link>
             </li>
-            <li className="nav-item d-flex align-items-center gap-1 text-white fw-medium small px-2">
-              <i className="bi bi-globe2 text-white"></i>
+            <li className="nav-item d-flex align-items-center gap-1 text-dark fw-medium small px-2">
+              <i className="bi bi-globe2 text-dark"></i>
               <span>Florence, Italy</span>
             </li>
           </ul>
 
-          <div className="text-white small">
+          <div className="text-dark small">
             <span>© {new Date().getFullYear()} reSea.</span>
           </div>
 
