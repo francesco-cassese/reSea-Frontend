@@ -4,11 +4,13 @@ import useFetch from "../hooks/useFetch";
 import { useCategories } from "../Context/CategoriesContext";
 import ProductSidebar from "../components/ProductSidebar";
 import { priceFormatter } from "../services/reseaServices";
+import { useAppContext } from "../Context/AppContext";
 
 function Product() {
     const { categories, categoriesLoading, categoriesError } = useCategories();
     const safeCategories = Array.isArray(categories) ? categories : [];
     const [searchParams, setSearchParams] = useSearchParams();
+    const { addHandler, cart } = useAppContext();
 
     const selectedCategory = searchParams.get("category") || "all";
     const appliedSearch = searchParams.get("search") || "";
@@ -111,46 +113,58 @@ function Product() {
                         </div>
                     ) : (
                         <>
-                        <div className="d-flex text-secondary justify-content-end">
-                            <p>Prodotti trovati: {products.length}</p>
-                        </div>
+                            <div className="d-flex text-secondary justify-content-end">
+                                <p>Prodotti trovati: {products.length}</p>
+                            </div>
                             <div className="d-flex flex-wrap gap-3 justify-content-center">
-                                {products.map((item) => (
-                                    <Link
-                                        to={"/products/" + item.slug}
-                                        className="text-decoration-none text-dark d-inline-block"
-                                        key={item.id}
-                                    >
-                                        <div className="card card-product" style={{ cursor: "pointer", width: "18rem" }}>
-                                            <img
-                                                src={item.image}
-                                                className="card-img-top"
-                                                alt={item.name}
-                                                loading="lazy"
-                                                decoding="async"
-                                            />
-                                            <div className="card-body p-2">
-                                                <h6 className="card-title fw-bold mt-3 mb-2">{item.name}</h6>
-                                                <div className="d-flex justify-content-between align-items-center">
-                                                    <p className="card-text fw-bold mb-0 small">
-                                                        €{Number(item.price).toFixed(2)}
-                                                    </p>
-                                                    <div>
+                                {products.map((item) => {
+                                    const inCart = cart.some(p => p.id === item.id);
+                                    return (
 
-                                                        <button type="button btn-cartwish" className="btn btn-black-50 rounded-circle">
-                                                            <i className="bi {liked ? bi-heart : bi-heart-fill } text-dark"></i>
-                                                        </button>
+                                        <Link
+                                            to={"/products/" + item.slug}
+                                            className="text-decoration-none text-dark d-inline-block"
+                                            key={item.id}
+                                        >
+                                            <div className="card card-product" style={{ cursor: "pointer", width: "18rem" }}>
+                                                <img
+                                                    src={item.image}
+                                                    className="card-img-top"
+                                                    alt={item.name}
+                                                    loading="lazy"
+                                                    decoding="async"
+                                                />
+                                                <div className="card-body p-2">
+                                                    <h6 className="card-title fw-bold mt-3 mb-2">{item.name}</h6>
+                                                    <div className="d-flex justify-content-between align-items-center">
+                                                        <p className="card-text fw-bold mb-0 small">
+                                                            €{Number(item.price).toFixed(2)}
+                                                        </p>
+                                                        <div>
 
-                                                        <button type="button btn-cartwish" className="btn btn-black-50 rounded-circle">
-                                                            <i className="bi {carted ? bi-cart : bi-cart-fill } text-dark"></i>
-                                                        </button>
+                                                            <button type="button btn-cartwish" className="btn btn-black-50 rounded-circle">
+                                                                <i className="bi {liked ? bi-heart : bi-heart-fill } text-dark"></i>
+                                                            </button>
+                                
+                                                            <button
+                                                                type="button"
+                                                                className="btn rounded-circle"
+                                                                onClick={(e) => {
+                                                                    e.preventDefault();
+                                                                    e.stopPropagation();
+                                                                    addHandler(item);
+                                                                }}
+                                                            >
+                                                                <i className={`bi ${inCart ? "bi-cart-fill" : "bi-cart"}`}></i>
+                                                            </button>
 
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </Link>
-                                ))}
+                                        </Link>
+                                        );
+                                })}
                             </div>
 
                             {/* paginazione */}
@@ -179,10 +193,10 @@ function Product() {
                                 <small className="text-muted">Pagina {page} di {totalPages}</small>
                             </div>
                         </>)}
-                    </div>
                 </div>
             </div>
-     );
+        </div>
+    );
 }
 
 export default Product;
