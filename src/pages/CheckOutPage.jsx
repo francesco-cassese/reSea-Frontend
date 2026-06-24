@@ -64,6 +64,16 @@ function CheckoutPage() {
 
     const cartItems = cart;
 
+    if (selectedItems.length === 0 && !isOrderPlaced) {
+        return (
+            <div className="container py-5 text-center">
+                <h2>Il tuo carrello è vuoto o non hai selezionato articoli</h2>
+                <p>Torna indietro per scegliere i prodotti che desideri acquistare.</p>
+                <Link to="/cart" className="btn btn-primary mt-3">Torna al carrello</Link>
+            </div>
+        );
+    }
+
     if (isOrderPlaced) {
         return (
             <div className="container py-5">
@@ -165,7 +175,7 @@ function CheckoutPage() {
                                 <PaymentForm
                                     onBack={() => setStep('shipping')}
                                     shippingData={shippingData}
-                                    onComplete={(data) => handleFinalOrder(data, cartItems)}
+                                    onComplete={(data) => handleFinalOrder(data, selectedItems)}
                                     isSubmitting={isSubmitting}
                                     setIsSubmitting={setIsSubmitting}
                                 />

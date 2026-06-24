@@ -1,6 +1,7 @@
 .container {
     background-color: #ffffff;
     min-height: 100vh;
+    padding-bottom: 2rem;
 }
 
 .title {
@@ -8,12 +9,23 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
+    font-size: 1.5rem;
 }
 
 .sectionWrapper {
-    margin-bottom: 3rem;
-    padding: 1.5rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
     border-radius: 12px;
     background-color: #fcfcfc;
     border: 1px solid #eeeeee;
+}
+
+@media (min-width: 768px) {
+    .sectionWrapper {
+        padding: 2rem;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
 }
