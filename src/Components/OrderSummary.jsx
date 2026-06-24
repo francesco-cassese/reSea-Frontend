@@ -1,3 +1,4 @@
+import { priceFormatter } from '../services/reseaServices';
 import styles from './OrderSummary.module.css';
 
 function OrderSummary({ cartItems }) {
@@ -18,21 +19,26 @@ function OrderSummary({ cartItems }) {
                 {cartItems.map((item) => (
                     <li key={item.id} className={`${styles.item} d-flex justify-content-between mb-2`}>
                         <span>{item.name} x {item.quantity}</span>
-                        <span>€{(item.price * item.quantity).toFixed(2)}</span>
+                        <span>{priceFormatter(item.price * item.quantity)}</span>
                     </li>
                 ))}
             </ul>
 
             <hr />
 
+            <div className="d-flex justify-content-between text-secondary mb-1">
+                <span>Subtotale (IVA esclusa)</span>
+                <span>{priceFormatter(subTotal)}</span>
+            </div>
+
             <div className="d-flex justify-content-between fw-bold fs-5 mt-3">
                 <span>Totale Complessivo</span>
-                <span>€{total.toFixed(2)}</span>
+                <span>{priceFormatter(total)}</span>
             </div>
 
             <div className="text-end">
                 <span className="text-muted">
-                    di cui IVA: €{vatAmount.toFixed(2)}
+                    di cui IVA:{priceFormatter(vatAmount)}
                 </span>
             </div>
         </div>

@@ -3,6 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import { useCategories } from "../Context/CategoriesContext";
 import ProductSidebar from "../components/ProductSidebar";
+import { priceFormatter } from "../services/reseaServices";
 
 function Product() {
     const { categories, categoriesLoading, categoriesError } = useCategories();
@@ -77,105 +78,105 @@ function Product() {
         <div className="container py-4">
             <div className="d-flex gap-4 align-items-start">
                 <div className="sidebarp">
-                {/* sidebar */}
-                <ProductSidebar
-                    searchInput={searchInput}
-                    setSearchInput={setSearchInput}
-                    applySearch={applySearch}
-                    handleSearchKeyDown={handleSearchKeyDown}
-                    selectedCategory={selectedCategory}
-                    handleCategoryChange={handleCategoryChange}
-                    safeCategories={safeCategories}
-                    categoriesLoading={categoriesLoading}
-                    categoriesError={categoriesError}
-                    minPriceInput={minPriceInput}
-                    setMinPriceInput={setMinPriceInput}
-                    maxPriceInput={maxPriceInput}
-                    setMaxPriceInput={setMaxPriceInput}
-                    sortBy={sortBy}
-                    handleSortChange={handleSortChange}
-                    limit={limit}
-                    handleLimitChange={handleLimitChange}
-                    handlePriceFilters={handlePriceFilters}
-                    clearAllFilters={clearAllFilters}
-                />
-            </div>
-            {/* prodotti */}
-            <div className="flex-grow-1">
-                {products.length === 0 ? (
+                    {/* sidebar */}
+                    <ProductSidebar
+                        searchInput={searchInput}
+                        setSearchInput={setSearchInput}
+                        applySearch={applySearch}
+                        handleSearchKeyDown={handleSearchKeyDown}
+                        selectedCategory={selectedCategory}
+                        handleCategoryChange={handleCategoryChange}
+                        safeCategories={safeCategories}
+                        categoriesLoading={categoriesLoading}
+                        categoriesError={categoriesError}
+                        minPriceInput={minPriceInput}
+                        setMinPriceInput={setMinPriceInput}
+                        maxPriceInput={maxPriceInput}
+                        setMaxPriceInput={setMaxPriceInput}
+                        sortBy={sortBy}
+                        handleSortChange={handleSortChange}
+                        limit={limit}
+                        handleLimitChange={handleLimitChange}
+                        handlePriceFilters={handlePriceFilters}
+                        clearAllFilters={clearAllFilters}
+                    />
+                </div>
+                {/* prodotti */}
+                <div className="flex-grow-1">
+                    {products.length === 0 ? (
 
-                    <div className="d-flex flex-column align-items-center justify-content-center py-5">
-                        <i className="bi bi-sunglasses text-warning" style={{ fontSize: '4rem' }}></i>
-                        <h4 className="mt-3 text-dark">Nessun prodotto trovato</h4>
-                    </div>
-
-                ) : (
-                    <>
-                        <div className="d-flex justify-content-between align-items-center mb-3">
-                            <small className="text-muted ms-auto">Totale prodotti: {total}</small>
-                            {isFetching && <small className="text-muted">Aggiornamento risultati...</small>}
+                        <div className="d-flex flex-column align-items-center justify-content-center py-5">
+                            <i className="bi bi-sunglasses text-warning" style={{ fontSize: '4rem' }}></i>
+                            <h4 className="mt-3 text-dark">Nessun prodotto trovato</h4>
                         </div>
 
-                        <div className="d-flex flex-wrap gap-3 justify-content-center">
-                            {products.map((item) => (
-                                <Link
-                                    to={"/products/" + item.slug}
-                                    className="text-decoration-none text-dark d-inline-block"
-                                    key={item.id}
-                                >
-                                    <div className="card" style={{ cursor: "pointer", width: "18rem" }}>
-                                        <img
-                                            src={item.image}
-                                            className="card-img-top"
-                                            style={{ height: "250px", objectFit: "contain" }}
-                                            alt={item.name}
-                                            loading="lazy"
-                                            decoding="async"
-                                        />
-                                        <div className="card-body p-2">
-                                            <h6 className="card-title mb-1">{item.name}</h6>
-                                            <div className="d-flex justify-content-between align-items-center">
-                                                <p className="card-text fw-bold mb-0 small">
-                                                    €{Number(item.price).toFixed(2)}
-                                                </p>
-                                                <button type="button" className="btn btn-black-50 rounded-circle">
-                                                    <i className="bi bi-heart-fill text-danger"></i>
-                                                </button>
+                    ) : (
+                        <>
+                            <div className="d-flex justify-content-between align-items-center mb-3">
+                                <small className="text-muted ms-auto">Totale prodotti: {total}</small>
+                                {isFetching && <small className="text-muted">Aggiornamento risultati...</small>}
+                            </div>
+
+                            <div className="d-flex flex-wrap gap-3 justify-content-center">
+                                {products.map((item) => (
+                                    <Link
+                                        to={"/products/" + item.slug}
+                                        className="text-decoration-none text-dark d-inline-block"
+                                        key={item.id}
+                                    >
+                                        <div className="card" style={{ cursor: "pointer", width: "18rem" }}>
+                                            <img
+                                                src={item.image}
+                                                className="card-img-top"
+                                                style={{ height: "250px", objectFit: "contain" }}
+                                                alt={item.name}
+                                                loading="lazy"
+                                                decoding="async"
+                                            />
+                                            <div className="card-body p-2">
+                                                <h6 className="card-title mb-1">{item.name}</h6>
+                                                <div className="d-flex justify-content-between align-items-center">
+                                                    <p className="card-text fw-bold mb-0 small">
+                                                        {priceFormatter(item.price)}
+                                                    </p>
+                                                    <button type="button" className="btn btn-black-50 rounded-circle">
+                                                        <i className="bi bi-heart-fill text-danger"></i>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </Link>
-                            ))}
-                        </div>
+                                    </Link>
+                                ))}
+                            </div>
 
-                        {/* paginazione */}
-                        <div className="d-flex flex-column align-items-center gap-2 mt-4">
-                            <nav>
-                                <ul className="pagination mb-0">
-                                    <li className={"page-item" + (page <= 1 ? " disabled" : "")}>
-                                        <button className="page-link" onClick={() => goToPage(page - 1)} type="button">
-                                            Precedente
-                                        </button>
-                                    </li>
-                                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
-                                        <li key={p} className={"page-item" + (p === page ? " active" : "")}>
-                                            <button className="page-link" onClick={() => goToPage(p)} type="button">
-                                                {p}
+                            {/* paginazione */}
+                            <div className="d-flex flex-column align-items-center gap-2 mt-4">
+                                <nav>
+                                    <ul className="pagination mb-0">
+                                        <li className={"page-item" + (page <= 1 ? " disabled" : "")}>
+                                            <button className="page-link" onClick={() => goToPage(page - 1)} type="button">
+                                                Precedente
                                             </button>
                                         </li>
-                                    ))}
-                                    <li className={"page-item" + (page >= totalPages ? " disabled" : "")}>
-                                        <button className="page-link" onClick={() => goToPage(page + 1)} type="button">
-                                            Successiva
-                                        </button>
-                                    </li>
-                                </ul>
-                            </nav>
-                            <small className="text-muted">Pagina {page} di {totalPages}</small>
-                        </div>
-                    </>)}
+                                        {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+                                            <li key={p} className={"page-item" + (p === page ? " active" : "")}>
+                                                <button className="page-link" onClick={() => goToPage(p)} type="button">
+                                                    {p}
+                                                </button>
+                                            </li>
+                                        ))}
+                                        <li className={"page-item" + (page >= totalPages ? " disabled" : "")}>
+                                            <button className="page-link" onClick={() => goToPage(page + 1)} type="button">
+                                                Successiva
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </nav>
+                                <small className="text-muted">Pagina {page} di {totalPages}</small>
+                            </div>
+                        </>)}
+                </div>
             </div>
-        </div>
         </div >
     );
 }

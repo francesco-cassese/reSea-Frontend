@@ -10,4 +10,21 @@ async function fetchApi(endpoint, options = {}) {
     return await response.json();
 }
 
-export { fetchApi };
+function priceFormatter(number, languageTag = 'it-IT', currency = 'EUR') {
+
+    const numericValue = parseFloat(number);
+
+    if (isNaN(numericValue)) {
+        console.error("Il valore passato non è un numero valido:", number);
+        return "Prezzo non disponibile";
+    }
+
+    const formatter = new Intl.NumberFormat(languageTag, {
+        style: 'currency',
+        currency: currency,
+    });
+
+    return formatter.format(numericValue);
+}
+
+export { fetchApi, priceFormatter };

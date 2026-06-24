@@ -4,6 +4,7 @@ import OrderSummary from '../Components/OrderSummary.jsx';
 import PaymentForm from '../Components/PaymentForm.jsx';
 import styles from './CheckoutPage.module.css';
 import useCheckout from '../hooks/useCeckout.js';
+import { priceFormatter } from '../services/reseaServices.js';
 
 function CheckoutPage() {
     const [step, setStep] = useState('shipping');
@@ -102,14 +103,14 @@ function CheckoutPage() {
                                 {orderDetails?.items?.map((item, index) => (
                                     <li key={index} className="d-flex justify-content-between border-bottom py-1">
                                         <span>{item.name || `Prodotto #${item.id}`} x {item.quantity}</span>
-                                        <span>€{(item.unitPrice * item.quantity).toFixed(2)}</span>
+                                        <span>{priceFormatter(item.unitPrice * item.quantity)}</span>
                                     </li>
                                 ))}
                             </ul>
                             <hr />
                             <p className="d-flex justify-content-between fw-bold mb-0">
                                 <span>Totale Finale</span>
-                                <span>€{orderDetails?.total.toFixed(2)}</span>
+                                <span>{priceFormatter(orderDetails?.total)}</span>
                             </p>
                         </div>
 
