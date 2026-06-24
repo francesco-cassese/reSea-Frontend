@@ -13,6 +13,8 @@ function Cart() {
         }
     }
 
+    const canProceed = cart.some((item) => item.selected === true);
+
     return (
         <>
             {cart.length === 0 ? (
@@ -40,9 +42,15 @@ function Cart() {
                         </div>
                     </div>
                     <div className="w-100 d-flex align-items-center">
-                        <Link to="/checkout" className="btn btn-primary btn-md mt-2 mb-3 mx-auto">
-                            Procedi al pagamento
-                        </Link>
+                        {canProceed ? (
+                            <Link to="/checkout" className="btn btn-primary btn-md mt-2 mb-3 mx-auto">
+                                Procedi al pagamento
+                            </Link>
+                        ) : (
+                            <button className="btn btn-secondary btn-md mt-2 mb-3 mx-auto" disabled>
+                                Procedi al pagamento
+                            </button>
+                        )}
                     </div>
                 </div>
 

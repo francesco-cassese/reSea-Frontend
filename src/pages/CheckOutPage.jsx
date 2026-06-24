@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from "react-router-dom";
 import CheckoutForm from '../Components/CheckOutForm.jsx';
 import OrderSummary from '../Components/OrderSummary.jsx';
 import PaymentForm from '../Components/PaymentForm.jsx';
@@ -8,6 +9,7 @@ import { priceFormatter } from '../services/reseaServices.js';
 import { useAppContext } from '../Context/AppContext.jsx';
 
 function CheckoutPage() {
+
     const [step, setStep] = useState('shipping');
     const [shippingData, setShippingData] = useState(null);
     const [orderDetails, setOrderDetail] = useState(null);
@@ -15,6 +17,8 @@ function CheckoutPage() {
     const [isOrderPlaced, setIsOrderPlaced] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const { cart, removePurchasedProducts } = useAppContext();
+
+    const selectedItems = cart.filter(item => item.selected === true);
 
     const handleShippingSubmit = (data) => {
         setShippingData(data);
@@ -59,15 +63,6 @@ function CheckoutPage() {
     };
 
     const cartItems = cart;
-
-    if (cartItems.length === 0) {
-        return (
-            <div className="container py-5">
-                <h1>Riepilogo</h1>
-                <p>Il tuo carrello è vuoto!</p>
-            </div>
-        );
-    }
 
     if (isOrderPlaced) {
         return (
@@ -135,6 +130,16 @@ function CheckoutPage() {
         );
     }
 
+    if (cartItems.length === 0) {
+        return (
+            <div className="container py-5">
+                <h1>Riepilogo</h1>
+                <p>Il tuo carrello è vuoto!</p>
+            </div>
+        );
+    }
+
+
     return (
         <div className={`container py-5 ${styles.container}`}>
             <h1 className={`text-center mb-5 ${styles.title}`}>Completa il tuo acquisto</h1>
@@ -143,21 +148,29 @@ function CheckoutPage() {
                 <div className="col-lg-8">
 
                     <div className={styles.sectionWrapper}>
-                        <OrderSummary cartItems={cartItems} />
-                    </div>
+                        <div className={styles.sectionWrapper}>
 
-                    <div className={styles.sectionWrapper}>
-                        {step === 'shipping' ? (
-                            <CheckoutForm onNext={handleShippingSubmit} />
-                        ) : (
-                            <PaymentForm
-                                onBack={() => setStep('shipping')}
-                                shippingData={shippingData}
-                                onComplete={(data) => handleFinalOrder(data, cartItems)}
-                                isSubmitting={isSubmitting}
-                                setIsSubmitting={setIsSubmitting}
-                            />
-                        )}
+                            <div className="mb-3">
+                                <Link to="/cart" className="text-decoration-none d-flex align-items-center">
+                                    <i className="bi bi-arrow-left me-2"></i> Torna al carrello
+                                </Link>
+                            </div>
+                            <OrderSummary cartItems={selectedItems} />
+                        </div>
+
+                        <div className={styles.sectionWrapper}>
+                            {step === 'shipping' ? (
+                                <CheckoutForm onNext={handleShippingSubmit} />
+                            ) : (
+                                <PaymentForm
+                                    onBack={() => setStep('shipping')}
+                                    shippingData={shippingData}
+                                    onComplete={(data) => handleFinalOrder(data, cartItems)}
+                                    isSubmitting={isSubmitting}
+                                    setIsSubmitting={setIsSubmitting}
+                                />
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>
