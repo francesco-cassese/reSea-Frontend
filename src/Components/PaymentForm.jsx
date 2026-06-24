@@ -1,27 +1,46 @@
 import { useState } from 'react';
 import styles from './CheckoutForm.module.css';
+import { validatePayment } from '../services/reseaServices';
+import { simulatePaymentGateway } from '../services/reseaServices';
 
-function PaymentForm({ onBack, shippingData, onComplete, isSubmitting }) {
+function PaymentForm({ onBack, shippingData, onComplete, isSubmitting, setIsSubmitting }) {
     const [cardNumber, setCardNumber] = useState('');
     const [expiry, setExpiry] = useState('');
     const [cvv, setCvv] = useState('');
     const [error, setError] = useState(null);
 
-    const handlePayment = () => {
+    const handlePayment = async () => {
 
-        if (cardNumber === "0000") {
-            setError("Pagamento rifiutato: carta non valida.");
-        } else if (cardNumber.length < 16 || cvv.length < 3) {
-            setError("Per favore, inserisci dati carta validi.");
-        } else {
-            setError(null);
-            onComplete({
+        setError(null);
+        setIsSubmitting(true);
+
+        const validation = validatePayment(cardNumber, expiry, cvv)
+
+        if (!validation.isValid) {
+            setError(validation.message);
+            setIsSubmitting(false);
+            return;
+        }
+
+        const paymentResponse = await simulatePaymentGateway(cvv);
+
+        if (!paymentResponse.success) {
+            setError(paymentResponse.message);
+            setIsSubmitting(false);
+            return;
+        }
+
+        try {
+            await onComplete({
                 ...shippingData,
                 paymentDetails: { cardNumber, expiry, cvv }
             });
+
+        } catch (err) {
+            setError("Errore critico di comunicazione. Riprova.");
+            setIsSubmitting(false);
         }
     };
-
     return (
         <div className={`p-4 border rounded ${styles.formContainer}`}>
             <h2 className="mb-4">Metodo di pagamento</h2>
@@ -58,8 +77,20 @@ function PaymentForm({ onBack, shippingData, onComplete, isSubmitting }) {
 
             <div className="d-flex gap-2">
                 <button className="btn btn-secondary" onClick={onBack}>Indietro</button>
-                <button className={`btn w-100 ${styles.coralButton}`} onClick={handlePayment} disabled={isSubmitting}>
-                    Paga ora
+
+                <button
+                    className={`btn w-100 ${styles.coralButton}`}
+                    onClick={handlePayment}
+                    disabled={isSubmitting}
+                >
+                    {isSubmitting ? (
+                        <>
+                            <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                            Elaborazione...
+                        </>
+                    ) : (
+                        "Paga ora"
+                    )}
                 </button>
             </div>
         </div>
