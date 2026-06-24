@@ -157,6 +157,7 @@ function CheckoutPage() {
                                 shippingData={shippingData}
                                 onComplete={(data) => handleFinalOrder(data, cartItems)}
                                 isSubmitting={isSubmitting}
+                                setIsSubmitting={setIsSubmitting}
                             />
                         )}
                     </div>
