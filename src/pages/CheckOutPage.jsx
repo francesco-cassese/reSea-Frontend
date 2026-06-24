@@ -11,6 +11,7 @@ function CheckoutPage() {
     const [orderDetails, setOrderDetail] = useState(null);
     const { processOrder } = useCheckout();
     const [isOrderPlaced, setIsOrderPlaced] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleShippingSubmit = (data) => {
         setShippingData(data);
@@ -18,33 +19,39 @@ function CheckoutPage() {
     };
 
     const handleFinalOrder = async (shippingDataWithPayment, items) => {
+        setIsSubmitting(true);
 
-        const {
-            client_name,
-            email_client,
-            shipping_address,
-            billing_address,
-            phone_number
-        } = shippingDataWithPayment;
+        try {
+            const {
+                client_name,
+                email_client,
+                shipping_address,
+                billing_address,
+                phone_number
+            } = shippingDataWithPayment;
 
-        const orderPayload = {
-            client_name,
-            email_client,
-            shipping_address,
-            billing_address,
-            phone_number,
-            items: items
-        };
+            const orderPayload = {
+                client_name,
+                email_client,
+                shipping_address,
+                billing_address,
+                phone_number,
+                items
+            };
 
-        console.log("Dati inviati al server:", JSON.stringify(orderPayload, null, 2));
+            const response = await processOrder(orderPayload);
 
-        const response = await processOrder(orderPayload);
-
-        if (response && response.data) {
-            setOrderDetail(response.data);
-            setIsOrderPlaced(true);
+            if (response && response.data) {
+                setOrderDetail(response.data);
+                setIsOrderPlaced(true);
+            } else {
+                throw new Error("Risposta non valida dal server");
+            }
+        } catch (error) {
+            console.error("Errore durante l'ordine:", error);
+            alert("Si è verificato un errore, riprova.");
+            setIsSubmitting(false);
         }
-
     };
 
     const mockCart = [
@@ -86,6 +93,23 @@ function CheckoutPage() {
 
                             <p className="mb-0 font-monospace">
                                 #ORD-2026-{orderDetails?.id || 'In elaborazione...'}
+                            </p>
+                        </div>
+
+                        <div className="bg-light p-3 rounded mb-4 text-start">
+                            <p className="mb-1 small text-uppercase fw-bold text-secondary">Riepilogo articoli</p>
+                            <ul className="list-unstyled mb-0">
+                                {orderDetails?.items?.map((item, index) => (
+                                    <li key={index} className="d-flex justify-content-between border-bottom py-1">
+                                        <span>{item.name || `Prodotto #${item.id}`} x {item.quantity}</span>
+                                        <span>€{(item.unitPrice * item.quantity).toFixed(2)}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                            <hr />
+                            <p className="d-flex justify-content-between fw-bold mb-0">
+                                <span>Totale Finale</span>
+                                <span>€{orderDetails?.total.toFixed(2)}</span>
                             </p>
                         </div>
 
