@@ -46,30 +46,36 @@ function Structure() {
 
             {/* WISHLIST - agganciare wishlistItems dal context quando pronto */}
             <div className="nav-item d-flex gap-3">
-              <Link to="/wishlist" className="nav-btn btn-sm btn-light text-dark position-relative">
+              <Link
+                to="/wishlist"
+                className="nav-btn btn-sm btn-light text-dark position-relative"
+                style={{ overflow: 'visible' }}
+              >
+                <i className="bi bi-heart-fill"></i>
                 {wishlist.length > 0 && (
-                  <span className="badge rounded-pill bg-danger">
+                  <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style={{ zIndex: 10 }}>
                     {wishlist.length}
-                  </span>)}
-                <i className="bi bi-heart-fill ms-1"></i>
+                  </span>
+                )}
               </Link>
+
 
               <div className="dropdown position-relative d-inline-block">
 
                 <button
-                  className="nav-btn btn-sm dropdown-toggle"
+                  className="nav-btn btn-sm dropdown-toggle position-relative"
                   type="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
+                  style={{ overflow: 'visible' }}
                 >
                   <i className="bi bi-cart-fill ms-1"></i>
+                  {totalQuantity > 0 && (
+                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style={{ zIndex: 10 }}>
+                      {totalQuantity}
+                    </span>
+                  )}
                 </button>
-
-                {totalQuantity > 0 && (
-                  <span className="badge rounded-pill bg-danger cart-badge">
-                    {totalQuantity}
-                  </span>
-                )}
 
                 <ul className="dropdown-menu dropdown-menu-end p-3 mt-3" style={{ minWidth: "280px" }}>
 

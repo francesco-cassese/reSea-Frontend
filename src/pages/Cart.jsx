@@ -8,12 +8,8 @@ function Cart() {
     let totale = 0;
 
     for (let i = 0; i < cart.length; i++) {
-        if (cart[i].selected === true) {
             totale = totale + (Number(cart[i].price) * cart[i].quantity);
-        }
     }
-
-    const canProceed = cart.some((item) => item.selected === true);
 
     return (
         <>
@@ -42,15 +38,11 @@ function Cart() {
                         </div>
                     </div>
                     <div className="w-100 d-flex align-items-center">
-                        {canProceed ? (
+                        
                             <Link to="/checkout" className="btn btn-pay btn-md mt-2 mb-3 mx-auto">
                                 Procedi al pagamento
                             </Link>
-                        ) : (
-                            <button className="btn btn-pay btn-md mt-2 mb-3 mx-auto" disabled>
-                                Procedi al pagamento
-                            </button>
-                        )}
+                        
                     </div>
                 </div>
 

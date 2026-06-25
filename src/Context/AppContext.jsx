@@ -5,6 +5,7 @@ const AppContext = createContext();
 function AppProvider({ children }) {
 
     const cartData = localStorage.getItem('cart');
+    const wishlistData = localStorage.getItem('wishlist');
 
     let initialCart;
     if (cartData) {
@@ -13,23 +14,27 @@ function AppProvider({ children }) {
         initialCart = [];
     }
 
+    let initialWishList;
+    if (wishlistData) {
+        initialWishList = JSON.parse(wishlistData);
+    } else {
+        initialWishList = [];
+    }
+
     const [search, setSearch] = useState("");
-    const [wishlist, setWishlist] = useState([]);
+    const [wishlist, setWishlist] = useState(initialWishList);
     const [cart, setCart] = useState(initialCart);
 
-    //btn carrello e wishlist
-    const toggleWishlist = (id) => {
-        setWishlist(prev =>
-            prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]
-        );
-    };
-
     const addToWishlist = (product) => {
-        setWishlist(prev =>
-            prev.some(p => p.id === product.id)
-                ? prev.filter(p => p.id !== product.id)
-                : [...prev, product]
-        );
+        const existsInWishlist = wishlist.some((item) => item.id === product.id);
+        let newWishlist;
+        if (existsInWishlist) {
+            newWishlist = wishlist.filter((item) => item.id !== product.id);
+        } else {
+            newWishlist = [...wishlist, product];
+        }
+        setWishlist(newWishlist);
+        localStorage.setItem('wishlist', JSON.stringify(newWishlist));
     };
 
 
@@ -56,7 +61,6 @@ function AppProvider({ children }) {
             const newProduct = {
                 ...productToAdd,
                 quantity: 1,
-                selected: true
             };
             newCart = [...cart, newProduct];
         }
@@ -89,22 +93,9 @@ function AppProvider({ children }) {
         localStorage.setItem('cart', JSON.stringify(newCart));
     };
 
-    const toggleSelect = (id) => {
-        const newCart = cart.map((product) => {
-            if (product.id === id) {
-                return { ...product, selected: !product.selected };
-            } else {
-                return product;
-            }
-        });
-        setCart(newCart);
-        localStorage.setItem('cart', JSON.stringify(newCart));
-    };
-
     const removePurchasedProducts = () => {
-        const newCart = cart.filter((product) => product.selected === false);
-        setCart(newCart);
-        localStorage.setItem('cart', JSON.stringify(newCart));
+        setCart([]);
+        localStorage.removeItem('cart');
     };
 
     const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
@@ -116,12 +107,10 @@ function AppProvider({ children }) {
             setSearch,
             wishlist,
             addToWishlist,
-            toggleWishlist,
             toggleCart,
             addHandler,
             removeHandler,
             updateQuantity,
-            toggleSelect,
             removePurchasedProducts,
             totalQuantity
         }}>
