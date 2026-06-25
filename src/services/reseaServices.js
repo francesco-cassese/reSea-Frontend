@@ -36,11 +36,9 @@ const validatePayment = (cardNumber, expiry, cvv) => {
         return { isValid: false, message: "I campi devono contenere solo numeri." };
     }
 
-
     if (cleanCard.length !== 16) return { isValid: false, message: "Numero carta non valido (16 cifre)." };
 
     if (cvv.length !== 3) return { isValid: false, message: "Il CVV deve avere 3 cifre." };
-
 
     const [month, year] = expiry.split('/').map(Number);
 

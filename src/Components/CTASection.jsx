@@ -1,4 +1,5 @@
 import styles from "./CTASection.module.css";
+import { Link } from "react-router-dom";
 
 function CTASection() {
     return (
@@ -14,9 +15,9 @@ function CTASection() {
                     e al pianeta.
                 </p>
 
-                <button className="btn btn-success btn-lg">
+                <Link to='/products' className="btn btn-success btn-lg">
                     Acquista ora
-                </button>
+                </Link>
 
             </div>
         </section>

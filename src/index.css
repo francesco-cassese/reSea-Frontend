@@ -7,7 +7,8 @@
 }
 
 :root {
-  --color-btn: #0DCAF0;;
+  --color-btn: #0DCAF0;
+  ;
 }
 
 
@@ -287,6 +288,15 @@ footer {
   background: #f8f6f2;
 }
 
+.cart-badge {
+  position: absolute;
+  top: -5px;
+  right: 2px;
+  font-size: 0.80rem;
+  padding: 0.2em 0.5em;
+  z-index: 100;
+}
+
 .cart-img {
   width: 200px;
   height: 160px;
@@ -351,7 +361,7 @@ footer {
 }
 
 .page-item.active .page-link {
-    background-color: var(--color-btn) !important;
-    border-color: var(--color-btn) !important;
-    color: white !important;
+  background-color: var(--color-btn) !important;
+  border-color: var(--color-btn) !important;
+  color: white !important;
 }

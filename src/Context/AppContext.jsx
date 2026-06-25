@@ -32,12 +32,26 @@ function AppProvider({ children }) {
 
 
     const addHandler = (productToAdd) => {
-        const newProduct = {
-            ...productToAdd,
-            quantity: 1,
-            selected: true
-        };
-        const newCart = [...cart, newProduct];
+
+        const existingProductIndex = cart.findIndex(item => item.id === productToAdd.id);
+
+        let newCart;
+
+        if (existingProductIndex !== -1) {
+            newCart = [...cart];
+            newCart[existingProductIndex] = {
+                ...newCart[existingProductIndex],
+                quantity: newCart[existingProductIndex].quantity + 1
+            };
+        } else {
+            const newProduct = {
+                ...productToAdd,
+                quantity: 1,
+                selected: true
+            };
+            newCart = [...cart, newProduct];
+        }
+
         setCart(newCart);
         localStorage.setItem('cart', JSON.stringify(newCart));
     };
@@ -84,6 +98,8 @@ function AppProvider({ children }) {
         localStorage.setItem('cart', JSON.stringify(newCart));
     };
 
+    const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
+
     return (
         <AppContext.Provider value={{
             cart,
@@ -96,7 +112,8 @@ function AppProvider({ children }) {
             removeHandler,
             updateQuantity,
             toggleSelect,
-            removePurchasedProducts
+            removePurchasedProducts,
+            totalQuantity
         }}>
             {children}
         </AppContext.Provider>

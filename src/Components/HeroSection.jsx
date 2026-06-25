@@ -1,4 +1,5 @@
 import styles from "./HeroSection.module.css";
+import { Link } from "react-router-dom";
 
 function HeroSection() {
     return (
@@ -23,9 +24,9 @@ function HeroSection() {
                             progettati per accompagnarti ogni giorno.
                         </p>
 
-                        <button className="btn btn-dark btn-lg">
+                        <Link to="/products" className="btn btn-dark btn-lg mb-3">
                             Scopri la collezione
-                        </button>
+                        </Link>
                     </div>
 
                     <div className="col-lg-6 text-center">
