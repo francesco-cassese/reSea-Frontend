@@ -1,0 +1,22 @@
+.impactSection {
+    background:
+        linear-gradient(135deg,
+            #082f49,
+            #0f766e);
+}
+
+.impactCard {
+    padding: 2rem;
+}
+
+.impactNumber {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 800;
+    color: #34d399;
+    margin-bottom: .5rem;
+}
+
+.impactLabel {
+    color: rgba(255, 255, 255, .85);
+    font-size: 1rem;
+}

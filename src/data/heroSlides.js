@@ -6,7 +6,7 @@ export const heroSlides = [
     title: "Ambra della Costa",
     text: "Occhiali nati dall'oceano, pensati per ogni orizzonte.",
     ctaLabel: "Scopri di più",
-    ctaTo: "/products"
+    ctaTo: "/products/ambra-della-costa"
   },
   {
     className: "hero-banner2",
@@ -20,6 +20,6 @@ export const heroSlides = [
     title: "Poseidon Wave",
     text: "Design sostenibile. Spirito oceanico.",
     ctaLabel: "Scopri di più",
-    ctaTo: "/products"
+    ctaTo: "/products/poseidon-wave"
   }
 ];

@@ -38,7 +38,7 @@ function Structure() {
                   <Link to="/products" className="nav-btn btn-sm btn-light text-dark">Prodotti</Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/about" className="nav-btn btn-sm btn-light text-dark">About</Link>
+                  <Link to="/aboutUs" className="nav-btn btn-sm btn-light text-dark">La Nostra Realtà</Link>
                 </li>
               </ul>
             </div>

@@ -1,0 +1,27 @@
+.hero {
+    position: relative;
+    overflow: hidden;
+}
+
+.highlight {
+    color: #0f766e;
+}
+
+.heroImage {
+    max-width: 100%;
+    width: 500px;
+    object-fit: contain;
+    filter: drop-shadow(0 25px 40px rgba(0, 0, 0, 0.15));
+    transition: transform .4s ease;
+}
+
+.heroImage:hover {
+    transform: translateY(-8px);
+}
+
+.lead {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #4a5568;
+    margin-bottom: 20px;
+}

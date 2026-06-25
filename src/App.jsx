@@ -17,6 +17,7 @@ import CheckOutPage from './pages/CheckOutPage.jsx'
 import ScrollToTop from './Components/ScrollToTop.jsx'
 import { CategoriesProvider } from './Context/CategoriesContext.jsx'
 import { AppProvider } from './Context/AppContext.jsx';
+import AboutUs from './pages/AboutUs.jsx'
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
                 <Route index element={<Navigate to='/homepage' replace />} />
                 <Route path='/homepage' element={<Homepage />} />
                 <Route path='/products' element={<Product />} />
+                <Route path='/aboutUs' element={<AboutUs />} />
                 <Route path='/checkout' element={<CheckOutPage />} />
                 <Route path='/products/:slug' element={<ProductDetails />} />
                 <Route path='/cart' element={<Cart />} />
