@@ -11,7 +11,7 @@ function CartList() {
     } else {
         // Se il carrello è pieno
         cartToShow = cart.map((item) => (
-            <div key={item.id} style={{ border: '1px solid #ccc', margin: '10px', padding: '10px' }}>
+            <div key={item.id}>
                 <div className="d-flex align-items-center gap-4 p-3 rounded-4 shadow-sm cart-card">
                     {/* image */}
                     <div className="cart-img flex-shrink-0 rounded-3 bg-light" style={{ backgroundImage: `url(${item.image})`, backgroundSize: 'cover' }} />

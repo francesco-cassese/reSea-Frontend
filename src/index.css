@@ -8,7 +8,6 @@
 
 :root {
   --color-btn: #0DCAF0;
-  ;
 }
 
 
@@ -266,17 +265,6 @@ footer {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
 }
 
-@media (max-width: 991.98px) {
-  .hero-slider {
-    min-height: 560px;
-  }
-}
-
-@media (max-width: 575.98px) {
-  .hero-slider {
-    min-height: 500px;
-  }
-
   .hero-content {
     text-align: center;
     margin-inline: auto;
@@ -361,7 +349,36 @@ footer {
 }
 
 .page-item.active .page-link {
-  background-color: var(--color-btn) !important;
-  border-color: var(--color-btn) !important;
-  color: white !important;
+
+    background-color: var(--color-btn) !important;
+    border-color: var(--color-btn) !important;
+    color: white !important;
 }
+
+.btn-pay{
+  background-color: var(--color-btn);
+}
+
+.btn-pay:hover {
+  background-color: #0dcaf0af;
+}
+
+.btn-cartnav{
+  background-color: var(--color-btn);
+}
+
+.btn-cartnav:hover {
+  background-color: #0dcaf0af;
+}
+
+@media (max-width: 991.98px) {
+  .hero-slider {
+    min-height: 560px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .hero-slider {
+    min-height: 500px;
+  }
+

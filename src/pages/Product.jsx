@@ -10,7 +10,7 @@ function Product() {
     const { categories, categoriesLoading, categoriesError } = useCategories();
     const safeCategories = Array.isArray(categories) ? categories : [];
     const [searchParams, setSearchParams] = useSearchParams();
-    const { addHandler, cart } = useAppContext();
+    const { addHandler, cart, wishlist, addToWishlist } = useAppContext();
 
     const selectedCategory = searchParams.get("category") || "all";
     const appliedSearch = searchParams.get("search") || "";
@@ -68,6 +68,7 @@ function Product() {
         setMaxPriceInput("");
         setSearchParams({ page: "1", limit: String(limit) });
     };
+
     const goToPage = (nextPage) => {
         if (nextPage < 1 || nextPage > totalPages) return;
         updateParams({ page: nextPage });
@@ -119,6 +120,7 @@ function Product() {
                             <div className="d-flex flex-wrap gap-3 justify-content-center">
                                 {products.map((item) => {
                                     const inCart = cart.some(p => p.id === item.id);
+                                    const inWishlist = wishlist.some(p => p.id === item.id);
                                     return (
 
                                         <Link
@@ -142,8 +144,15 @@ function Product() {
                                                         </p>
                                                         <div>
 
-                                                            <button type="button btn-cartwish" className="btn btn-black-50 rounded-circle">
-                                                                <i className="bi {liked ? bi-heart : bi-heart-fill } text-dark"></i>
+                                                            <button
+                                                                type="button"
+                                                                className="btn rounded-circle"
+                                                                onClick={(e) => {
+                                                                    e.preventDefault();
+                                                                    e.stopPropagation();
+                                                                    addToWishlist(item);
+                                                                }}>
+                                                                <i className={`bi ${inWishlist ? "bi-heart-fill" : "bi-heart"}`}></i>
                                                             </button>
                                 
                                                             <button
