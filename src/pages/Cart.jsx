@@ -26,7 +26,7 @@ function Cart() {
             ) : (
 
                 <div className="container">
-                    <div className="min-vh-100 d-flex align-items-center justify-content-center p-4 cart-bg">
+                    <div className="d-flex align-items-center justify-content-center p-4 cart-bg">
                         <div style={{ width: "100%", maxWidth: "860px" }}>
 
                             {/* header */}
@@ -43,11 +43,11 @@ function Cart() {
                     </div>
                     <div className="w-100 d-flex align-items-center">
                         {canProceed ? (
-                            <Link to="/checkout" className="btn btn-primary btn-md mt-2 mb-3 mx-auto">
+                            <Link to="/checkout" className="btn btn-pay btn-md mt-2 mb-3 mx-auto">
                                 Procedi al pagamento
                             </Link>
                         ) : (
-                            <button className="btn btn-secondary btn-md mt-2 mb-3 mx-auto" disabled>
+                            <button className="btn btn-pay btn-md mt-2 mb-3 mx-auto" disabled>
                                 Procedi al pagamento
                             </button>
                         )}

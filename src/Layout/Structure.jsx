@@ -5,7 +5,7 @@ import logo from '../assets/logoneutro.png'
 
 function Structure() {
 
-  const { cart } = useAppContext();
+  const { cart, removeHandler, wishlist } = useAppContext();
 
   return (
     <>
@@ -47,25 +47,31 @@ function Structure() {
             {/* WISHLIST - agganciare wishlistItems dal context quando pronto */}
             <div className="nav-item d-flex gap-3">
               <Link to="/wishlist" className="nav-btn btn-sm btn-light text-dark position-relative">
-                <i className="bi bi-heart-fill"></i>
-                {/* {wishlistItems.length > 0 && (
-                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                {wishlistItems.length}
-                      </span>)} */}
+                {wishlist.length > 0 && (
+                  <span className="badge rounded-pill bg-danger">
+                    {wishlist.length}
+                  </span>)}
+                <i className="bi bi-heart-fill ms-1"></i>
               </Link>
 
               {/* btn cart-list */}
               <div className="dropdown">
+
                 <button
                   className="nav-btn btn-sm dropdown-toggle"
                   type="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  <i className="bi bi-cart-fill"></i>
+                  {cart.length > 0 && (
+                    <span className="badge rounded-pill bg-danger">
+                      {cart.length}
+                    </span>
+                  )}
+                  <i className="bi bi-cart-fill ms-1"></i>
                 </button>
 
-                <ul className="dropdown-menu dropdown-menu-end p-3" style={{ minWidth: "280px" }}>
+                <ul className="dropdown-menu dropdown-menu-end p-3 mt-3" style={{ minWidth: "280px" }}>
 
                   {/* lista prodotti */}
                   <li className="dropdown-item-text text-muted small mb-2">Il tuo carrello</li>
@@ -80,9 +86,12 @@ function Structure() {
                             <p className="mb-0 small fw-bold">{product.name}</p>
                             <p className="mb-0 small text-muted">€ {Number(product.price).toFixed(2)}</p>
                           </div>
-                          <button className="btn btn-light rounded-3 p-2">
+
+                          <button className="btn btn-light rounded-3 p-2"
+                            onClick={() => removeHandler(product.id)}>
                             <i className="bi bi-trash text-secondary"></i>
                           </button>
+
                         </div>
                       </li>
                     ))
@@ -94,7 +103,7 @@ function Structure() {
 
                   {/* btn pagina carrello */}
                   <li>
-                    <Link to="/cart" className="btn btn-primary w-100 btn-sm">
+                    <Link to="/cart" className="btn btn-cartnav w-100 btn-sm">
                       Vai al carrello
                     </Link>
                   </li>

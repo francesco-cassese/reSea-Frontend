@@ -24,6 +24,15 @@ function AppProvider({ children }) {
         );
     };
 
+    const addToWishlist = (product) => {
+        setWishlist(prev =>
+            prev.some(p => p.id === product.id)
+                ? prev.filter(p => p.id !== product.id)
+                : [...prev, product]
+        );
+    };
+
+
     const toggleCart = (id) => {
         setCart(prev =>
             prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]
@@ -90,6 +99,7 @@ function AppProvider({ children }) {
             search,
             setSearch,
             wishlist,
+            addToWishlist,
             toggleWishlist,
             toggleCart,
             addHandler,

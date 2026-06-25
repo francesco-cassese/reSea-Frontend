@@ -3,11 +3,11 @@
 }
 
 .coralButton {
-    background-color: #FF7F7F !important;
+    background-color: #0DCAF0 !important;
     color: #001f3f !important;
     border: none !important;
 }
 
 .coralButton:hover {
-    background-color: #ff6b6b !important;
+    background-color: #0dcaf0cd !important;
 }

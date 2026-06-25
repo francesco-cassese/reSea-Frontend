@@ -36,6 +36,7 @@ function App() {
                 <Route path='/checkout' element={<CheckOutPage />} />
                 <Route path='/products/:slug' element={<ProductDetails />} />
                 <Route path='/cart' element={<Cart />} />
+                <Route path='/wishlist' element={<Wishlist />} />
                 <Route path="*" element={<NotFound />} />
               </Route>
             </Routes>
