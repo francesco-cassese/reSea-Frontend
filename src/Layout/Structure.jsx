@@ -62,11 +62,6 @@ function Structure() {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  {cart.length > 0 && (
-                    <span className="badge rounded-pill bg-danger">
-                      {cart.length}
-                    </span>
-                  )}
                   <i className="bi bi-cart-fill ms-1"></i>
                 </button>
 
@@ -75,7 +70,7 @@ function Structure() {
                     {totalQuantity}
                   </span>
                 )}
-                
+
                 <ul className="dropdown-menu dropdown-menu-end p-3 mt-3" style={{ minWidth: "280px" }}>
 
                   {/* lista prodotti */}
@@ -101,7 +96,7 @@ function Structure() {
                               event.stopPropagation();
                               removeHandler(product.id);
                             }}>
-                              
+
                             <i className="bi bi-trash text-secondary"></i>
                           </button>
 
