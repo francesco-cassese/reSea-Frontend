@@ -5,7 +5,7 @@ import logo from '../assets/logoneutro.png'
 
 function Structure() {
 
-  const { cart } = useAppContext();
+  const { cart, removeHandler } = useAppContext();
 
   return (
     <>
@@ -80,9 +80,12 @@ function Structure() {
                             <p className="mb-0 small fw-bold">{product.name}</p>
                             <p className="mb-0 small text-muted">€ {Number(product.price).toFixed(2)}</p>
                           </div>
-                          <button className="btn btn-light rounded-3 p-2">
+
+                          <button className="btn btn-light rounded-3 p-2"
+                            onClick={() => removeHandler(product.id)}>
                             <i className="bi bi-trash text-secondary"></i>
                           </button>
+
                         </div>
                       </li>
                     ))
@@ -94,7 +97,7 @@ function Structure() {
 
                   {/* btn pagina carrello */}
                   <li>
-                    <Link to="/cart" className="btn btn-primary w-100 btn-sm">
+                    <Link to="/cart" className="btn btn-cartnav w-100 btn-sm">
                       Vai al carrello
                     </Link>
                   </li>

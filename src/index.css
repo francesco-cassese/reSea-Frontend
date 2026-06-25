@@ -7,7 +7,7 @@
 }
 
 :root {
-  --color-btn: #0DCAF0;;
+  --color-btn: #0DCAF0;
 }
 
 
@@ -354,4 +354,20 @@ footer {
     background-color: var(--color-btn) !important;
     border-color: var(--color-btn) !important;
     color: white !important;
+}
+
+.btn-pay{
+  background-color: var(--color-btn);
+}
+
+.btn-pay:hover {
+  background-color: #0dcaf0af;
+}
+
+.btn-cartnav{
+  background-color: var(--color-btn);
+}
+
+.btn-cartnav:hover {
+  background-color: #0dcaf0af;
 }

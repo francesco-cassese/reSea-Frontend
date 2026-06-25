@@ -151,7 +151,7 @@ function CheckoutPage() {
 
 
     return (
-        <div className={`container py-5 ${styles.container}`}>
+        <div className={`container py-5`}>
             <h1 className={`text-center mb-5 ${styles.title}`}>Completa il tuo acquisto</h1>
 
             <div className="row justify-content-center">
