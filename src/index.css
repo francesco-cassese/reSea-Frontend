@@ -265,10 +265,9 @@ footer {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
 }
 
-  .hero-content {
-    text-align: center;
-    margin-inline: auto;
-  }
+.hero-content {
+  text-align: center;
+  margin-inline: auto;
 }
 
 /*carrello*/
@@ -350,12 +349,12 @@ footer {
 
 .page-item.active .page-link {
 
-    background-color: var(--color-btn) !important;
-    border-color: var(--color-btn) !important;
-    color: white !important;
+  background-color: var(--color-btn) !important;
+  border-color: var(--color-btn) !important;
+  color: white !important;
 }
 
-.btn-pay{
+.btn-pay {
   background-color: var(--color-btn);
 }
 
@@ -363,7 +362,7 @@ footer {
   background-color: #0dcaf0af;
 }
 
-.btn-cartnav{
+.btn-cartnav {
   background-color: var(--color-btn);
 }
 
@@ -381,4 +380,4 @@ footer {
   .hero-slider {
     min-height: 500px;
   }
-
+}
