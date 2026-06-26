@@ -77,4 +77,23 @@ const simulatePaymentGateway = (cvv) => {
     });
 };
 
-export { fetchApi, priceFormatter, validatePayment, simulatePaymentGateway };
+const getFilterLabel = (category, search, min, max) => {
+    let label = "prodotti";
+    if (category !== "All") label += ` in "${category}"`;
+    if (search) label += ` per "${search}"`;
+    if (min || max) {
+        label += " con prezzo";
+        if (min) label += ` da ${min}€`;
+        if (max) label += ` a ${max}€`;
+    }
+    return label;
+};
+
+const formatCategoryName = (category) => {
+    if (!category) return "";
+    return category
+        .replace(/-/g, ' ')// Sostituisco i trattini con spazi
+        .replace(/^\w/, (c) => c.toUpperCase()); //Trasforma la prima lettera in maiuscola
+};
+
+export { fetchApi, priceFormatter, validatePayment, simulatePaymentGateway, getFilterLabel, formatCategoryName };

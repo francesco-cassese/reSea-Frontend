@@ -1,5 +1,5 @@
-import { useAppContext } from '../Context/AppContext';
-import { priceFormatter } from '../services/reseaServices';
+import { useAppContext } from '../context/AppContext.jsx';
+import { priceFormatter } from '../services/reseaServices.js';
 
 function CartList() {
 

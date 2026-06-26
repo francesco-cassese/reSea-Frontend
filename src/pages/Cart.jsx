@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import CartList from "../Components/CartList.jsx"
-import { useAppContext } from "../Context/AppContext";
+import CartList from "../components/CartList.jsx"
+import { useAppContext } from "../context/AppContext.jsx";
 import { priceFormatter } from "../services/reseaServices.js";
 
 
@@ -9,7 +9,7 @@ function Cart() {
     let totale = 0;
 
     for (let i = 0; i < cart.length; i++) {
-            totale = totale + (Number(cart[i].price) * cart[i].quantity);
+        totale = totale + (Number(cart[i].price) * cart[i].quantity);
     }
 
     return (
@@ -38,11 +38,11 @@ function Cart() {
                         </div>
                     </div>
                     <div className="w-100 d-flex align-items-center">
-                        
-                            <Link to="/checkout" className="btn btn-pay btn-md mt-2 mb-3 mx-auto">
-                                Procedi al pagamento
-                            </Link>
-                        
+
+                        <Link to="/checkout" className="btn btn-pay btn-md mt-2 mb-3 mx-auto">
+                            Procedi al pagamento
+                        </Link>
+
                     </div>
                 </div>
 

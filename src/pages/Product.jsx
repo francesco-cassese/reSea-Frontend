@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
-import { useCategories } from "../Context/CategoriesContext";
-import ProductSidebar from "../components/ProductSidebar";
-import { priceFormatter } from "../services/reseaServices";
-import { useAppContext } from "../Context/AppContext";
+import { useCategories } from "../context/CategoriesContext.jsx";
+import ProductSidebar from "../components/ProductSidebar.jsx";
+import { priceFormatter, getFilterLabel, formatCategoryName } from "../services/reseaServices";
+import { useAppContext } from "../context/AppContext.jsx";
 
 function Product() {
     const { categories, categoriesLoading, categoriesError } = useCategories();
@@ -85,6 +85,10 @@ function Product() {
         limit, handleLimitChange, handlePriceFilters, clearAllFilters
     };
 
+    const formattedCategory = formatCategoryName(selectedCategory);
+    const filterDescription = getFilterLabel(formattedCategory, appliedSearch, minPrice, maxPrice);
+
+
     return (
         <div className="container py-4">
             <div className="d-flex flex-column flex-lg-row gap-4 align-items-start">
@@ -96,7 +100,7 @@ function Product() {
                         data-bs-toggle="offcanvas"
                         data-bs-target="#offcanvasFilters"
                     >
-                        <i className="bi bi-funnel"></i> Filtra e Ordina
+                        <i className="bi bi-funnel"></i> Filtri
                     </button>
 
                     {/*OFF-CANVAS MOBILE*/}
@@ -125,8 +129,11 @@ function Product() {
                         </div>
                     ) : (
                         <>
-                            <div className="d-flex text-secondary justify-content-end">
-                                <p>Prodotti trovati: {products.length}</p>
+                            <div className="d-flex justify-content-between align-items-center border-bottom pb-3 mb-4">
+                                <h6 className="mb-0 text-muted">
+                                    Mostrati <span className="text-dark fw-bold">{products.length}</span> di <span className="text-dark fw-bold">{total}</span>
+                                    <span className="ms-1">{filterDescription}</span>
+                                </h6>
                             </div>
                             <div className="d-flex flex-wrap gap-3 justify-content-center">
                                 {products.map((item) => {
@@ -151,7 +158,7 @@ function Product() {
                                                     <h6 className="card-title fw-bold mt-3 mb-2">{item.name}</h6>
                                                     <div className="d-flex justify-content-between align-items-center">
                                                         <p className="card-text fw-bold mb-0 small">
-                                                            €{Number(item.price).toFixed(2)}
+                                                            {priceFormatter(item.price)}
                                                         </p>
                                                         <div>
 
