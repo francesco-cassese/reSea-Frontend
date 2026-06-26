@@ -18,6 +18,7 @@ import ScrollToTop from './components/ScrollToTop.jsx'
 import { CategoriesProvider } from './context/CategoriesContext.jsx'
 import { AppProvider } from './context/AppContext.jsx';
 import AboutUs from './pages/AboutUs.jsx'
+import AssistantWidget from './Components/AssistantWidget.jsx'
 
 function App() {
 
@@ -40,6 +41,7 @@ function App() {
                 <Route path="*" element={<NotFound />} />
               </Route>
             </Routes>
+            <AssistantWidget/>
           </BrowserRouter>
         </AppProvider>
       </CategoriesProvider>

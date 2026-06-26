@@ -506,3 +506,22 @@ footer {
     gap: 15px;
   }
 }
+
+/*WIDGET IA*/
+.assistant-widget {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 1200;
+}
+
+.assistant-widget-panel {
+  width: 340px;
+  max-width: calc(100vw - 32px);
+}
+
+.assistant-widget-messages {
+  height: 280px;
+  overflow-y: auto;
+  background: #fff;
+}
