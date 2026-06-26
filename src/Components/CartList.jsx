@@ -3,7 +3,7 @@ import { priceFormatter } from '../services/reseaServices';
 
 function CartList() {
 
-    const { cart, removeHandler, updateQuantity, toggleSelect } = useAppContext();
+    const { cart, removeHandler, updateQuantity, addToWishlist, wishlist } = useAppContext();
     let cartToShow;
 
     if (cart.length === 0) {
@@ -32,10 +32,16 @@ function CartList() {
                         </div>
 
                         <div className="d-flex align-items-center gap-1">
-                            <i className="bi bi-heart text-muted"></i>
-                            <span className="small text-muted text-decoration-underline" style={{ cursor: "pointer" }}>
-                                Aggiungi ai preferiti
-                            </span>
+                            <button
+                                className="btn btn-link p-0 text-decoration-none"
+                                onClick={() => addToWishlist(item)}
+                                style={{ cursor: "pointer" }}
+                            >
+                                <i className={`bi ${wishlist.some(w => w.id === item.id) ? 'bi-heart-fill text-danger' : 'bi-heart'} text-muted`}></i>
+                                <span className="small text-muted text-decoration-underline ms-1">
+                                    {wishlist.some(w => w.id === item.id) ? "Rimuovi dai preferiti" : "Aggiungi ai preferiti"}
+                                </span>
+                            </button>
                         </div>
                     </div>
 
@@ -71,19 +77,6 @@ function CartList() {
                         <span className="fw-bold fs-5 text-primary">
                             {priceFormatter(item.price * item.quantity)}
                         </span>
-
-                        <div className="form-check m-0">
-                            <input
-                                className="form-check-input"
-                                type="checkbox"
-                                id={`check-${item.id}`}
-                                checked={item.selected}
-                                onChange={() => toggleSelect(item.id)}
-                            />
-                            <label className="form-check-label small fw-medium" htmlFor={`check-${item.id}`}>
-                                Seleziona
-                            </label>
-                        </div>
                     </div>
                 </div>
             </div>

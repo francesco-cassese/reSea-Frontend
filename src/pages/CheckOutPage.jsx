@@ -18,8 +18,6 @@ function CheckoutPage() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const { cart, removePurchasedProducts } = useAppContext();
 
-    const selectedItems = cart.filter(item => item.selected === true);
-
     const handleShippingSubmit = (data) => {
         setShippingData(data);
         setStep('payment');
@@ -63,16 +61,6 @@ function CheckoutPage() {
     };
 
     const cartItems = cart;
-
-    if (selectedItems.length === 0 && !isOrderPlaced) {
-        return (
-            <div className="container py-5 text-center">
-                <h2>Il tuo carrello è vuoto o non hai selezionato articoli</h2>
-                <p>Torna indietro per scegliere i prodotti che desideri acquistare.</p>
-                <Link to="/cart" className="btn btn-primary mt-3">Torna al carrello</Link>
-            </div>
-        );
-    }
 
     if (isOrderPlaced) {
         return (
@@ -165,7 +153,7 @@ function CheckoutPage() {
                                     <i className="bi bi-arrow-left me-2"></i> Torna al carrello
                                 </Link>
                             </div>
-                            <OrderSummary cartItems={selectedItems} />
+                            <OrderSummary cartItems={cartItems} />
                         </div>
 
                         <div className={styles.sectionWrapper}>
@@ -175,7 +163,7 @@ function CheckoutPage() {
                                 <PaymentForm
                                     onBack={() => setStep('shipping')}
                                     shippingData={shippingData}
-                                    onComplete={(data) => handleFinalOrder(data, selectedItems)}
+                                    onComplete={(data) => handleFinalOrder(data, cartItems)}
                                     isSubmitting={isSubmitting}
                                     setIsSubmitting={setIsSubmitting}
                                 />
