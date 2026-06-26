@@ -66,7 +66,7 @@ function Structure() {
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    <i className="bi bi-cart-fill ms-1"></i>
+                    <i className="bi bi-cart-fill"></i>
                   </button>
 
                   {totalQuantity > 0 && (
