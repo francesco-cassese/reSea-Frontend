@@ -4,7 +4,7 @@ import { useAppContext } from "../context/AppContext.jsx";
 import logo from '../assets/logoneutro.png'
 
 function Structure() {
-  const { cart, totalQuantity, removeHandler, wishlist } = useAppContext();
+  const { cart, totalQuantity, removeHandler, wishlist, addHandler, updateQuantity } = useAppContext();
 
 
   return (
@@ -90,20 +90,30 @@ function Structure() {
                             <div style={{ flexGrow: 1 }}>
                               <p className="mb-0 small fw-bold">
                                 {product.name}
-                                {product.quantity > 1 && <span className="text-muted ms-1">x{product.quantity}</span>}
                               </p>
                               <p className="mb-0 small text-muted">€ {Number(product.price).toFixed(2)}</p>
                             </div>
+                            <div className="d-flex align-items-center gap-2">
+                              <button
+                                className="btn btn-outline-secondary rounded-circle p-0 d-flex align-items-center justify-content-center"
+                                style={{ width: "28px", height: "28px" }}
+                                onClick={(e) => { e.stopPropagation(); product.quantity === 1 ? removeHandler(product.id) : updateQuantity(product.id, -1); }}
+                              >
+                                {product.quantity === 1 ? <i class="bi bi-trash3-fill"></i> : "-"}
+                              </button>
 
-                            <button
-                              className="btn btn-light rounded-3 p-2"
-                              onClick={(event) => {
-                                event.stopPropagation();
-                                removeHandler(product.id);
-                              }}>
+                              <span className="fw-bold text-center mx-1">
+                                {product.quantity}
+                              </span>
 
-                              <i className="bi bi-trash text-secondary"></i>
-                            </button>
+                              <button
+                                className="btn btn-outline-secondary rounded-circle p-0 d-flex align-items-center justify-content-center"
+                                style={{ width: "28px", height: "28px" }}
+                                onClick={(e) => { e.stopPropagation(); updateQuantity(product.id, +1); }}
+                              >
+                                +
+                              </button>
+                            </div>
 
                           </div>
                         </li>

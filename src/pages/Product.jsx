@@ -10,7 +10,7 @@ function Product() {
     const { categories, categoriesLoading, categoriesError } = useCategories();
     const safeCategories = Array.isArray(categories) ? categories : [];
     const [searchParams, setSearchParams] = useSearchParams();
-    const { addHandler, cart, wishlist, addToWishlist } = useAppContext();
+    const { addHandler, cart, wishlist, addToWishlist, updateQuantity, removeHandler } = useAppContext();
 
     const selectedCategory = searchParams.get("category") || "all";
     const appliedSearch = searchParams.get("search") || "";
@@ -131,7 +131,7 @@ function Product() {
                                 <div className="d-flex justify-content-center mb-4 flex-column">
                                     <div className="d-flex flex-column align-items-center">
                                         <button onClick={() => setView(view === 'column' ? 'row' : 'column')} className="btn btn-pay">
-                                            {view === 'column' ? <i class="bi bi-list-ul"></i> : <i class="bi bi-grid-3x3-gap"></i> }
+                                            {view === 'column' ? <i class="bi bi-list-ul"></i> : <i class="bi bi-grid-3x3-gap"></i>}
                                         </button>
                                     </div>
                                 </div>
@@ -139,6 +139,7 @@ function Product() {
 
                             <div className={`d-flex flex-wrap gap-3 justify-content-center`}>
                                 {products.map((item) => {
+                                    const countCart = cart.find(p => p.id === item.id)
                                     const inCart = cart.some(p => p.id === item.id);
                                     const inWishlist = wishlist.some(p => p.id === item.id);
                                     return (
@@ -171,9 +172,35 @@ function Product() {
                                                             <button type="button" className={`btn rounded-circle ${view === 'row' ? 'btn-lg fs-4' : ''}`} onClick={(e) => { e.preventDefault(); e.stopPropagation(); addToWishlist(item); }}>
                                                                 <i className={`bi ${inWishlist ? "bi-heart-fill" : "bi-heart"}`}></i>
                                                             </button>
-                                                            <button type="button" className={`btn rounded-circle ${view === 'row' ? 'btn-lg fs-4' : ''}`} onClick={(e) => { e.preventDefault(); e.stopPropagation(); addHandler(item); }}>
-                                                                <i className={`bi ${inCart ? "bi-cart-fill" : "bi-cart"}`}></i>
-                                                            </button>
+
+                                                            <div>
+
+                                                                <button type="button" className={`btn rounded-circle ${view === 'row' ? 'btn-lg fs-4' : ''}`} onClick={(e) => { e.preventDefault(); e.stopPropagation(); addHandler(item); }}>
+                                                                    <i className={`bi ${inCart ? "bi-cart-fill" : "bi-cart"}`}></i>
+                                                                </button>
+
+                                                                {inCart && (
+                                                                    <>
+
+                                                                        <button
+                                                                        className="btn rounded-circle"
+                                                                            onClick={(e) => { e.preventDefault(), e.stopPropagation(), countCart.quantity === 1 ? removeHandler(item.id) : updateQuantity(item.id, -1); }}
+                                                                        >
+                                                                            -
+                                                                        </button>
+
+                                                                        <span>{countCart ? countCart.quantity : 0}</span>
+
+                                                                        <button
+                                                                        className="btn rounded-circle"
+                                                                            onClick={(e) => { e.preventDefault(), e.stopPropagation(), updateQuantity(item.id, +1); }}
+                                                                        >
+                                                                            +
+                                                                        </button>
+                                                                    </>
+                                                                )}
+
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
