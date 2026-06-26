@@ -75,6 +75,10 @@ function Product() {
         updateParams({ page: nextPage });
     };
 
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, [endpoint]);
+
     const descrizioniSostenibili = [
         "Un accessorio nato dal mare e progettato per la terra. Realizzato al 100% con plastica riciclata recuperata dagli oceani, unendo eco-responsabilità e design d'avanguardia.",
         "Ogni pezzo di questa collezione contribuisce a rimuovere i rifiuti plastici dalle nostre coste. Leggero, resistente e pensato per chi protegge il pianeta con stile.",
