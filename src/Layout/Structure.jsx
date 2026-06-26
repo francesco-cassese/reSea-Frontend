@@ -30,7 +30,7 @@ function Structure() {
 
           <div className="collapse navbar-collapse" id="navMenu">
             <div className="menu-links mx-auto w-100 d-flex justify-content-center">
-              <ul className="navbar-nav d-flex flex-column gap-3">
+              <ul className="navbar-nav d-flex flex-column flex-sm-row gap-3">
                 <li className="nav-item">
                   <Link to="/homepage" className="nav-btn nav-btn-text text-center">Home</Link>
                 </li>
@@ -47,77 +47,81 @@ function Structure() {
             {/* WISHLIST - agganciare wishlistItems dal context quando pronto */}
 
             <div className="d-flex align-items-center gap-2">
-              <Link to="/wishlist" className="nav-btn  position-relative">
+              <div className="position-relative">
+                <Link to="/wishlist" className="nav-btn">
+                  <i className="bi bi-heart-fill"></i>
+                </Link>
                 {wishlist.length > 0 && (
-                  <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style={{ zIndex: 10 }}>
+                  <span className="position-absolute badge rounded-pill bg-danger badge-wishlist">
                     {wishlist.length}
                   </span>
                 )}
-              </Link>
+              </div>
 
+              <div className="dropdown d-inline-block">
+                <div className="position-relative">
+                  <button
+                    className="nav-btn dropdown-toggle"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <i className="bi bi-cart-fill ms-1"></i>
+                  </button>
 
-              <div className="dropdown position-relative d-inline-block">
-
-                <button
-                  className="nav-btn dropdown-toggle"
-                  type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  style={{ overflow: 'visible' }}
-                >
-                  <i className="bi bi-cart-fill ms-1"></i>
                   {totalQuantity > 0 && (
-                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style={{ zIndex: 10 }}>
+                    <span className="position-absolute badge rounded-pill bg-danger badge-cart">
                       {totalQuantity}
                     </span>
                   )}
-                </button>
 
-                <ul className="dropdown-menu dropdown-menu-end p-3 mt-3" style={{ minWidth: "280px" }}>
 
-                  {/* lista prodotti */}
-                  <li className="dropdown-item-text text-muted small mb-2">Il tuo carrello</li>
+                  <ul className="dropdown-menu dropdown-menu-end p-3 mt-3" style={{ minWidth: "280px" }}>
 
-                  {/* placeholder per i prodotti */}
-                  {cart.length > 0 ? (
-                    cart.map((product) => (
-                      <li key={product.id} className="dropdown-item-text">
-                        <div className="d-flex align-items-center gap-2 py-1">
-                          <img src={product.image} alt={product.name} style={{ width: "40px", height: "40px", objectFit: "cover" }} />
-                          <div style={{ flexGrow: 1 }}>
-                            <p className="mb-0 small fw-bold">
-                              {product.name}
-                              {product.quantity > 1 && <span className="text-muted ms-1">x{product.quantity}</span>}
-                            </p>
-                            <p className="mb-0 small text-muted">€ {Number(product.price).toFixed(2)}</p>
+                    {/* lista prodotti */}
+                    <li className="dropdown-item-text text-muted small mb-2">Il tuo carrello</li>
+
+                    {/* placeholder per i prodotti */}
+                    {cart.length > 0 ? (
+                      cart.map((product) => (
+                        <li key={product.id} className="dropdown-item-text">
+                          <div className="d-flex align-items-center gap-2 py-1">
+                            <img src={product.image} alt={product.name} style={{ width: "40px", height: "40px", objectFit: "cover" }} />
+                            <div style={{ flexGrow: 1 }}>
+                              <p className="mb-0 small fw-bold">
+                                {product.name}
+                                {product.quantity > 1 && <span className="text-muted ms-1">x{product.quantity}</span>}
+                              </p>
+                              <p className="mb-0 small text-muted">€ {Number(product.price).toFixed(2)}</p>
+                            </div>
+
+                            <button
+                              className="btn btn-light rounded-3 p-2"
+                              onClick={(event) => {
+                                event.stopPropagation();
+                                removeHandler(product.id);
+                              }}>
+
+                              <i className="bi bi-trash text-secondary"></i>
+                            </button>
+
                           </div>
+                        </li>
+                      ))
+                    ) : (
+                      <li className="dropdown-item-text text-muted small">Carrello vuoto</li>
+                    )}
 
-                          <button
-                            className="btn btn-light rounded-3 p-2"
-                            onClick={(event) => {
-                              event.stopPropagation();
-                              removeHandler(product.id);
-                            }}>
+                    <li><hr className="dropdown-divider" /></li>
 
-                            <i className="bi bi-trash text-secondary"></i>
-                          </button>
-
-                        </div>
-                      </li>
-                    ))
-                  ) : (
-                    <li className="dropdown-item-text text-muted small">Carrello vuoto</li>
-                  )}
-
-                  <li><hr className="dropdown-divider" /></li>
-
-                  {/* btn pagina carrello */}
-                  <li>
-                    <Link to="/cart" className="btn btn-cartnav w-100 btn-sm">
-                      Vai al carrello
-                    </Link>
-                  </li>
-                </ul>
+                    {/* btn pagina carrello */}
+                    <li>
+                      <Link to="/cart" className="btn btn-cartnav w-100 btn-sm">
+                        Vai al carrello
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>

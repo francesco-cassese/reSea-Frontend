@@ -295,13 +295,14 @@ footer {
   gap: 8px;
 }
 
-.cart-badge {
-  position: absolute;
-  top: -5px;
-  right: 2px;
-  font-size: 0.80rem;
-  padding: 0.2em 0.5em;
-  z-index: 100;
+.badge-wishlist {
+  top: -6px;
+  right: -6px;
+}
+
+.badge-cart {
+  top: -6px;
+  right: -2px;
 }
 
 .cart-img {
@@ -468,13 +469,6 @@ footer {
   }
 }
 
-@media (min-width: 510px) {
-  .navbar-nav {
-    flex-direction: row !important;
-    justify-content: center;
-    align-items: center;
-  }
-}
 
 @media (min-width: 992px) {
   .navbar-nav {
