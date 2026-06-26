@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import useFetch from "../hooks/useFetch";
-import { heroSlides, HERO_INTERVAL_MS } from "../data/heroSlides";
-import { priceFormatter } from "../services/reseaServices";
+import useFetch from "../hooks/useFetch.js";
+import { heroSlides, HERO_INTERVAL_MS } from "../data/heroSlides.js";
+import { priceFormatter } from "../services/reseaServices.js";
 
 function ProductCarouselSection({ title, products, loading, error }) {
     const [currentIndex, setCurrentIndex] = useState(0);

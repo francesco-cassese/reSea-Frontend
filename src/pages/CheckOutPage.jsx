@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Link } from "react-router-dom";
-import CheckoutForm from '../Components/CheckOutForm.jsx';
-import OrderSummary from '../Components/OrderSummary.jsx';
-import PaymentForm from '../Components/PaymentForm.jsx';
+import CheckoutForm from '../components/CheckOutForm.jsx';
+import OrderSummary from '../components/OrderSummary.jsx';
+import PaymentForm from '../components/PaymentForm.jsx';
 import styles from './CheckoutPage.module.css';
-import useCheckout from '../hooks/useCeckout.js';
+import useCheckout from '../hooks/useCheckout.js';
 import { priceFormatter } from '../services/reseaServices.js';
-import { useAppContext } from '../Context/AppContext.jsx';
+import { useAppContext } from '../context/AppContext.jsx';
 
 function CheckoutPage() {
 

@@ -1,7 +1,7 @@
-import HeroSection from "../Components/HeroSection.jsx";
-import MissionSection from "../Components/MissionSection.jsx";
-import ImpactSection from "../Components/ImpactSection.jsx";
-import CTASection from "../Components/CTASection.jsx";
+import HeroSection from "../components/HeroSection.jsx";
+import MissionSection from "../components/MissionSection.jsx";
+import ImpactSection from "../components/ImpactSection.jsx";
+import CTASection from "../components/CTASection.jsx";
 
 function AboutPage() {
     return (

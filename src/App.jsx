@@ -6,12 +6,12 @@ import {
   Navigate
 } from 'react-router-dom'
 
-import Structure from './layout/Structure'
-import Homepage from './pages/Hompage'
+import Structure from './layout/Structure.jsx'
+import Homepage from './pages/Homepage.jsx'
 import ProductDetails from './pages/ProductDetails.jsx'
-import NotFound from './pages/NotFound'
-import Wishlist from './pages/Wishlist'
-import Product from './pages/Product'
+import NotFound from './pages/NotFound.jsx'
+import Wishlist from './pages/Wishlist.jsx'
+import Product from './pages/Product.jsx'
 import Cart from './pages/Cart.jsx'
 import CheckOutPage from './pages/CheckOutPage.jsx'
 import ScrollToTop from './components/ScrollToTop.jsx'
