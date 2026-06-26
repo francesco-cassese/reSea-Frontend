@@ -29,29 +29,25 @@ function Structure() {
           </button>
 
           <div className="collapse navbar-collapse" id="navMenu">
-            <div className="menu-links mx-auto">
-              <ul className="navbar-nav  mb-2 mb-lg-0 d-flex flex-column flex-md-row align-items-start align-items-md-center gap-3">
+            <div className="menu-links mx-auto w-100 d-flex justify-content-center">
+              <ul className="navbar-nav d-flex flex-column gap-3">
                 <li className="nav-item">
-                  <Link to="/homepage" className="nav-btn btn-sm btn-light text-dark">Home</Link>
+                  <Link to="/homepage" className="nav-btn nav-btn-text text-center">Home</Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/products" className="nav-btn btn-sm btn-light text-dark">Prodotti</Link>
+                  <Link to="/products" className="nav-btn nav-btn-text text-center">Prodotti</Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/aboutUs" className="nav-btn btn-sm btn-light text-dark">La Nostra Realtà</Link>
+                  <Link to="/aboutUs" className="nav-btn nav-btn-text text-center">La Nostra Realtà</Link>
                 </li>
               </ul>
             </div>
 
 
             {/* WISHLIST - agganciare wishlistItems dal context quando pronto */}
-            <div className="nav-item d-flex gap-3">
-              <Link
-                to="/wishlist"
-                className="nav-btn btn-sm btn-light text-dark position-relative"
-                style={{ overflow: 'visible' }}
-              >
-                <i className="bi bi-heart-fill"></i>
+
+            <div className="d-flex align-items-center gap-2">
+              <Link to="/wishlist" className="nav-btn  position-relative">
                 {wishlist.length > 0 && (
                   <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style={{ zIndex: 10 }}>
                     {wishlist.length}
@@ -63,7 +59,7 @@ function Structure() {
               <div className="dropdown position-relative d-inline-block">
 
                 <button
-                  className="nav-btn btn-sm dropdown-toggle position-relative"
+                  className="nav-btn dropdown-toggle"
                   type="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"

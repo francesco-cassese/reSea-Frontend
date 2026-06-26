@@ -103,8 +103,8 @@ function ProductCarouselSection({ title, products, loading, error }) {
                                         src={item.image}
                                         className="card-img-top"
                                         alt={item.name}
-                                    
                                     />
+
                                     <div className="card-body">
                                         <h6 className="card-title">{item.name}</h6>
                                         <p className="card-text fw-bold mb-0">{priceFormatter(item.price)}</p>

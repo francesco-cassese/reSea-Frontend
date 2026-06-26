@@ -1,4 +1,5 @@
 import { useAppContext } from '../Context/AppContext';
+import { priceFormatter } from '../services/reseaServices';
 
 function CartList() {
 
@@ -12,7 +13,7 @@ function CartList() {
         // Se il carrello è pieno
         cartToShow = cart.map((item) => (
             <div key={item.id}>
-                <div className="d-flex align-items-center gap-4 p-3 rounded-4 shadow-sm cart-card">
+                <div className="d-flex align-items-start flex-wrap p-3 rounded-4 shadow-sm cart-card mb-3">
                     {/* image */}
                     <div className="cart-img flex-shrink-0 rounded-3 bg-light" style={{ backgroundImage: `url(${item.image})`, backgroundSize: 'cover' }} />
 
@@ -20,11 +21,11 @@ function CartList() {
                     <div className="flex-grow-1">
                         <h5 className="fw-bold mb-1">{item.name}</h5>
                         <div className="d-flex flex-column gap-1 mb-3">
-                            <div className="d-flex align-items-center gap-2">
+                            <div className="d-flex align-items-center hide-on-small gap-2">
                                 <i className="bi bi-shield-check text-secondary"></i>
                                 <span className="small text-secondary">Protezione UV 100%</span>
                             </div>
-                            <div className="d-flex align-items-center gap-2">
+                            <div className="d-flex align-items-center hide-on-small gap-2">
                                 <i className="bi bi-recycle text-secondary"></i>
                                 <span className="small text-secondary">Materiali sostenibili</span>
                             </div>
@@ -45,11 +46,11 @@ function CartList() {
                     </div>
 
                     {/* divider */}
-                    <div className="vr mx-1" />
+                    <div className="vr mx-1 d-none d-md-block" />
 
                     {/* actions */}
-                    <div className="d-flex flex-column align-items-center gap-3" style={{ minWidth: "140px" }}>
-                        <div className="d-flex align-items-center gap-2">
+                    <div className="flex-fill d-flex flex-column align-items-center gap-1 cart-card" style={{ minWidth: "140px" }}>
+                        <div className="d-flex align-items-center justify-content-center gap-2">
                             <div className="d-flex align-items-center gap-2 px-2 py-1 rounded-pill bg-light">
                                 <button
                                     className="btn btn-sm rounded-circle cart-qty-btn"
@@ -74,7 +75,7 @@ function CartList() {
                         </div>
 
                         <span className="fw-bold fs-5 text-primary">
-                            € {Number(item.price * item.quantity).toFixed(2)}
+                            {priceFormatter(item.price * item.quantity)}
                         </span>
                     </div>
                 </div>

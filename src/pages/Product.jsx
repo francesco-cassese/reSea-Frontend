@@ -77,32 +77,43 @@ function Product() {
     if (loading) return <p className="p-4">Caricamento dei prodotti in corso...</p>;
     if (error) return <p className="p-4 text-danger">Qualcosa è andato storto: {error}</p>;
 
+    const sidebarProps = {
+        searchInput, setSearchInput, applySearch, handleSearchKeyDown,
+        selectedCategory, handleCategoryChange, safeCategories,
+        categoriesLoading, categoriesError, minPriceInput, setMinPriceInput,
+        maxPriceInput, setMaxPriceInput, sortBy, handleSortChange,
+        limit, handleLimitChange, handlePriceFilters, clearAllFilters
+    };
+
     return (
         <div className="container py-4">
-            <div className="d-flex gap-4 align-items-start">
+            <div className="d-flex flex-column flex-lg-row gap-4 align-items-start">
                 <div className="sidebarp">
-                    {/* sidebar */}
-                    <ProductSidebar
-                        searchInput={searchInput}
-                        setSearchInput={setSearchInput}
-                        applySearch={applySearch}
-                        handleSearchKeyDown={handleSearchKeyDown}
-                        selectedCategory={selectedCategory}
-                        handleCategoryChange={handleCategoryChange}
-                        safeCategories={safeCategories}
-                        categoriesLoading={categoriesLoading}
-                        categoriesError={categoriesError}
-                        minPriceInput={minPriceInput}
-                        setMinPriceInput={setMinPriceInput}
-                        maxPriceInput={maxPriceInput}
-                        setMaxPriceInput={setMaxPriceInput}
-                        sortBy={sortBy}
-                        handleSortChange={handleSortChange}
-                        limit={limit}
-                        handleLimitChange={handleLimitChange}
-                        handlePriceFilters={handlePriceFilters}
-                        clearAllFilters={clearAllFilters}
-                    />
+                    {/* BOTTONE MOBILE*/}
+                    <button
+                        className="btn btn-primary d-lg-none mb-4 w-100"
+                        type="button"
+                        data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasFilters"
+                    >
+                        <i className="bi bi-funnel"></i> Filtra e Ordina
+                    </button>
+
+                    {/*OFF-CANVAS MOBILE*/}
+                    <div className="offcanvas offcanvas-start d-lg-none" tabIndex="-1" id="offcanvasFilters">
+                        <div className="offcanvas-header">
+                            <h5 className="offcanvas-title">Filtri</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="offcanvas"></button>
+                        </div>
+                        <div className="offcanvas-body">
+                            <ProductSidebar {...sidebarProps} />
+                        </div>
+                    </div>
+
+                    {/* SIDEBAR FISSA (Solo Desktop*/}
+                    <div className="d-none d-lg-block">
+                        <ProductSidebar {...sidebarProps} />
+                    </div>
                 </div>
                 {/* prodotti */}
                 <div className="flex-grow-1">
@@ -154,7 +165,7 @@ function Product() {
                                                                 }}>
                                                                 <i className={`bi ${inWishlist ? "bi-heart-fill" : "bi-heart"}`}></i>
                                                             </button>
-                                
+
                                                             <button
                                                                 type="button"
                                                                 className="btn rounded-circle"
@@ -172,7 +183,7 @@ function Product() {
                                                 </div>
                                             </div>
                                         </Link>
-                                        );
+                                    );
                                 })}
                             </div>
 

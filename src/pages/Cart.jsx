@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import CartList from "../Components/CartList.jsx"
 import { useAppContext } from "../Context/AppContext";
+import { priceFormatter } from "../services/reseaServices.js";
 
 
 function Cart() {
@@ -26,15 +27,14 @@ function Cart() {
                         <div style={{ width: "100%", maxWidth: "860px" }}>
 
                             {/* header */}
-                            <div className="d-flex justify-content-between align-items-baseline mb-3">
+                            <div className="d-flex justify-content-between align-items-baseline">
                                 <h2 className="fw-bold fs-4 m-0">Il tuo carrello:</h2>
-                                <span className="fw-semibold fs-5 text-primary">
-                                    Totale: € {totale.toFixed(2)}
-                                </span>
                             </div>
                             {/* Lista prodotti nel carrello */}
                             <CartList />
-
+                            <span className="fw-semibold fs-5 text-primary">
+                                Totale: {priceFormatter(totale)}
+                            </span>
                         </div>
                     </div>
                     <div className="w-100 d-flex align-items-center">
