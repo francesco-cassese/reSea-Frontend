@@ -1,6 +1,6 @@
 import { Link, Outlet } from "react-router-dom";
 import { useAppContext } from "../context/AppContext.jsx";
-import logo from '../assets/logoneutro.png'
+import logo from '../assets/logoneutro.png';
 
 function Structure() {
   const { cart, totalQuantity, removeHandler, wishlist, addHandler, updateQuantity } = useAppContext();

@@ -44,50 +44,6 @@ footer {
   min-height: 100vh;
 }
 
-.hero-banner1 {
-  width: 100%;
-  min-height: 700px;
-  background-image: url('./assets/hero2.png');
-  background-size: cover;
-  background-position: top;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  .container {
-    margin-right: 15rem;
-  }
-}
-
-.hero-banner2 {
-  width: 100%;
-  min-height: 700px;
-  background-image: url('./assets/herobanner.png');
-  background-size: cover;
-  background-position: 50% 70%;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hero-banner3 {
-  width: 100%;
-  min-height: 900px;
-  background-image: url('./assets/hero1.png');
-  background-size: cover;
-  background-position: center;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  .container {
-    margin-left: 15rem;
-  }
-}
-
 /*==STILE NAVBAR==*/
 
 .navbar {
@@ -198,6 +154,124 @@ footer {
   left: 150%;
 }
 
+.badge-wishlist {
+  top: -6px;
+  right: -6px;
+}
+
+.badge-cart {
+  top: -6px;
+  right: -2px;
+}
+
+.btn-cartnav {
+  background-color: var(--color-btn);
+}
+
+.btn-cartnav:hover {
+  background-color: #0dcaf0af;
+}
+
+@media (max-width: 991.98px) {
+
+  .navbar-collapse {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
+
+  }
+
+  .menu-links {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+}
+
+@media (min-width: 992px) {
+  .navbar-nav {
+    flex-direction: row !important;
+  }
+
+  .navbar-collapse {
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+  }
+}
+
+@media (max-width: 991px) {
+  .navbar-collapse.show {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2rem;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .navbar-nav {
+    display: flex !important;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 15px;
+  }
+}
+
+/*-------*/
+
+
+/*HOMEPAGE*/
+
+/*herobanner*/
+.hero-banner1 {
+  width: 100%;
+  min-height: 700px;
+  background-image: url('./assets/hero2.png');
+  background-size: cover;
+  background-position: top;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .container {
+    margin-right: 15rem;
+  }
+}
+
+.hero-banner2 {
+  width: 100%;
+  min-height: 700px;
+  background-image: url('./assets/herobanner.png');
+  background-size: cover;
+  background-position: 50% 70%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-banner3 {
+  width: 100%;
+  min-height: 900px;
+  background-image: url('./assets/hero1.png');
+  background-size: cover;
+  background-position: center;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .container {
+    margin-left: 15rem;
+  }
+}
+
 .hero-slider {
   width: 100%;
   min-height: 700px;
@@ -254,6 +328,18 @@ footer {
   background: #fff;
 }
 
+@media (max-width: 991.98px) {
+  .hero-slider {
+    min-height: 560px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .hero-slider {
+    min-height: 500px;
+  }
+}
+
 .section-title {
   color: #0A2540;
   font-weight: 800;
@@ -284,7 +370,25 @@ footer {
   margin-inline: auto;
 }
 
-/*carrello*/
+/*-------*/
+
+.home-card {
+  border: none;
+
+  .card-img-top {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+  }
+}
+
+/*-------*/
+
+/**/
+
+/*CART*/
 .cart-card {
   background: #f8f6f2;
   display: flex;
@@ -297,16 +401,6 @@ footer {
   display: flex;
   align-items: center;
   gap: 8px;
-}
-
-.badge-wishlist {
-  top: -6px;
-  right: -6px;
-}
-
-.badge-cart {
-  top: -6px;
-  right: -2px;
 }
 
 .cart-img {
@@ -329,11 +423,25 @@ footer {
   border: none;
   border-radius: 4px;
 }
+/*-----*/
 
+/*SIDEBAR IN Components/ProductSidebar*/
 .sidebarp {
   margin-top: 37px;
 }
 
+.sidebar-filter {
+
+  .btn {
+    background-color: var(--color-btn);
+    color: black;
+    border: none;
+  }
+}
+
+/*-----*/
+
+/*PRODUCT*/
 .card-product {
   border-radius: 0;
   border: none;
@@ -350,28 +458,6 @@ footer {
   border-radius: 0;
 }
 
-
-.home-card {
-  border: none;
-
-  .card-img-top {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
-  }
-}
-
-.sidebar-filter {
-
-  .btn {
-    background-color: var(--color-btn);
-    color: black;
-    border: none;
-  }
-}
-
 .page-item.active .page-link {
 
   background-color: var(--color-btn) !important;
@@ -386,45 +472,6 @@ footer {
 .btn-pay:hover {
   background-color: #0dcaf0af;
 }
-
-.btn-cartnav {
-  background-color: var(--color-btn);
-}
-
-.btn-cartnav:hover {
-  background-color: #0dcaf0af;
-}
-
-@media (max-width: 991.98px) {
-
-  .navbar-collapse {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 1rem;
-
-  }
-
-  .menu-links {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-  }
-
-}
-
-@media (max-width: 991.98px) {
-  .hero-slider {
-    min-height: 560px;
-  }
-}
-
-@media (max-width: 575.98px) {
-  .hero-slider {
-    min-height: 500px;
-  }
-}
-
-
 
 /* ==========================
   Link "Torna indietro"
@@ -499,39 +546,6 @@ footer {
   }
 }
 
-
-@media (min-width: 992px) {
-  .navbar-nav {
-    flex-direction: row !important;
-  }
-
-  .navbar-collapse {
-    opacity: 1 !important;
-    transform: none !important;
-    visibility: visible !important;
-  }
-}
-
-@media (max-width: 991px) {
-  .navbar-collapse.show {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 2rem;
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  }
-
-  .navbar-nav {
-    display: flex !important;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 15px;
-  }
-}
 
 /*WIDGET IA*/
 .assistant-widget {
@@ -689,3 +703,4 @@ footer {
     height: 44vh;
   }
 }
+/*========*/
