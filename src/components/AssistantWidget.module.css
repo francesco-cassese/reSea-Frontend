@@ -1,0 +1,155 @@
+.assistantWidget {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 1200;
+}
+
+.assistantWidgetToggle {
+  border: 1px solid rgba(0, 200, 255, 0.4);
+  border-radius: 1000px;
+  background: linear-gradient(135deg, var(--color-gradient-start), var(--color-gradient-end));
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 10px 16px;
+  box-shadow: 0 4px 15px rgba(0, 150, 255, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  transition: all 0.25s ease;
+}
+
+.assistantWidgetToggle:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, var(--color-gradient-start-hover), var(--color-gradient-end-hover));
+  box-shadow: 0 8px 25px rgba(0, 150, 255, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+.assistantWidgetPanel {
+  width: 360px;
+  max-width: calc(100vw - 32px);
+  border: 1px solid rgba(0, 70, 120, 0.15);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 27, 52, 0.18);
+  backdrop-filter: blur(4px);
+}
+
+.assistantWidgetHeader {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(0, 70, 120, 0.12);
+  background: linear-gradient(120deg, rgba(237, 224, 198, 0.85), rgba(202, 232, 245, 0.85));
+}
+
+.assistantWidgetTitle {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #0a2540
+}
+
+.assistantWidgetSubtitle {
+  margin: 2px 0 0;
+  font-size: 0.78rem;
+  color: #24425f;
+}
+
+.assistantWidgetMessages {
+  height: 300px;
+  overflow-y: auto;
+  padding: 10px;
+  background: rgba(248, 252, 255, 0.92)
+}
+
+.assistantBubble {
+  margin-bottom: 8px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+}
+
+.assistantBubbleUser {
+  background: #e9f7ff;
+  border-color: rgba(0, 140, 215, 0.2)
+}
+
+.assistantBubbleAi {
+  background: #fffdf8;
+  border-color: rgba(155, 126, 80, 0.2);
+}
+
+.assistantBubbleLabel {
+  margin: 0 0 4px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #35526d;
+}
+
+.assistantBubbleText {
+  margin: 0;
+  color: #0b2947;
+  font-size: 0.9rem;
+  line-height: 1.35rem;
+}
+
+.assistantWidgetForm {
+  padding: 10px;
+  border-top: 1px solid rgba(0, 70, 120, 0.12);
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+.assistantWidgetTextarea {
+  width: 100%;
+  border: 1px solid #c8d9e6;
+  border-radius: 10px;
+  resize: vertical;
+  min-height: 96px;
+  padding: 8px 10px;
+  color: #0b2947;
+}
+
+.assistantWidgetTextarea:focus {
+  outline: none;
+  border-color: var(--color-gradient-end-hover);
+  box-shadow: 0 0 0 3px rgba(0, 170, 221, 0.15);
+}
+
+.assistantWidgetActions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.assistantWidgetSend {
+  border: 0;
+  border-radius: 1000px;
+  padding: 7px 14px;
+  background: linear-gradient(135deg, var(--color-gradient-start), var(--color-gradient-end));
+  color: #fff;
+  font-weight: 700;
+}
+
+.assistantWidgetSend:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.assistantWidgetError {
+  margin: 8px 0 0;
+  color: #b42318;
+  font-size: 0.8rem;
+}
+
+@media (max-width: 576px) {
+  .assistantWidget {
+    right: 10px;
+    bottom: 10px;
+  }
+
+  .assistantWidgetPanel {
+    width: min(92vw, 360px);
+  }
+
+  .assistantWidgetMessages {
+    height: 44vh;
+  }
+}

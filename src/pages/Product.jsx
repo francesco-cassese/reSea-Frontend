@@ -5,6 +5,7 @@ import { useCategories } from "../context/CategoriesContext.jsx";
 import ProductSidebar from "../components/ProductSidebar.jsx";
 import { priceFormatter, getFilterLabel, formatCategoryName } from "../services/reseaServices";
 import { useAppContext } from "../context/AppContext.jsx";
+import styles from "./Product.module.css";
 
 function Product() {
     const { categories, categoriesLoading, categoriesError } = useCategories();
@@ -103,7 +104,7 @@ function Product() {
     return (
         <div className="container py-4">
             <div className="d-flex flex-column flex-lg-row gap-4 align-items-start">
-                <div className="sidebarp">
+                <div className={styles.sidebarp}>
                     <button className="btn btn-primary d-lg-none mb-4 w-100" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasFilters">
                         <i className="bi bi-funnel"></i> Filtri
                     </button>
@@ -142,7 +143,7 @@ function Product() {
                             </div>
 
                             <div className={`d-flex flex-wrap gap-3 justify-content-center`}>
-                                {products.map((item) => {
+                                {products.map((item, index) => {
                                     const countCart = cart.find(p => p.id === item.id)
                                     const inCart = cart.some(p => p.id === item.id);
                                     const inWishlist = wishlist.some(p => p.id === item.id);
@@ -150,10 +151,16 @@ function Product() {
                                         <Link
                                             to={"/products/" + item.slug}
                                             className="text-decoration-none text-dark"
-                                            style={{ width: view === 'column' ? '18rem' : '100%', display: 'inline-block' }}
+                                            style={{
+                                                width: view === 'column' ? '18rem' : '100%',
+                                                display: 'inline-block',
+                                                '--index-mobile': index,
+                                                '--index-desktop': Math.floor(index / 3),
+                                                '--index-tablet': Math.floor(index / 2)
+                                            }}
                                             key={item.id}
                                         >
-                                            <div className={`card card-product w-100 ${view === 'column' ? 'list-column' : 'list-row'} ${view === 'column' ? '' : 'd-flex flex-column flex-md-row align-items-center p-3 gap-3 rounded-5'}`} style={{ cursor: "pointer" }}>
+                                            <div className={`card ${styles.cardProduct} w-100 ${view === 'column' ? 'list-column' : 'list-row'} ${view === 'column' ? '' : 'd-flex flex-column flex-md-row align-items-center p-3 gap-3 rounded-5'}`} style={{ cursor: "pointer" }}>
                                                 <img
                                                     src={item.image}
                                                     className={view === 'column' ? 'card-img-top' : 'img-fluid w-25 w-md-25 img-thumbnail border-0 bg-transparent'}
@@ -165,16 +172,16 @@ function Product() {
                                                     <p className={`card-text text-muted small mt-2 fs-4 fw-semibold ${view === 'column' ? 'd-none' : 'd-none d-md-block'}`}>
                                                         {descrizioniSostenibili[item.id % descrizioniSostenibili.length]}
                                                     </p>
-                                                    <h6 className={`card-title fw-bold mt-3 mb-2 ${view === 'column' ? '' : 'fs-3 mt-0'}`}>
+                                                    <h4 className={`card-title fw-bold mt-3 mb-2 ${view === 'column' ? '' : 'fs-3 mt-0'}`}>
                                                         {item.name}
-                                                    </h6>
+                                                    </h4>
                                                     <div className="d-flex justify-content-between align-items-center">
-                                                        <p className={`card-text fw-bold mb-0 ${view === 'row' ? 'fs-3' : 'small'}`}>
+                                                        <p className={`card-text ${styles.cardPrice} fw-bold mb-0 ${view === 'row' ? 'fs-3' : 'small'}`}>
                                                             {priceFormatter(item.price)}
                                                         </p>
                                                         <button
                                                             type="button"
-                                                            className={`btn rounded-circle ${view === 'row' ? 'btn-lg fs-4' : ''}`}
+                                                            className={`btn rounded-circle ${styles.gradientBtn} ${view === 'row' ? 'btn-lg fs-4' : ''}`}
                                                             onClick={(e) => { e.preventDefault(); e.stopPropagation(); addToWishlist(item); }}
                                                         >
                                                             <i className={`bi ${inWishlist ? "bi-heart-fill" : "bi-heart"}`}></i>
@@ -185,15 +192,15 @@ function Product() {
                                                         {!inCart ? (
                                                             <button
                                                                 type="button"
-                                                                className="btn btn-dark rounded-pill w-100"
+                                                                className={`btn rounded-pill w-100 ${styles.gradientBtn}`}
                                                                 onClick={(e) => { e.preventDefault(); e.stopPropagation(); addHandler(item); }}
                                                             >
-                                                                <i className="bi bi-cart me-2"></i> Aggiungi
+                                                                <i className="bi bi-cart me-2 fs-5"></i> Aggiungi
                                                             </button>
                                                         ) : (
-                                                            <div className="btn btn-dark rounded-pill w-100 d-flex justify-content-between align-items-center px-3">
+                                                            <div className={`btn btn-dark rounded-pill w-100 d-flex justify-content-between align-items-center px-3 ${styles.gradientBtn}`}>
                                                                 <button
-                                                                    className="btn btn-sm text-white p-0"
+                                                                    className={`btn btn-sm text-white p-0 ${styles.gradientBtn}`}
                                                                     onClick={(e) => { e.preventDefault(); e.stopPropagation(); countCart.quantity === 1 ? removeHandler(item.id) : updateQuantity(item.id, -1); }}
                                                                 >
                                                                     <i className="bi bi-dash-lg"></i>
@@ -204,7 +211,7 @@ function Product() {
                                                                     <i className="bi bi-cart-fill"></i>
                                                                 </div>
                                                                 <button
-                                                                    className="btn btn-sm text-white p-0"
+                                                                    className={`btn btn-sm text-white p-0 ${styles.gradientBtn}`}
                                                                     onClick={(e) => { e.preventDefault(); e.stopPropagation(); updateQuantity(item.id, +1); }}
                                                                 >
                                                                     <i className="bi bi-plus-lg"></i>

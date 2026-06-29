@@ -1,0 +1,42 @@
+.sidebarp {
+  margin-top: 37px;
+}
+
+.cardProduct {
+  border-radius: 12px;
+  border: none;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-image: url('../assets/bgcard2.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.cardPrice {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #34495e;
+}
+
+.gradientBtn {
+  background-color: hsl(200, 70%, clamp(40%, 60% - (var(--index-mobile, 0) * 3%), 60%)) !important;
+  transition: background-color 0.4s ease;
+  border: none !important;
+  color: white !important;
+  font-weight: bold;
+}
+
+@media (min-width: 768px) {
+  .gradientBtn {
+    background-color: hsl(200, 70%, clamp(40%, 60% - (var(--index-tablet, 0) * 10%), 60%)) !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .gradientBtn {
+    background-color: hsl(200, 70%, clamp(40%, 60% - (var(--index-desktop, 0) * 7%), 60%)) !important;
+  }
+}

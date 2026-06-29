@@ -3,6 +3,13 @@ import { Link } from "react-router-dom";
 import useFetch from "../hooks/useFetch.js";
 import { heroSlides, HERO_INTERVAL_MS } from "../data/heroSlides.js";
 import { priceFormatter } from "../services/reseaServices.js";
+import styles from "./Homepage.module.css";
+
+const heroBannerStyles = {
+    "hero-banner1": styles.heroBanner1,
+    "hero-banner2": styles.heroBanner2,
+    "hero-banner3": styles.heroBanner3,
+};
 
 function ProductCarouselSection({ title, products, loading, error }) {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -38,7 +45,7 @@ function ProductCarouselSection({ title, products, loading, error }) {
     if (loading) {
         return (
             <section className="container py-5">
-                <h2 className="section-title mb-3">{title}</h2>
+                <h2 className={`${styles.sectionTitle} mb-3`}>{title}</h2>
                 <p>Caricamento in corso...</p>
             </section>
         );
@@ -47,7 +54,7 @@ function ProductCarouselSection({ title, products, loading, error }) {
     if (error) {
         return (
             <section className="container py-5">
-                <h2 className="section-title mb-3">{title}</h2>
+                <h2 className={`${styles.sectionTitle} mb-3`}>{title}</h2>
                 <p>Errore nel caricamento dei prodotti.</p>
             </section>
         );
@@ -56,7 +63,7 @@ function ProductCarouselSection({ title, products, loading, error }) {
     if (safeProducts.length === 0) {
         return (
             <section className="container py-5" >
-                <h2 className="section-title mb-3">{title}</h2>
+                <h2 className={`${styles.sectionTitle} mb-3`}>{title}</h2>
                 <p>Nessun prodotto disponibile.</p>
             </section >
         );
@@ -65,7 +72,7 @@ function ProductCarouselSection({ title, products, loading, error }) {
     return (
         <section className="container py-5">
             <div className="d-flex justify-content-between align-items-center mb-3">
-                <h2 className="section-title mb-0">{title}</h2>
+                <h2 className={`${styles.sectionTitle} mb-0`}>{title}</h2>
                 <div className="d-flex gap-2">
                     <button
                         type="button"
@@ -86,19 +93,19 @@ function ProductCarouselSection({ title, products, loading, error }) {
                 </div>
             </div>
 
-            <div className="product-carousel-viewport">
+            <div className={styles.productCarouselViewport}>
                 <div
-                    className="product-carousel-track"
+                    className={styles.productCarouselTrack}
                     style={{ transform: `translateX(-${currentIndex * (100 / cardsPerView)}%)` }}
                 >
                     {safeProducts.map((item) => (
                         <div
-                            className="product-carousel-item"
+                            className={styles.productCarouselItem}
                             key={item.id}
                             style={{ flex: `0 0 calc(100% / ${cardsPerView})` }}
                         >
                             <Link to={"/products/" + item.slug} className="text-decoration-none text-dark">
-                                <div className="card home-card h-100">
+                                <div className={`card ${styles.homeCard} h-100`}>
                                     <img
                                         src={item.image}
                                         className="card-img-top"
@@ -147,23 +154,23 @@ function Homepage() {
 
     return (
         <>
-            <section className={"hero-slider " + currentHero.className}>
-                <div className="hero-overlay"></div>
-                <div className="container hero-content">
-                    <h1 className="hero-title">{currentHero.title}</h1>
-                    <p className="hero-text">{currentHero.text}</p>
+            <section className={`${styles.heroSlider} ${heroBannerStyles[currentHero.className]}`}>
+                <div className={styles.heroOverlay}></div>
+                <div className={`container ${styles.heroContent}`}>
+                    <h1 className={styles.heroTitle}>{currentHero.title}</h1>
+                    <p className={styles.heroText}>{currentHero.text}</p>
                     <Link to={currentHero.ctaTo} className="btn btn-primary rounded-pill px-4">
                         {currentHero.ctaLabel}
                     </Link>
 
                 </div>
 
-                <div className="hero-dots">
+                <div className={styles.heroDots}>
                     {heroSlides.map((_, index) => (
                         <button
                             key={index}
                             type="button"
-                            className={"hero-dot " + (index === activeSlide ? "active" : "")}
+                            className={`${styles.heroDot} ${index === activeSlide ? styles.active : ""}`}
                             onClick={() => setActiveSlide(index)}
                             aria-label={"Vai al banner " + (index + 1)}
                         />

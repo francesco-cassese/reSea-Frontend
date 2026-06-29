@@ -1,0 +1,31 @@
+.cartCard {
+  background: #f8f6f2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 15px;
+}
+
+.cartImg {
+  width: 200px;
+  height: 160px;
+}
+
+.cartQtyBtn {
+  padding: 5px 10px;
+  background: #e0dbd3;
+  border: none;
+  border-radius: 4px;
+}
+
+@media (max-width: 475px) {
+  .hideOnSmall {
+    display: none !important;
+  }
+
+  .cartCard {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+}

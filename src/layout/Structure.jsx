@@ -3,6 +3,7 @@ import { useAppContext } from "../context/AppContext.jsx";
 import logo from '../assets/logoneutro.png';
 import { priceFormatter } from "../services/reseaServices.js";
 import { useRef, useEffect } from "react";
+import styles from "./Structure.module.css";
 
 function Structure() {
   const { cart, totalQuantity, removeHandler, wishlist, addHandler, updateQuantity } = useAppContext();
@@ -34,7 +35,7 @@ function Structure() {
         <nav className="navbar navbar-expand-lg navbar-white px-4">
 
           <Link className="navbar-brand" to="/homepage">
-            <img className="logo-nav" src={logo} alt="Logo" />
+            <img className={styles.logoNav} src={logo} alt="Logo" />
           </Link>
 
           <button
@@ -50,16 +51,16 @@ function Structure() {
           </button>
 
           <div className="collapse navbar-collapse" id="navMenu">
-            <div className="menu-links mx-auto w-100 d-flex justify-content-center">
+            <div className={`${styles.menuLinks} mx-auto w-100 d-flex justify-content-center`}>
               <ul className="navbar-nav d-flex flex-column flex-sm-row gap-3">
                 <li className="nav-item">
-                  <Link to="/homepage" className="nav-btn nav-btn-text text-center">Home</Link>
+                  <Link to="/homepage" className={`${styles.navBtn} ${styles.navBtnText} text-center`}>Home</Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/products" className="nav-btn nav-btn-text text-center">Prodotti</Link>
+                  <Link to="/products" className={`${styles.navBtn} ${styles.navBtnText} text-center`}>Prodotti</Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/aboutUs" className="nav-btn nav-btn-text text-center">La Nostra Realtà</Link>
+                  <Link to="/aboutUs" className={`${styles.navBtn} ${styles.navBtnText} text-center`}>La Nostra Realtà</Link>
                 </li>
               </ul>
             </div>
@@ -69,11 +70,11 @@ function Structure() {
 
             <div className="d-flex align-items-center gap-2">
               <div className="position-relative">
-                <Link to="/wishlist" className="nav-btn">
+                <Link to="/wishlist" className={styles.navBtn}>
                   <i className="bi bi-heart-fill"></i>
                 </Link>
                 {wishlist.length > 0 && (
-                  <span className="position-absolute badge rounded-pill bg-danger badge-wishlist">
+                  <span className={`position-absolute badge rounded-pill bg-danger ${styles.badgeWishlist}`}>
                     {wishlist.length}
                   </span>
                 )}
@@ -82,7 +83,7 @@ function Structure() {
               <div className="dropdown d-inline-block">
                 <div className="position-relative">
                   <button
-                    className="nav-btn dropdown-toggle"
+                    className={`${styles.navBtn} dropdown-toggle`}
                     type="button"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
@@ -91,20 +92,20 @@ function Structure() {
                   </button>
 
                   {totalQuantity > 0 && (
-                    <span className="position-absolute badge rounded-pill bg-danger badge-cart">
+                    <span className={`position-absolute badge rounded-pill bg-danger ${styles.badgeCart}`}>
                       {totalQuantity}
                     </span>
                   )}
 
 
                   <ul
-                    className="dropdown-menu dropdown-menu-end cart-menu-container p-3 mt-3">
+                    className={`dropdown-menu dropdown-menu-end ${styles.cartMenuContainer} p-3 mt-3`}>
 
                     {/* lista prodotti */}
                     <li className="dropdown-item-text text-muted small mb-2">Il tuo carrello</li>
 
                     {/* placeholder per i prodotti */}
-                    <li className="cart-products-scroll">
+                    <li className={styles.cartProductsScroll}>
                       {cart.length > 0 ? (
                         cart.map((product) => (
                           <div key={product.id} className="dropdown-item-text">
@@ -142,7 +143,7 @@ function Structure() {
                           </div>
                         ))
                       ) : (
-                        <div className="dropdown-item-text text-muted small">Carrello vuoto</div>
+                        <div className="dropdown-item-text text-muted small">è vuoto</div>
                       )}
 
                       <div ref={endOfListRef} />
@@ -153,10 +154,10 @@ function Structure() {
                         <li><hr className="dropdown-divider" /></li>
                         <li className="px-3 py-2 d-flex justify-content-between align-items-center">
                           <span className="fw-bold">Totale:</span>
-                          <span className="fw-bold text-primary">€ {totale.toFixed(2)}</span>
+                          <span className="fw-bold text-primary">{priceFormatter(totale)}</span>
                         </li>
                         <li>
-                          <Link to="/cart" className="btn btn-cartnav w-100 btn-sm">
+                          <Link to="/cart" className={`btn ${styles.btnCartnav} w-100 btn-sm fw-bold`}>
                             Vai al carrello
                           </Link>
                         </li>
@@ -170,7 +171,7 @@ function Structure() {
         </nav>
       </header >
 
-      <main className="appbg">
+      <main className={styles.appBg}>
         <Outlet />
       </main>
 

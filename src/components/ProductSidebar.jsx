@@ -1,3 +1,5 @@
+import styles from './ProductSidebar.module.css';
+
 function ProductSidebar({
     searchInput,
     setSearchInput,
@@ -20,7 +22,7 @@ function ProductSidebar({
     clearAllFilters,
 }) {
     return (
-        <div className="d-flex flex-column gap-4 p-3 rounded-3 bg-light sidebar-filter" style={{ minWidth: "240px" }}>
+        <div className={`d-flex flex-column gap-4 p-3 rounded-3 bg-light ${styles.sidebarFilter}`} style={{ minWidth: "240px" }}>
 
             {/* Search */}
             <div>

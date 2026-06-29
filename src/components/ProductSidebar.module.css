@@ -1,0 +1,5 @@
+.sidebarFilter :global(.btn) {
+  background-color: var(--color-btn);
+  color: black;
+  border: none;
+}
