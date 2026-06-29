@@ -1,13 +1,16 @@
+/*==SEZIONE==*/
 .impactSection {
     background: linear-gradient(135deg,
             #082f49,
             #0dcaf0af);
 }
 
+/*==TESTI==*/
 .textTitle {
     color: white;
 }
 
+/*==CARD STATISTICHE==*/
 .impactCard {
     padding: 2rem;
 }

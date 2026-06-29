@@ -1,3 +1,4 @@
+/*==HERO BANNER==*/
 .heroBanner1 {
   width: 100%;
   min-height: 700px;
@@ -42,6 +43,7 @@
   margin-left: 15rem;
 }
 
+/*==HERO SLIDER==*/
 .heroSlider {
   width: 100%;
   min-height: 700px;
@@ -126,12 +128,14 @@
   }
 }
 
+/*==TITOLI SEZIONE==*/
 .sectionTitle {
   color: #0A2540;
   font-weight: 800;
   letter-spacing: 0.3px;
 }
 
+/*==CAROSELLO PRODOTTI==*/
 .productCarouselViewport {
   overflow: hidden;
 }
@@ -145,6 +149,7 @@
   padding: 0 8px;
 }
 
+/*==CARD PRODOTTO==*/
 .homeCard {
   border: none;
 }

@@ -110,8 +110,8 @@ function Structure() {
                         cart.map((product) => (
                           <div key={product.id} className="dropdown-item-text">
                             <div className="d-flex align-items-center gap-2 py-1">
-                              <img src={product.image} alt={product.name} style={{ width: "40px", height: "40px", objectFit: "cover" }} />
-                              <div style={{ flexGrow: 1 }}>
+                              <img src={product.image} alt={product.name} className={styles.cartThumb} />
+                              <div className={styles.cartInfo}>
                                 <p className="mb-0 small fw-bold">
                                   {product.name}
                                 </p>
@@ -119,8 +119,7 @@ function Structure() {
                               </div>
                               <div className="d-flex align-items-center gap-2">
                                 <button
-                                  className="btn btn-outline-secondary rounded-circle p-0 d-flex align-items-center justify-content-center"
-                                  style={{ width: "28px", height: "28px" }}
+                                  className={`btn btn-outline-secondary rounded-circle p-0 d-flex align-items-center justify-content-center ${styles.cartQtyBtnSize}`}
                                   onClick={(e) => { e.stopPropagation(); product.quantity === 1 ? removeHandler(product.id) : updateQuantity(product.id, -1); }}
                                 >
                                   {product.quantity === 1 ? <i class="bi bi-trash3-fill"></i> : "-"}
@@ -131,8 +130,7 @@ function Structure() {
                                 </span>
 
                                 <button
-                                  className="btn btn-outline-secondary rounded-circle p-0 d-flex align-items-center justify-content-center"
-                                  style={{ width: "28px", height: "28px" }}
+                                  className={`btn btn-outline-secondary rounded-circle p-0 d-flex align-items-center justify-content-center ${styles.cartQtyBtnSize}`}
                                   onClick={(e) => { e.stopPropagation(); updateQuantity(product.id, +1); }}
                                 >
                                   +
@@ -179,7 +177,7 @@ function Structure() {
         <div className="container-fluid d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
           <a className="navbar-brand d-flex align-items-center gap-3 text-decoration-none text-dark" href="/">
             <div className="brand-text">
-              <img style={{ width: '200px', borderRadius: '50px' }} src={logo} alt="Logo BB" />
+              <img className={styles.footerLogo} src={logo} alt="Logo BB" />
             </div>
           </a>
           <ul className="nav align-items-center gap-3 flex-wrap justify-content-center">

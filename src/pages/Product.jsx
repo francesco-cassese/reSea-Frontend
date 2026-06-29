@@ -121,7 +121,7 @@ function Product() {
                 <div className="flex-grow-1">
                     {products.length === 0 ? (
                         <div className="d-flex flex-column align-items-center justify-content-center py-5">
-                            <i className="bi bi-sunglasses text-warning" style={{ fontSize: '4rem' }}></i>
+                            <i className="bi bi-sunglasses text-warning icon-xl"></i>
                             <h4 className="mt-3 text-dark">Nessun prodotto trovato</h4>
                         </div>
                     ) : (
@@ -150,17 +150,15 @@ function Product() {
                                     return (
                                         <Link
                                             to={"/products/" + item.slug}
-                                            className="text-decoration-none text-dark"
+                                            className={`text-decoration-none text-dark ${view === 'column' ? styles.cardLinkColumn : styles.cardLinkRow}`}
                                             style={{
-                                                width: view === 'column' ? '18rem' : '100%',
-                                                display: 'inline-block',
                                                 '--index-mobile': index,
                                                 '--index-desktop': Math.floor(index / 3),
                                                 '--index-tablet': Math.floor(index / 2)
                                             }}
                                             key={item.id}
                                         >
-                                            <div className={`card ${styles.cardProduct} w-100 ${view === 'column' ? 'list-column' : 'list-row'} ${view === 'column' ? '' : 'd-flex flex-column flex-md-row align-items-center p-3 gap-3 rounded-5'}`} style={{ cursor: "pointer" }}>
+                                            <div className={`card ${styles.cardProduct} w-100 ${view === 'column' ? 'list-column' : 'list-row'} ${view === 'column' ? '' : 'd-flex flex-column flex-md-row align-items-center p-3 gap-3 rounded-5'}`}>
                                                 <img
                                                     src={item.image}
                                                     className={view === 'column' ? 'card-img-top' : 'img-fluid w-25 w-md-25 img-thumbnail border-0 bg-transparent'}

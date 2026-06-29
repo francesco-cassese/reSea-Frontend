@@ -16,7 +16,7 @@ function CartList() {
             <div key={item.id}>
                 <div className={`d-flex align-items-start flex-wrap p-3 rounded-4 shadow-sm ${styles.cartCard} mb-3`}>
                     {/* image */}
-                    <div className={`${styles.cartImg} flex-shrink-0 rounded-3 bg-light`} style={{ backgroundImage: `url(${item.image})`, backgroundSize: 'cover' }} />
+                    <div className={`${styles.cartImg} flex-shrink-0 rounded-3 bg-light`} style={{ backgroundImage: `url(${item.image})` }} />
 
                     {/* info */}
                     <div className="flex-grow-1">
@@ -34,9 +34,8 @@ function CartList() {
 
                         <div className="d-flex align-items-center gap-1">
                             <button
-                                className="btn btn-link p-0 text-decoration-none"
+                                className={`btn btn-link p-0 text-decoration-none ${styles.likeBtn}`}
                                 onClick={() => addToWishlist(item)}
-                                style={{ cursor: "pointer" }}
                             >
                                 <i className={`bi ${wishlist.some(w => w.id === item.id) ? 'bi-heart-fill text-danger' : 'bi-heart'} text-muted`}></i>
                                 <span className="small text-muted text-decoration-underline ms-1">
@@ -50,7 +49,7 @@ function CartList() {
                     <div className="vr mx-1 d-none d-md-block" />
 
                     {/* actions */}
-                    <div className={`flex-fill d-flex flex-column align-items-center gap-1 ${styles.cartCard}`} style={{ minWidth: "140px" }}>
+                    <div className={`flex-fill d-flex flex-column align-items-center gap-1 ${styles.cartCard} ${styles.actionsCol}`}>
                         <div className="d-flex align-items-center justify-content-center gap-2">
                             <div className="d-flex align-items-center gap-2 px-2 py-1 rounded-pill bg-light">
                                 <button
