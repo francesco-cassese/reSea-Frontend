@@ -1,6 +1,8 @@
 import { Link, Outlet } from "react-router-dom";
 import { useAppContext } from "../context/AppContext.jsx";
 import logo from '../assets/logoneutro.png';
+import { priceFormatter } from "../services/reseaServices.js";
+import { useRef, useEffect } from "react";
 
 function Structure() {
   const { cart, totalQuantity, removeHandler, wishlist, addHandler, updateQuantity } = useAppContext();
@@ -12,6 +14,20 @@ function Structure() {
     let quantitaProdotto = cart[i].quantity;
     totale += prezzoProdotto * quantitaProdotto;
   }
+
+  const endOfListRef = useRef(null);
+
+  const prevCartLength = useRef(cart.length);
+
+  useEffect(() => {
+
+    if (cart.length > prevCartLength.current) {
+      endOfListRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    prevCartLength.current = cart.length;
+  }, [cart]);
+
   return (
     <>
       <header>
@@ -82,57 +98,55 @@ function Structure() {
 
 
                   <ul
-                    className="dropdown-menu dropdown-menu-end p-3 mt-3"
-                    style={{
-                      minWidth: "280px",
-                      maxHeight: "300px",
-                      overflowY: "auto"
-                    }}
-                  >
+                    className="dropdown-menu dropdown-menu-end cart-menu-container p-3 mt-3">
 
                     {/* lista prodotti */}
                     <li className="dropdown-item-text text-muted small mb-2">Il tuo carrello</li>
 
                     {/* placeholder per i prodotti */}
-                    {cart.length > 0 ? (
-                      cart.map((product) => (
-                        <li key={product.id} className="dropdown-item-text">
-                          <div className="d-flex align-items-center gap-2 py-1">
-                            <img src={product.image} alt={product.name} style={{ width: "40px", height: "40px", objectFit: "cover" }} />
-                            <div style={{ flexGrow: 1 }}>
-                              <p className="mb-0 small fw-bold">
-                                {product.name}
-                              </p>
-                              <p className="mb-0 small text-muted">€ {Number(product.price).toFixed(2)}</p>
+                    <li className="cart-products-scroll">
+                      {cart.length > 0 ? (
+                        cart.map((product) => (
+                          <div key={product.id} className="dropdown-item-text">
+                            <div className="d-flex align-items-center gap-2 py-1">
+                              <img src={product.image} alt={product.name} style={{ width: "40px", height: "40px", objectFit: "cover" }} />
+                              <div style={{ flexGrow: 1 }}>
+                                <p className="mb-0 small fw-bold">
+                                  {product.name}
+                                </p>
+                                <p className="mb-0 small text-muted">{priceFormatter(product.price)}</p>
+                              </div>
+                              <div className="d-flex align-items-center gap-2">
+                                <button
+                                  className="btn btn-outline-secondary rounded-circle p-0 d-flex align-items-center justify-content-center"
+                                  style={{ width: "28px", height: "28px" }}
+                                  onClick={(e) => { e.stopPropagation(); product.quantity === 1 ? removeHandler(product.id) : updateQuantity(product.id, -1); }}
+                                >
+                                  {product.quantity === 1 ? <i class="bi bi-trash3-fill"></i> : "-"}
+                                </button>
+
+                                <span className="fw-bold text-center mx-1">
+                                  {product.quantity}
+                                </span>
+
+                                <button
+                                  className="btn btn-outline-secondary rounded-circle p-0 d-flex align-items-center justify-content-center"
+                                  style={{ width: "28px", height: "28px" }}
+                                  onClick={(e) => { e.stopPropagation(); updateQuantity(product.id, +1); }}
+                                >
+                                  +
+                                </button>
+                              </div>
+
                             </div>
-                            <div className="d-flex align-items-center gap-2">
-                              <button
-                                className="btn btn-outline-secondary rounded-circle p-0 d-flex align-items-center justify-content-center"
-                                style={{ width: "28px", height: "28px" }}
-                                onClick={(e) => { e.stopPropagation(); product.quantity === 1 ? removeHandler(product.id) : updateQuantity(product.id, -1); }}
-                              >
-                                {product.quantity === 1 ? <i class="bi bi-trash3-fill"></i> : "-"}
-                              </button>
-
-                              <span className="fw-bold text-center mx-1">
-                                {product.quantity}
-                              </span>
-
-                              <button
-                                className="btn btn-outline-secondary rounded-circle p-0 d-flex align-items-center justify-content-center"
-                                style={{ width: "28px", height: "28px" }}
-                                onClick={(e) => { e.stopPropagation(); updateQuantity(product.id, +1); }}
-                              >
-                                +
-                              </button>
-                            </div>
-
                           </div>
-                        </li>
-                      ))
-                    ) : (
-                      <li className="dropdown-item-text text-muted small">Carrello vuoto</li>
-                    )}
+                        ))
+                      ) : (
+                        <div className="dropdown-item-text text-muted small">Carrello vuoto</div>
+                      )}
+
+                      <div ref={endOfListRef} />
+                    </li>
 
                     {cart.length > 0 && (
                       <>
