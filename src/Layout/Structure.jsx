@@ -5,7 +5,13 @@ import logo from '../assets/logoneutro.png';
 function Structure() {
   const { cart, totalQuantity, removeHandler, wishlist, addHandler, updateQuantity } = useAppContext();
 
+  let totale = 0;
 
+  for (let i = 0; i < cart.length; i++) {
+    let prezzoProdotto = Number(cart[i].price);
+    let quantitaProdotto = cart[i].quantity;
+    totale += prezzoProdotto * quantitaProdotto;
+  }
   return (
     <>
       <header>
@@ -75,7 +81,14 @@ function Structure() {
                   )}
 
 
-                  <ul className="dropdown-menu dropdown-menu-end p-3 mt-3" style={{ minWidth: "280px" }}>
+                  <ul
+                    className="dropdown-menu dropdown-menu-end p-3 mt-3"
+                    style={{
+                      minWidth: "280px",
+                      maxHeight: "300px",
+                      overflowY: "auto"
+                    }}
+                  >
 
                     {/* lista prodotti */}
                     <li className="dropdown-item-text text-muted small mb-2">Il tuo carrello</li>
@@ -121,14 +134,20 @@ function Structure() {
                       <li className="dropdown-item-text text-muted small">Carrello vuoto</li>
                     )}
 
-                    <li><hr className="dropdown-divider" /></li>
-
-                    {/* btn pagina carrello */}
-                    <li>
-                      <Link to="/cart" className="btn btn-cartnav w-100 btn-sm">
-                        Vai al carrello
-                      </Link>
-                    </li>
+                    {cart.length > 0 && (
+                      <>
+                        <li><hr className="dropdown-divider" /></li>
+                        <li className="px-3 py-2 d-flex justify-content-between align-items-center">
+                          <span className="fw-bold">Totale:</span>
+                          <span className="fw-bold text-primary">€ {totale.toFixed(2)}</span>
+                        </li>
+                        <li>
+                          <Link to="/cart" className="btn btn-cartnav w-100 btn-sm">
+                            Vai al carrello
+                          </Link>
+                        </li>
+                      </>
+                    )}
                   </ul>
                 </div>
               </div>
