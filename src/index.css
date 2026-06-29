@@ -51,7 +51,7 @@ footer {
 }
 
 .nav-item {
-  width: 160px
+  width: 160px;
 }
 
 .navbar-collapse {
@@ -68,7 +68,7 @@ footer {
 }
 
 .navbar-brand img {
-  width: 270px;
+  width: 145px;
   border-radius: 50px;
 }
 
@@ -471,6 +471,16 @@ footer {
 
 .btn-pay:hover {
   background-color: #0dcaf0af;
+}
+
+.addbtn .btn-dark {
+  background-color: var(--color-btn); 
+  border-color: var(--color-btn)
+}
+
+.addbtn .btn-dark:hover {
+  background-color: #25d1f3;
+  border-color: #24d1f4;
 }
 
 /* ==========================
