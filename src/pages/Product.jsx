@@ -172,41 +172,47 @@ function Product() {
                                                         <p className={`card-text fw-bold mb-0 ${view === 'row' ? 'fs-3' : 'small'}`}>
                                                             {priceFormatter(item.price)}
                                                         </p>
-                                                        <div className={view === 'row' ? "w-100 d-flex justify-content-end gap-2" : ""}>
-                                                            <button type="button" className={`btn rounded-circle ${view === 'row' ? 'btn-lg fs-4' : ''}`} onClick={(e) => { e.preventDefault(); e.stopPropagation(); addToWishlist(item); }}>
-                                                                <i className={`bi ${inWishlist ? "bi-heart-fill" : "bi-heart"}`}></i>
+                                                        <button
+                                                            type="button"
+                                                            className={`btn rounded-circle ${view === 'row' ? 'btn-lg fs-4' : ''}`}
+                                                            onClick={(e) => { e.preventDefault(); e.stopPropagation(); addToWishlist(item); }}
+                                                        >
+                                                            <i className={`bi ${inWishlist ? "bi-heart-fill" : "bi-heart"}`}></i>
+                                                        </button>
+                                                    </div>
+
+                                                    <div className="addbtn w-100 mt-2" onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}>
+                                                        {!inCart ? (
+                                                            <button
+                                                                type="button"
+                                                                className="btn btn-dark rounded-pill w-100"
+                                                                onClick={(e) => { e.preventDefault(); e.stopPropagation(); addHandler(item); }}
+                                                            >
+                                                                <i className="bi bi-cart me-2"></i> Aggiungi
                                                             </button>
-
-                                                            <div>
-
-                                                                <button type="button" className={`btn rounded-circle ${view === 'row' ? 'btn-lg fs-4' : ''}`} onClick={(e) => { e.preventDefault(); e.stopPropagation(); addHandler(item); }}>
-                                                                    <i className={`bi ${inCart ? "bi-cart-fill" : "bi-cart"}`}></i>
+                                                        ) : (
+                                                            <div className="btn btn-dark rounded-pill w-100 d-flex justify-content-between align-items-center px-3">
+                                                                <button
+                                                                    className="btn btn-sm text-white p-0"
+                                                                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); countCart.quantity === 1 ? removeHandler(item.id) : updateQuantity(item.id, -1); }}
+                                                                >
+                                                                    <i className="bi bi-dash-lg"></i>
                                                                 </button>
 
-                                                                {inCart && (
-                                                                    <>
-
-                                                                        <button
-                                                                            className="btn rounded-circle"
-                                                                            onClick={(e) => { e.preventDefault(), e.stopPropagation(), countCart.quantity === 1 ? removeHandler(item.id) : updateQuantity(item.id, -1); }}
-                                                                        >
-                                                                            -
-                                                                        </button>
-
-                                                                        <span>{countCart ? countCart.quantity : 0}</span>
-
-                                                                        <button
-                                                                            className="btn rounded-circle"
-                                                                            onClick={(e) => { e.preventDefault(), e.stopPropagation(), updateQuantity(item.id, +1); }}
-                                                                        >
-                                                                            +
-                                                                        </button>
-                                                                    </>
-                                                                )}
-
+                                                                <div className="d-flex gap-2">
+                                                                    <span className="fw-bold">{countCart.quantity}  </span>
+                                                                    <i className="bi bi-cart-fill"></i>
+                                                                </div>
+                                                                <button
+                                                                    className="btn btn-sm text-white p-0"
+                                                                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); updateQuantity(item.id, +1); }}
+                                                                >
+                                                                    <i className="bi bi-plus-lg"></i>
+                                                                </button>
                                                             </div>
-                                                        </div>
+                                                        )}
                                                     </div>
+
                                                 </div>
                                             </div>
                                         </Link>

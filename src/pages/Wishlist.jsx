@@ -7,7 +7,6 @@ function Wishlist() {
 
     return (
         <>
-            <h2 className="mb-4 text-center">La tua Lista dei Desideri</h2>
             {wishlist.length === 0 ? (
                 <div className="d-flex flex-column align-items-center justify-content-center py-5">
                     <i className="bi bi-heart text-warning" style={{ fontSize: '4rem' }}></i>
@@ -16,6 +15,7 @@ function Wishlist() {
                 </div>
             ) : (
                 <div className="container">
+                    <h2 className="mb-4 text-center">La tua Lista dei Desideri</h2>
                     <div className="d-flex flex-wrap gap-3 justify-content-center">
                         {wishlist.map((item) => (
                             <div key={item.id} className="card shadow-sm position-relative" style={{ width: "160px" }}>
