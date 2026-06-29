@@ -1,5 +1,17 @@
+/*==SIDEBAR==*/
 .sidebarp {
   margin-top: 37px;
+}
+
+/*==CARD PRODOTTO==*/
+.cardLinkColumn {
+  width: 18rem;
+  display: inline-block;
+}
+
+.cardLinkRow {
+  width: 100%;
+  display: inline-block;
 }
 
 .cardProduct {
@@ -13,6 +25,7 @@
   background-repeat: no-repeat;
   backdrop-filter: blur(5px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
 }
 
 .cardPrice {

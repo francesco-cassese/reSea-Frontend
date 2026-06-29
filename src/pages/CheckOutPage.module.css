@@ -1,9 +1,11 @@
+/*==CONTENITORE==*/
 .container {
     background-color: #ffffff;
     min-height: 100vh;
     padding-bottom: 2rem;
 }
 
+/*==TITOLO==*/
 .title {
     color: #001f3f;
     font-weight: 700;
@@ -12,6 +14,7 @@
     font-size: 1.5rem;
 }
 
+/*==SEZIONI==*/
 .sectionWrapper {
     margin-bottom: 2rem;
     padding: 1rem;

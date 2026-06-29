@@ -1,3 +1,4 @@
+/*==SFONDO APP==*/
 .appBg {
   background-image: url('../assets/sea.png');
   background-size: cover;
@@ -13,7 +14,7 @@
   height: auto;
 }
 
-/*Bottoni Nav*/
+/*==BOTTONE NAV==*/
 .navBtn {
   display: inline-flex;
   text-decoration: none;
@@ -79,6 +80,7 @@
   left: 150%;
 }
 
+/*==BADGE / CARRELLO==*/
 .badgeWishlist {
   top: -6px;
   right: -6px;
@@ -97,6 +99,7 @@
   background-color: var(--color-btn-soft);
 }
 
+/*==MENU MOBILE==*/
 @media (max-width: 991.98px) {
   .menuLinks {
     margin-left: 0 !important;
@@ -104,6 +107,7 @@
   }
 }
 
+/*==CARRELLO DROPDOWN==*/
 .cartMenuContainer {
   min-width: 280px;
 }
@@ -111,4 +115,25 @@
 .cartProductsScroll {
   max-height: 250px;
   overflow-y: auto;
+}
+
+.cartThumb {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+}
+
+.cartInfo {
+  flex-grow: 1;
+}
+
+.cartQtyBtnSize {
+  width: 28px;
+  height: 28px;
+}
+
+/*==FOOTER==*/
+.footerLogo {
+  width: 200px;
+  border-radius: 50px;
 }

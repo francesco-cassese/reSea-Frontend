@@ -1,3 +1,4 @@
+/*==CONTENITORE / TOGGLE==*/
 .assistantWidget {
   position: fixed;
   right: 16px;
@@ -24,6 +25,7 @@
   box-shadow: 0 8px 25px rgba(0, 150, 255, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.45);
 }
 
+/*==PANNELLO / HEADER==*/
 .assistantWidgetPanel {
   width: 360px;
   max-width: calc(100vw - 32px);
@@ -53,6 +55,7 @@
   color: #24425f;
 }
 
+/*==MESSAGGI==*/
 .assistantWidgetMessages {
   height: 300px;
   overflow-y: auto;
@@ -91,6 +94,7 @@
   line-height: 1.35rem;
 }
 
+/*==FORM / INVIO==*/
 .assistantWidgetForm {
   padding: 10px;
   border-top: 1px solid rgba(0, 70, 120, 0.12);
@@ -139,6 +143,7 @@
   font-size: 0.8rem;
 }
 
+/*==RESPONSIVE==*/
 @media (max-width: 576px) {
   .assistantWidget {
     right: 10px;

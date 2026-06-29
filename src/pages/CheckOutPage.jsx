@@ -69,7 +69,7 @@ function CheckoutPage() {
                     <div className="col-md-8 col-lg-6 text-center border p-5 rounded shadow-sm bg-white">
 
                         <div className="mb-4">
-                            <i className="bi bi-check-circle-fill text-success" style={{ fontSize: '4rem' }}></i>
+                            <i className="bi bi-check-circle-fill text-success icon-xl"></i>
                         </div>
 
                         <h1 className="h2 mb-3">Ordine confermato!</h1>
@@ -106,7 +106,7 @@ function CheckoutPage() {
                         </div>
 
                         <div className="mt-4 p-4 border border-success rounded bg-light text-center">
-                            <i className="bi bi-heart-fill text-success" style={{ fontSize: '2rem' }}></i>
+                            <i className="bi bi-heart-fill text-success icon-lg"></i>
                             <h5 className="text-success mt-2 mb-2">Un acquisto con un impatto reale</h5>
                             <p className="mb-0 text-muted">
                                 Grazie per aver scelto di proteggere i nostri oceani. Con questo ordine,
