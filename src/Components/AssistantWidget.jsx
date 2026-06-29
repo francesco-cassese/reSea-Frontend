@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { postAgentPrompt } from "../services/reseaServices";
 
 function AssistantWidget() {
@@ -12,12 +12,29 @@ function AssistantWidget() {
         }
     ]);
     const [error, setError] = useState("");
+    const messagesContainerRef = useRef(null);
+
+    const scrollToBottom = () => {
+        const el = messagesContainerRef.current;
+        if(!el) return;
+        el.scrollTop = el.scrollHeight;
+    };
 
     const buttonLabel = loading
         ? "Sto cercando..."
         : isOpen
             ? "chiudi chat"
             : "GretAI Thun";
+
+    useEffect(() => {
+        if(!isOpen) return;
+        const rafID = requestAnimationFrame(scrollToBottom);
+        const t = setTimeout(scrollToBottom, 120);
+        return () => {
+            cancelAnimationFrame(rafID);
+            clearTimeout(t);
+        }
+    },[messages, isOpen, loading]);
 
     async function handleSend(event) {
         event.preventDefault();
@@ -65,7 +82,7 @@ function AssistantWidget() {
                         <p className="assistant-widget-subtitle">Risposte rapide sul catalogo</p>
                     </header>
 
-                    <div className="assistant-widget-messages">
+                    <div className="assistant-widget-messages" ref={messagesContainerRef}>
                         {messages.map((message, index) => (
                             <article key={index} className={"assistant-bubble " + (message.role === "user" ? "assistant-bubble-user" : "assistant-bubble-ai")}>
                                 <p className="assistant-bubble-label">{message.role === "user" ? "Tu" : "GretAI Thun"}</p>
