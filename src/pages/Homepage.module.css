@@ -130,7 +130,7 @@
 
 /*==TITOLI SEZIONE==*/
 .sectionTitle {
-  color: #0A2540;
+  color: var(--color-navy);
   font-weight: 800;
   letter-spacing: 0.3px;
 }
@@ -146,15 +146,34 @@
 }
 
 .productCarouselItem {
-  padding: 0 8px;
+  padding: 6px 8px;
 }
 
 /*==CARD PRODOTTO==*/
 .homeCard {
   border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0 4px 6px var(--color-card-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.homeCard :global(.card-img-top) {
-  border-top-right-radius: 5px;
-  border-top-left-radius: 5px;
+.homeCard:hover {
+  transform: translatey(-6px);
+  box-shadow: 0 10px 30px var(--color-card-shadow-hover);
+}
+
+
+.homeCardTitle {
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.homeCardPrice {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-navy);
 }

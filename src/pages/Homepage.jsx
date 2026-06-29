@@ -113,8 +113,8 @@ function ProductCarouselSection({ title, products, loading, error }) {
                                     />
 
                                     <div className="card-body">
-                                        <h6 className="card-title">{item.name}</h6>
-                                        <p className="card-text fw-bold mb-0">{priceFormatter(item.price)}</p>
+                                        <h6 className={`card-title ${styles.homeCardTitle}`}>{item.name}</h6>
+                                        <p className={`card-text fw-bold mb-0 ${styles.homeCardPrice}`}>{priceFormatter(item.price)}</p>
                                     </div>
                                 </div>
                             </Link>
@@ -179,7 +179,7 @@ function Homepage() {
             </section>
 
             <ProductCarouselSection
-                title="I piu venduti"
+                title="I nostri bestseller"
                 products={bestSellers}
                 loading={bestSellersLoading}
                 error={bestSellersError}
