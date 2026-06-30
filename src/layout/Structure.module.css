@@ -93,10 +93,12 @@
 
 .btnCartnav {
   background-color: var(--color-btn);
+  color: #fff;
 }
 
 .btnCartnav:hover {
   background-color: var(--color-btn-soft);
+  color: #fff;
 }
 
 /*==MENU MOBILE==*/

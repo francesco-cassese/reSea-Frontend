@@ -54,7 +54,7 @@ function ProductCardGrid({
                             Aggiungi
                         </button>
                     ) : (
-                        <div className={`btn btn-dark rounded-pill w-100 d-flex justify-content-between align-items-center px-3 me-3 ${styles.gradientBtn}`}>
+                        <div className={`${styles.btnAddToCartGrid} w-100 d-flex justify-content-between align-items-center px-3 me-3 ${styles.gradientBtn}`}>
 
                             <button
                                 className="btn btn-sm text-white p-0"
