@@ -98,7 +98,15 @@ function Product() {
         limit, handleLimitChange, handlePriceFilters, clearAllFilters
     };
 
-    const filterDescription = getFilterLabel(formatCategoryName(selectedCategory), appliedSearch, minPrice, maxPrice);
+    const filterDescription = getFilterLabel(formatCategoryName(selectedCategory), appliedSearch);
+
+    const productActions = {
+        addHandler,
+        addToWishlist,
+        updateQuantity,
+        removeHandler,
+        priceFormatter
+    };
 
     if (loading) return <p className="p-4">Caricamento dei prodotti in corso...</p>;
     if (error) return <p className="p-4 text-danger">Qualcosa è andato storto: {error}</p>;
@@ -107,8 +115,8 @@ function Product() {
         <div className="container py-4">
             <div className="d-flex flex-column flex-lg-row gap-4 align-items-start">
                 <div className={styles.sidebarp}>
-                    <button className="btn btn-primary d-lg-none mb-4 w-100" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasFilters">
-                        <i className="bi bi-funnel"></i> Filtri
+                    <button className={`${styles.btnOffcanvasMobile} d-lg-none mb-4 w-100`} type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasFilters">
+                        <i className="bi bi-funnel fs-5"></i> Filtri
                     </button>
                     <div className="offcanvas offcanvas-start d-lg-none" tabIndex="-1" id="offcanvasFilters">
                         <div className="offcanvas-header">
@@ -129,16 +137,22 @@ function Product() {
                     ) : (
                         <>
                             <div className="d-flex text-secondary justify-content-between">
-                                <div className="d-flex justify-content-between align-items-center border-bottom pb-3 mb-4">
+                                <div className="d-flex border-bottom pb-3 mb-3 flex-column">
                                     <h6 className="mb-0 text-muted">
                                         Mostrati <span className="text-dark fw-bold">{products.length}</span> di <span className="text-dark fw-bold">{total}</span>
                                         <span className="ms-1">{filterDescription}</span>
                                     </h6>
+                                    <button
+                                        className={`${styles.btnResetMobile} mt-2 d-lg-none`}
+                                        onClick={() => clearAllFilters()}
+                                    >
+                                        Reset Filtri
+                                    </button>
                                 </div>
-                                <div className="d-flex justify-content-center mb-4 flex-column">
+                                <div className="d-flex justify-content-center mb-3 flex-column">
                                     <div className="d-flex flex-column align-items-center">
                                         <button onClick={() => setView(view === 'column' ? 'row' : 'column')} className="btn btn-pay">
-                                            {view === 'column' ? <i className="bi bi-list-ul"></i> : <i className="bi bi-grid-3x3-gap"></i>}
+                                            {view === 'column' ? <i className="bi bi-list-ul fs-5"></i> : <i className="bi bi-grid-3x3-gap fs-5"></i>}
                                         </button>
                                     </div>
                                 </div>
@@ -149,6 +163,15 @@ function Product() {
                                     const countCart = cart.find(p => p.id === item.id)
                                     const inCart = cart.some(p => p.id === item.id);
                                     const inWishlist = wishlist.some(p => p.id === item.id);
+
+                                    const commonProps = {
+                                        item,
+                                        inCart,
+                                        inWishlist,
+                                        countCart,
+                                        ...productActions
+                                    };
+
                                     return (
                                         <Link
                                             to={"/products/" + item.slug}
@@ -165,27 +188,11 @@ function Product() {
                                         >
                                             {view === "column" ? (
                                                 <ProductCardGrid
-                                                    item={item}
-                                                    inCart={inCart}
-                                                    inWishlist={inWishlist}
-                                                    addHandler={addHandler}
-                                                    addToWishlist={addToWishlist}
-                                                    updateQuantity={updateQuantity}
-                                                    removeHandler={removeHandler}
-                                                    countCart={countCart}
-                                                    priceFormatter={priceFormatter}
+                                                    {...commonProps}
                                                 />
                                             ) : (
                                                 <ProductCardRow
-                                                    item={item}
-                                                    inCart={inCart}
-                                                    inWishlist={inWishlist}
-                                                    addHandler={addHandler}
-                                                    addToWishlist={addToWishlist}
-                                                    updateQuantity={updateQuantity}
-                                                    removeHandler={removeHandler}
-                                                    countCart={countCart}
-                                                    priceFormatter={priceFormatter}
+                                                    {...commonProps}
                                                     descrizioniSostenibili={descrizioniSostenibili}
                                                 />
                                             )}

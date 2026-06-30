@@ -36,8 +36,8 @@ function ProductSidebar({
                         onChange={(e) => setSearchInput(e.target.value)}
                         onKeyDown={handleSearchKeyDown}
                     />
-                    <button className="btn btn-sm" onClick={applySearch} type="button">
-                        <i className="bi bi-search"></i>
+                    <button className={`btn btn-sm ${styles.btnSearch}`} onClick={applySearch} type="button">
+                        <i className="bi bi-search fs-5"></i>
                     </button>
                 </div>
             </div>
@@ -85,7 +85,7 @@ function ProductSidebar({
                         value={maxPriceInput}
                         onChange={(e) => setMaxPriceInput(e.target.value)}
                     />
-                    <button className="btn btn-sm w-100" onClick={handlePriceFilters} type="button">
+                    <button className="btn btn-sm w-100 btn-pay fw-bold" onClick={handlePriceFilters} type="button">
                         Applica
                     </button>
                 </div>
@@ -122,7 +122,7 @@ function ProductSidebar({
             <hr className="my-0" />
 
             {/* Reset */}
-            <button className="btn btn-outline-secondary btn-sm w-100" onClick={clearAllFilters} type="button">
+            <button className="btn btn-outline-secondary btn-sm w-100 btn-pay fw-bold" onClick={clearAllFilters} type="button">
                 Reset filtri
             </button>
 

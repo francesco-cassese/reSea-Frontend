@@ -43,7 +43,7 @@ function ProductCardGrid({
                     {!inCart ? (
                         <button
                             type="button"
-                            className={`btn rounded-pill w-100 me-3 ${styles.gradientBtn}`}
+                            className={`w-100 me-3 ${styles.btnAddToCartGrid} ${styles.gradientBtn}`}
                             onClick={(e) => {
                                 e.preventDefault();
                                 e.stopPropagation();

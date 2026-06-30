@@ -141,10 +141,13 @@ footer {
 
 .btn-pay {
   background-color: var(--color-btn);
+  color: #fff !important;
+  transition: background-color 0.25s ease, transform 0.2s ease
 }
 
 .btn-pay:hover {
   background-color: var(--color-btn-soft);
+  transform: translateY(-2px);
 }
 
 /*==OFFCANVAS==*/

@@ -8,3 +8,12 @@
   color: black;
   border: none;
 }
+
+.btnSearch {
+  background-color: var(--color-btn);
+  color: white !important;
+}
+
+.btnSearch:hover {
+  background-color: var(--color-btn-soft);
+}
