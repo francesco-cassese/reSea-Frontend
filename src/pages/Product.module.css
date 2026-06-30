@@ -4,14 +4,17 @@
 }
 
 /*==CARD PRODOTTO==*/
+
 .cardLinkColumn {
   width: 18rem;
   display: inline-block;
+  transition: transform 0.3s ease;
 }
 
 .cardLinkRow {
   width: 100%;
   display: inline-block;
+  transition: transform 0.3s ease;
 }
 
 .imageRow {
@@ -32,7 +35,6 @@
   border-radius: 12px;
   border: none;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
   background-image: url('../assets/bgcard2.png');
   background-size: cover;
   background-position: center;
@@ -40,6 +42,13 @@
   backdrop-filter: blur(5px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.3s ease;
+}
+
+.cardLinkColumn:hover .cardProduct,
+.cardLinkRow:hover .cardProduct {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
 }
 
 .cardPrice {
