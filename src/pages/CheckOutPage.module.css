@@ -1,8 +1,27 @@
-/*==CONTENITORE==*/
+/*==CONTENITORI==*/
 .container {
     background-color: #ffffff;
     min-height: 100vh;
     padding-bottom: 2rem;
+}
+
+.checkoutRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.checkoutMain {
+    flex: 2;
+    min-width: 300px;
+}
+
+.checkoutSide {
+    flex: 1;
+    min-width: 300px;
+    top: 20px;
 }
 
 /*==TITOLO==*/

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import useFetch from "../hooks/useFetch.js";
 import { heroSlides, HERO_INTERVAL_MS } from "../data/heroSlides.js";
@@ -128,14 +128,30 @@ function ProductCarouselSection({ title, products, loading, error }) {
 
 function Homepage() {
     const [activeSlide, setActiveSlide] = useState(0);
+    const intervalRef = useRef(null); // <--- Crea il riferimento per il timer
 
-    useEffect(() => {
-        const timerId = setInterval(() => {
+    // Funzione per far partire o resettare il timer
+    const startTimer = () => {
+        // Pulisci l'eventuale timer precedente
+        if (intervalRef.current) clearInterval(intervalRef.current);
+
+        // Avvia un nuovo timer
+        intervalRef.current = setInterval(() => {
             setActiveSlide((prev) => (prev + 1) % heroSlides.length);
         }, HERO_INTERVAL_MS);
+    };
 
-        return () => clearInterval(timerId);
+    // All'avvio, fai partire il timer
+    useEffect(() => {
+        startTimer();
+        return () => clearInterval(intervalRef.current); // Pulizia alla chiusura
     }, []);
+
+    // Gestione click manuale
+    const handleDotClick = (index) => {
+        setActiveSlide(index); // Cambia slide
+        startTimer();          // Reset del timer!
+    };
 
     const currentHero = heroSlides[activeSlide];
 
@@ -171,7 +187,7 @@ function Homepage() {
                             key={index}
                             type="button"
                             className={`${styles.heroDot} ${index === activeSlide ? styles.active : ""}`}
-                            onClick={() => setActiveSlide(index)}
+                            onClick={() => handleDotClick(index)}
                             aria-label={"Vai al banner " + (index + 1)}
                         />
                     ))}

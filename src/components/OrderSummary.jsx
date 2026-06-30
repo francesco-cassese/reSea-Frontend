@@ -1,14 +1,9 @@
-import { priceFormatter } from '../services/reseaServices';
+import { priceFormatter, } from '../services/reseaServices';
 import styles from './OrderSummary.module.css';
+import { calculateOrderTotals } from '../services/reseaServices.js';
 
 function OrderSummary({ cartItems }) {
-    const subTotal = cartItems.reduce((accumulator, item) => accumulator + (item.price * item.quantity), 0);
-
-    const vatValue = 0.22;
-
-    const vatAmount = subTotal * vatValue;
-
-    const total = subTotal + vatAmount;
+    const totals = calculateOrderTotals(cartItems);
 
     return (
 
@@ -28,17 +23,17 @@ function OrderSummary({ cartItems }) {
 
             <div className="d-flex justify-content-between text-secondary mb-1">
                 <span>Subtotale (IVA esclusa)</span>
-                <span>{priceFormatter(subTotal)}</span>
+                <span>{priceFormatter(totals.subtotal)}</span>
             </div>
 
             <div className="d-flex justify-content-between fw-bold fs-5 mt-3">
                 <span>Totale Complessivo</span>
-                <span>{priceFormatter(total)}</span>
+                <span>{priceFormatter(totals.total)}</span>
             </div>
 
             <div className="text-end">
                 <span className="text-muted">
-                    di cui IVA:{priceFormatter(vatAmount)}
+                    di cui IVA: {priceFormatter(totals.iva)}
                 </span>
             </div>
         </div>
