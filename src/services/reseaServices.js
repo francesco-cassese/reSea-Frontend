@@ -77,15 +77,10 @@ const simulatePaymentGateway = (cvv) => {
     });
 };
 
-const getFilterLabel = (category, search, min, max) => {
+const getFilterLabel = (category, search) => {
     let label = "prodotti";
     if (category !== "All") label += ` in "${category}"`;
     if (search) label += ` per "${search}"`;
-    if (min || max) {
-        label += " con prezzo";
-        if (min) label += ` da ${min}€`;
-        if (max) label += ` a ${max}€`;
-    }
     return label;
 };
 
@@ -102,17 +97,17 @@ async function postAgentPrompt(prompt) {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({prompt})
+        body: JSON.stringify({ prompt })
     });
 
     let result = null;
     try {
         result = await response.json();
-    }catch{
+    } catch {
         result = null;
     }
 
-    if(!response.ok){
+    if (!response.ok) {
         const serverMessage = result?.message || `HTTP Error: ${response.status}`;
         throw new Error(serverMessage);
     }

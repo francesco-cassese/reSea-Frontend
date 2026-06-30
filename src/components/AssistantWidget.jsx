@@ -17,7 +17,7 @@ function AssistantWidget() {
 
     const scrollToBottom = () => {
         const el = messagesContainerRef.current;
-        if(!el) return;
+        if (!el) return;
         el.scrollTop = el.scrollHeight;
     };
 
@@ -28,14 +28,14 @@ function AssistantWidget() {
             : "GretAI Thun";
 
     useEffect(() => {
-        if(!isOpen) return;
+        if (!isOpen) return;
         const rafID = requestAnimationFrame(scrollToBottom);
         const t = setTimeout(scrollToBottom, 120);
         return () => {
             cancelAnimationFrame(rafID);
             clearTimeout(t);
         }
-    },[messages, isOpen, loading]);
+    }, [messages, isOpen, loading]);
 
     async function handleSend(event) {
         event.preventDefault();
@@ -69,11 +69,19 @@ function AssistantWidget() {
             <button
                 type="button"
                 onClick={() => setIsOpen((prev) => !prev)}
-                className={styles.assistantWidgetToggle}
+                className={`${styles.assistantWidgetToggle} ${!isOpen ? styles.withImage : ''}`}
                 aria-expanded={isOpen}
                 aria-controls="assistant-widget-panel"
             >
                 {buttonLabel}
+                {!isOpen && (
+                    <img
+                        src="./images/gretai-avatar.jpg"
+                        alt="Avatar GretAI"
+                        className={` d-none d-md-block ${styles.assistantAvatar}`}
+                    />
+                )}
+
             </button>
 
             {isOpen && (

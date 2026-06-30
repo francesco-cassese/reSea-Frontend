@@ -6,17 +6,33 @@
   z-index: 1200;
 }
 
+.assistantAvatar {
+  width: 120px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  display: block;
+}
+
+.assistantAvatar.withImage {
+  flex-direction: column;
+}
+
 .assistantWidgetToggle {
   border: 1px solid rgba(0, 200, 255, 0.4);
-  border-radius: 1000px;
+  border-radius: 8px;
   background: linear-gradient(135deg, var(--color-gradient-start), var(--color-gradient-end));
   color: #fff;
   font-size: 0.9rem;
   font-weight: 700;
   letter-spacing: 0.5px;
-  padding: 10px 16px;
   box-shadow: 0 4px 15px rgba(0, 150, 255, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.25);
   transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
 }
 
 .assistantWidgetToggle:hover {

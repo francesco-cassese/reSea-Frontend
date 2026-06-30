@@ -6,6 +6,8 @@ import ProductSidebar from "../components/ProductSidebar.jsx";
 import { priceFormatter, getFilterLabel, formatCategoryName } from "../services/reseaServices";
 import { useAppContext } from "../context/AppContext.jsx";
 import styles from "./Product.module.css";
+import ProductCardGrid from "../components/ProductCardGrid.jsx";
+import ProductCardRow from "../components/ProductCardRow.jsx";
 
 function Product() {
     const { categories, categoriesLoading, categoriesError } = useCategories();
@@ -150,77 +152,45 @@ function Product() {
                                     return (
                                         <Link
                                             to={"/products/" + item.slug}
-                                            className={`text-decoration-none text-dark ${view === 'column' ? styles.cardLinkColumn : styles.cardLinkRow}`}
+                                            key={item.slug}
+                                            className={`text-decoration-none text-dark ${view === "column"
+                                                ? styles.cardLinkColumn
+                                                : styles.cardLinkRow
+                                                }`}
                                             style={{
-                                                '--index-mobile': index,
-                                                '--index-desktop': Math.floor(index / 3),
-                                                '--index-tablet': Math.floor(index / 2)
+                                                "--index-mobile": index,
+                                                "--index-desktop": Math.floor(index / 3),
+                                                "--index-tablet": Math.floor(index / 2)
                                             }}
-                                            key={item.id}
                                         >
-                                            <div className={`card ${styles.cardProduct} w-100 ${view === 'column' ? 'list-column' : 'list-row'} ${view === 'column' ? '' : 'd-flex flex-column flex-md-row align-items-center p-3 gap-3 rounded-5'}`}>
-                                                <img
-                                                    src={item.image}
-                                                    className={view === 'column' ? 'card-img-top' : 'img-fluid w-25 w-md-25 img-thumbnail border-0 bg-transparent'}
-                                                    alt={item.name}
-                                                    loading="lazy"
-                                                    decoding="async"
+                                            {view === "column" ? (
+                                                <ProductCardGrid
+                                                    item={item}
+                                                    inCart={inCart}
+                                                    inWishlist={inWishlist}
+                                                    addHandler={addHandler}
+                                                    addToWishlist={addToWishlist}
+                                                    updateQuantity={updateQuantity}
+                                                    removeHandler={removeHandler}
+                                                    countCart={countCart}
+                                                    priceFormatter={priceFormatter}
                                                 />
-                                                <div className={`card-body ${view === 'column' ? 'p-2' : 'flex-grow-1 p-3'}`}>
-                                                    <p className={`card-text text-muted small mt-2 fs-4 fw-semibold ${view === 'column' ? 'd-none' : 'd-none d-md-block'}`}>
-                                                        {descrizioniSostenibili[item.id % descrizioniSostenibili.length]}
-                                                    </p>
-                                                    <h4 className={`card-title fw-bold mt-3 mb-2 ${view === 'column' ? '' : 'fs-3 mt-0'}`}>
-                                                        {item.name}
-                                                    </h4>
-                                                    <div className="d-flex justify-content-between align-items-center">
-                                                        <p className={`card-text ${styles.cardPrice} fw-bold mb-0 ${view === 'row' ? 'fs-3' : 'small'}`}>
-                                                            {priceFormatter(item.price)}
-                                                        </p>
-                                                        <button
-                                                            type="button"
-                                                            className={`btn rounded-circle ${styles.gradientBtn} ${view === 'row' ? 'btn-lg fs-4' : ''}`}
-                                                            onClick={(e) => { e.preventDefault(); e.stopPropagation(); addToWishlist(item); }}
-                                                        >
-                                                            <i className={`bi ${inWishlist ? "bi-heart-fill" : "bi-heart"}`}></i>
-                                                        </button>
-                                                    </div>
-
-                                                    <div className="addbtn w-100 mt-2" onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}>
-                                                        {!inCart ? (
-                                                            <button
-                                                                type="button"
-                                                                className={`btn rounded-pill w-100 ${styles.gradientBtn}`}
-                                                                onClick={(e) => { e.preventDefault(); e.stopPropagation(); addHandler(item); }}
-                                                            >
-                                                                <i className="bi bi-cart me-2 fs-5"></i> Aggiungi
-                                                            </button>
-                                                        ) : (
-                                                            <div className={`btn btn-dark rounded-pill w-100 d-flex justify-content-between align-items-center px-3 ${styles.gradientBtn}`}>
-                                                                <button
-                                                                    className={`btn btn-sm text-white p-0 ${styles.gradientBtn}`}
-                                                                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); countCart.quantity === 1 ? removeHandler(item.id) : updateQuantity(item.id, -1); }}
-                                                                >
-                                                                    <i className="bi bi-dash-lg"></i>
-                                                                </button>
-
-                                                                <div className="d-flex gap-2">
-                                                                    <span className="fw-bold">{countCart.quantity}  </span>
-                                                                    <i className="bi bi-cart-fill"></i>
-                                                                </div>
-                                                                <button
-                                                                    className={`btn btn-sm text-white p-0 ${styles.gradientBtn}`}
-                                                                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); updateQuantity(item.id, +1); }}
-                                                                >
-                                                                    <i className="bi bi-plus-lg"></i>
-                                                                </button>
-                                                            </div>
-                                                        )}
-                                                    </div>
-
-                                                </div>
-                                            </div>
+                                            ) : (
+                                                <ProductCardRow
+                                                    item={item}
+                                                    inCart={inCart}
+                                                    inWishlist={inWishlist}
+                                                    addHandler={addHandler}
+                                                    addToWishlist={addToWishlist}
+                                                    updateQuantity={updateQuantity}
+                                                    removeHandler={removeHandler}
+                                                    countCart={countCart}
+                                                    priceFormatter={priceFormatter}
+                                                    descrizioniSostenibili={descrizioniSostenibili}
+                                                />
+                                            )}
                                         </Link>
+
                                     );
                                 })}
                             </div>
