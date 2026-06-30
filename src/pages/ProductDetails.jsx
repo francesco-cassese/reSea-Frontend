@@ -8,7 +8,7 @@ import styles from './ProductDetails.module.css';
 function ProductDetails() {
 
     const { slug } = useParams();
-    const { addHandler } = useAppContext();
+    const { addHandler, addToWishlist, inWishlist } = useAppContext();
 
     const risultato = useFetch(`/products/${slug}`);
     const product = risultato.data;
@@ -44,9 +44,21 @@ function ProductDetails() {
         );
     }
 
+    const isWishlisted = inWishlist(product.id);
+
     const addToCartHandler = () => {
         addHandler(product);
         alert(`${product.name} è stato aggiunto al carrello!`);
+    };
+
+    const addToWishlistHandler = () => {
+        const wasInWishlist = inWishlist(product.id);
+        addToWishlist(product);
+        if (wasInWishlist) {
+            alert(`${product.name} rimosso dai Preferiti`);
+        } else {
+            alert(`${product.name} aggiunto ai Preferiti`);
+        }
     };
 
     return (
@@ -76,12 +88,16 @@ function ProductDetails() {
 
                     <button
                         className="btn btn-dark btn-lg px-4 me-md-2"
-                        onClick={addToCartHandler}>
+                        onClick={addToCartHandler}
+                    >
                         Aggiungi al carrello
                     </button>
                     {/* 'outline': crea un bottone trasparente con solo il bordo colorato di rosso */}
-                    <button className="btn btn-outline-danger btn-lg">
-                        <i className="bi bi-heart"></i>
+                    <button
+                        className={`btn btn-lg ${isWishlisted ? 'btn-danger' : 'btn-outline-danger'}`}
+                        onClick={addToWishlistHandler}
+                    >
+                        <i className={`bi ${isWishlisted ? 'bi-heart-fill' : 'bi-heart'}`}></i>
                     </button>
                 </div>
             </div>

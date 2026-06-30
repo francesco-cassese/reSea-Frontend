@@ -98,6 +98,10 @@ function AppProvider({ children }) {
         localStorage.removeItem('cart');
     };
 
+    const inWishlist = (id) => {
+        return wishlist.some((item) => item.id === id);
+    };
+
     const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
 
     return (
@@ -112,7 +116,8 @@ function AppProvider({ children }) {
             removeHandler,
             updateQuantity,
             removePurchasedProducts,
-            totalQuantity
+            totalQuantity,
+            inWishlist
         }}>
             {children}
         </AppContext.Provider>
