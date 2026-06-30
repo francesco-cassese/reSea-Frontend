@@ -1,0 +1,20 @@
+/*==LINK INDIETRO==*/
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+
+  color: var(--color-btn-soft);
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+
+  transition: all 0.3s ease;
+  margin-bottom: 10px;
+}
+
+.backLink:hover {
+  color: #0492ae;
+  text-decoration: none;
+  transform: translateX(-4px);
+}

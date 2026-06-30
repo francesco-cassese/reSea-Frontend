@@ -80,7 +80,7 @@ function CheckoutForm({ onNext }) {
                     required />
             </div>
 
-            <button className={`${styles.coralButton} btn btn-lg w-100`} type="submit">
+            <button className={`${styles.coralButton} btn btn-lg w-100 fw-bold`} type="submit">
                 Continua
             </button>
 

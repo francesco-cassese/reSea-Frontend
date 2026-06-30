@@ -3,10 +3,12 @@ import { Link } from "react-router-dom";
 import CheckoutForm from '../components/CheckOutForm.jsx';
 import OrderSummary from '../components/OrderSummary.jsx';
 import PaymentForm from '../components/PaymentForm.jsx';
-import styles from './CheckoutPage.module.css';
+import styles from './CheckOutPage.module.css';
 import useCheckout from '../hooks/useCheckout.js';
-import { priceFormatter } from '../services/reseaServices.js';
+import { priceFormatter, calculateOrderTotals } from '../services/reseaServices.js';
 import { useAppContext } from '../context/AppContext.jsx';
+
+
 
 function CheckoutPage() {
 
@@ -62,6 +64,8 @@ function CheckoutPage() {
 
     const cartItems = cart;
 
+    const totals = calculateOrderTotals(cartItems);
+
     if (isOrderPlaced) {
         return (
             <div className="container py-5">
@@ -69,7 +73,7 @@ function CheckoutPage() {
                     <div className="col-md-8 col-lg-6 text-center border p-5 rounded shadow-sm bg-white">
 
                         <div className="mb-4">
-                            <i className="bi bi-check-circle-fill text-success" style={{ fontSize: '4rem' }}></i>
+                            <i className="bi bi-check-circle-fill text-success icon-xl"></i>
                         </div>
 
                         <h1 className="h2 mb-3">Ordine confermato!</h1>
@@ -99,6 +103,10 @@ function CheckoutPage() {
                                 ))}
                             </ul>
                             <hr />
+                            <p className='d-flex justify-content-between fw-bold mb-0'>
+                                <span> Iva (22%) </span>
+                                <span>{priceFormatter(orderDetails?.iva)}</span>
+                            </p>
                             <p className="d-flex justify-content-between fw-bold mb-0">
                                 <span>Totale Finale</span>
                                 <span>{priceFormatter(orderDetails?.total)}</span>
@@ -106,7 +114,7 @@ function CheckoutPage() {
                         </div>
 
                         <div className="mt-4 p-4 border border-success rounded bg-light text-center">
-                            <i className="bi bi-heart-fill text-success" style={{ fontSize: '2rem' }}></i>
+                            <i className="bi bi-heart-fill text-success icon-lg"></i>
                             <h5 className="text-success mt-2 mb-2">Un acquisto con un impatto reale</h5>
                             <p className="mb-0 text-muted">
                                 Grazie per aver scelto di proteggere i nostri oceani. Con questo ordine,
@@ -117,7 +125,7 @@ function CheckoutPage() {
                         </div>
 
                         <button
-                            className="btn btn-outline-primary px-4 py-2 mt-4"
+                            className="btn btn-pay fw-bold px-4 py-2 mt-4"
                             onClick={() => window.location.href = '/'}
                         >
                             Continua lo shopping
@@ -144,38 +152,40 @@ function CheckoutPage() {
 
 
     return (
-        <div className={`container py-5`}>
+        <div className="container py-5">
             <h1 className={`text-center mb-5 ${styles.title}`}>Completa il tuo acquisto</h1>
 
-            <div className="row justify-content-center">
-                <div className="col-lg-8">
+            <div className={styles.checkoutRow}>
 
+                {/* Colonna 1: Riepilogo */}
+                <div className={styles.checkoutSide}>
                     <div className={styles.sectionWrapper}>
-                        <div className={styles.sectionWrapper}>
-
-                            <div className="mb-3">
-                                <Link to="/cart" className="text-decoration-none d-flex align-items-center">
-                                    <i className="bi bi-arrow-left me-2"></i> Torna al carrello
-                                </Link>
-                            </div>
-                            <OrderSummary cartItems={cartItems} />
+                        <div className="mb-3">
+                            <Link to="/cart" className="text-decoration-none d-flex align-items-center">
+                                <i className="bi bi-arrow-left me-2"></i> Torna al carrello
+                            </Link>
                         </div>
-
-                        <div className={styles.sectionWrapper}>
-                            {step === 'shipping' ? (
-                                <CheckoutForm onNext={handleShippingSubmit} />
-                            ) : (
-                                <PaymentForm
-                                    onBack={() => setStep('shipping')}
-                                    shippingData={shippingData}
-                                    onComplete={(data) => handleFinalOrder(data, cartItems)}
-                                    isSubmitting={isSubmitting}
-                                    setIsSubmitting={setIsSubmitting}
-                                />
-                            )}
-                        </div>
+                        <OrderSummary cartItems={cartItems} />
                     </div>
                 </div>
+
+                {/* Colonna 2: Form */}
+                <div className={styles.checkoutMain}>
+                    <div className={styles.sectionWrapper}>
+                        {step === 'shipping' ? (
+                            <CheckoutForm onNext={handleShippingSubmit} />
+                        ) : (
+                            <PaymentForm
+                                onBack={() => setStep('shipping')}
+                                shippingData={shippingData}
+                                onComplete={(data) => handleFinalOrder(data, cartItems)}
+                                isSubmitting={isSubmitting}
+                                setIsSubmitting={setIsSubmitting}
+                            />
+                        )}
+                    </div>
+                </div>
+
             </div>
         </div>
     );

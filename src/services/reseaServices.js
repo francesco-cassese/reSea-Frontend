@@ -77,15 +77,10 @@ const simulatePaymentGateway = (cvv) => {
     });
 };
 
-const getFilterLabel = (category, search, min, max) => {
+const getFilterLabel = (category, search) => {
     let label = "prodotti";
     if (category !== "All") label += ` in "${category}"`;
     if (search) label += ` per "${search}"`;
-    if (min || max) {
-        label += " con prezzo";
-        if (min) label += ` da ${min}€`;
-        if (max) label += ` a ${max}€`;
-    }
     return label;
 };
 
@@ -102,17 +97,17 @@ async function postAgentPrompt(prompt) {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({prompt})
+        body: JSON.stringify({ prompt })
     });
 
     let result = null;
     try {
         result = await response.json();
-    }catch{
+    } catch {
         result = null;
     }
 
-    if(!response.ok){
+    if (!response.ok) {
         const serverMessage = result?.message || `HTTP Error: ${response.status}`;
         throw new Error(serverMessage);
     }
@@ -120,5 +115,33 @@ async function postAgentPrompt(prompt) {
     return result;
 }
 
-export { fetchApi, priceFormatter, validatePayment, simulatePaymentGateway, postAgentPrompt, getFilterLabel, formatCategoryName };
+const calculateOrderTotals = (items, ivaRate = 0.22) => {
+
+    if (!items || !Array.isArray(items)) {
+        return { subtotal: 0, iva: 0, total: 0 };
+    }
+
+    const subtotal = items.reduce((acc, item) => {
+        const price = parseFloat(item.price) || 0;
+        const qty = parseInt(item.quantity) || 0;
+
+        return acc + (price * qty);
+    }, 0);
+
+    const iva = subtotal * ivaRate;
+    const total = subtotal + iva;
+
+    return { subtotal, iva, total };
+};
+
+export {
+    fetchApi,
+    priceFormatter,
+    validatePayment,
+    simulatePaymentGateway,
+    postAgentPrompt,
+    getFilterLabel,
+    formatCategoryName,
+    calculateOrderTotals
+};
 

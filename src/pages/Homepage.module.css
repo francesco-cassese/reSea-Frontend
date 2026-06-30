@@ -1,0 +1,179 @@
+/*==HERO BANNER==*/
+.heroBanner1 {
+  width: 100%;
+  min-height: 700px;
+  background-image: url('../assets/hero2.png');
+  background-size: cover;
+  background-position: top;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heroBanner1 :global(.container) {
+  margin-right: 15rem;
+}
+
+.heroBanner2 {
+  width: 100%;
+  min-height: 700px;
+  background-image: url('../assets/herobanner.png');
+  background-size: cover;
+  background-position: 50% 70%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heroBanner3 {
+  width: 100%;
+  min-height: 900px;
+  background-image: url('../assets/hero1.png');
+  background-size: cover;
+  background-position: center;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heroBanner3 :global(.container) {
+  margin-left: 15rem;
+}
+
+/*==HERO SLIDER==*/
+.heroSlider {
+  width: 100%;
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(0, 33, 71, 0.55), rgba(0, 0, 0, 0.15));
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  max-width: 620px;
+  text-align: center;
+  margin-inline: auto;
+}
+
+.heroTitle {
+  font-size: clamp(2rem, 4vw, 3.3rem);
+  font-weight: 800;
+  margin-bottom: 0.8rem;
+}
+
+.heroText {
+  font-size: 1.05rem;
+  margin-bottom: 1.2rem;
+}
+
+.heroDots {
+  position: absolute;
+  left: 50%;
+  bottom: 1.5rem;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.55rem;
+  z-index: 3;
+}
+
+.heroDot {
+  width: 10px;
+  height: 10px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.heroDot.active {
+  width: 24px;
+  background: #fff;
+}
+
+@media (max-width: 991.98px) {
+  .heroSlider {
+    min-height: 560px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .heroSlider {
+    min-height: 500px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .heroContent {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    padding: 0 20px !important;
+  }
+}
+
+/*==TITOLI SEZIONE==*/
+.sectionTitle {
+  color: var(--color-navy);
+  font-weight: 800;
+  letter-spacing: 0.3px;
+}
+
+/*==CAROSELLO PRODOTTI==*/
+.productCarouselViewport {
+  overflow: hidden;
+}
+
+.productCarouselTrack {
+  display: flex;
+  transition: transform 0.35s ease;
+}
+
+.productCarouselItem {
+  padding: 6px 8px;
+}
+
+/*==CARD PRODOTTO==*/
+.homeCard {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0 4px 6px var(--color-card-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.homeCard:hover {
+  transform: translatey(-6px);
+  box-shadow: 0 10px 30px var(--color-card-shadow-hover);
+}
+
+
+.homeCardTitle {
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.homeCardPrice {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-navy);
+}

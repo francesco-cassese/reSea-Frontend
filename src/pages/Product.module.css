@@ -1,0 +1,113 @@
+/*==SIDEBAR==*/
+.sidebarp {
+  margin-top: 37px;
+}
+
+/*==CARD PRODOTTO==*/
+
+.cardLinkColumn {
+  width: 18rem;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.cardLinkRow {
+  width: 100%;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.imageRow {
+  width: 190px;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.imageRow img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.cardProduct {
+  border-radius: 12px;
+  border: none;
+  overflow: hidden;
+  background-image: url('../assets/bgcard2.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.3s ease;
+}
+
+.cardLinkColumn:hover .cardProduct,
+.cardLinkRow:hover .cardProduct {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+}
+
+.cardPrice {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #34495e;
+}
+
+/*==BOTTONI SEZIONE PRODOTTO==*/
+
+.btnOffcanvasMobile {
+  padding: 5px 10px;
+  background-color: var(--color-btn);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.btnResetMobile {
+  height: 30px;
+  width: 100px;
+  background-color: var(--color-btn);
+  color: #fff;
+  text-align: center;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.btnAddToCartGrid {
+  border: none;
+  border-radius: 10px;
+  display: block;
+}
+
+.gradientBtn {
+  background-color: hsl(200, 70%, clamp(40%, 60% - (var(--index-mobile, 0) * 3%), 60%)) !important;
+  transition: background-color 0.4s ease, transform 0.3s ease, filter 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: none !important;
+  color: white !important;
+  font-weight: bold;
+}
+
+.gradientBtn:hover {
+  filter: brightness(110%);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+@media (min-width: 768px) {
+  .gradientBtn {
+    background-color: hsl(200, 70%, clamp(40%, 60% - (var(--index-tablet, 0) * 10%), 60%)) !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .gradientBtn {
+    background-color: hsl(200, 70%, clamp(40%, 60% - (var(--index-desktop, 0) * 7%), 60%)) !important;
+  }
+}

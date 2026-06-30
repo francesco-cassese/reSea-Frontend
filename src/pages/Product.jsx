@@ -5,6 +5,9 @@ import { useCategories } from "../context/CategoriesContext.jsx";
 import ProductSidebar from "../components/ProductSidebar.jsx";
 import { priceFormatter, getFilterLabel, formatCategoryName } from "../services/reseaServices";
 import { useAppContext } from "../context/AppContext.jsx";
+import styles from "./Product.module.css";
+import ProductCardGrid from "../components/ProductCardGrid.jsx";
+import ProductCardRow from "../components/ProductCardRow.jsx";
 
 function Product() {
     const { categories, categoriesLoading, categoriesError } = useCategories();
@@ -95,7 +98,15 @@ function Product() {
         limit, handleLimitChange, handlePriceFilters, clearAllFilters
     };
 
-    const filterDescription = getFilterLabel(formatCategoryName(selectedCategory), appliedSearch, minPrice, maxPrice);
+    const filterDescription = getFilterLabel(formatCategoryName(selectedCategory), appliedSearch);
+
+    const productActions = {
+        addHandler,
+        addToWishlist,
+        updateQuantity,
+        removeHandler,
+        priceFormatter
+    };
 
     if (loading) return <p className="p-4">Caricamento dei prodotti in corso...</p>;
     if (error) return <p className="p-4 text-danger">Qualcosa è andato storto: {error}</p>;
@@ -103,9 +114,9 @@ function Product() {
     return (
         <div className="container py-4">
             <div className="d-flex flex-column flex-lg-row gap-4 align-items-start">
-                <div className="sidebarp">
-                    <button className="btn btn-primary d-lg-none mb-4 w-100" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasFilters">
-                        <i className="bi bi-funnel"></i> Filtri
+                <div className={styles.sidebarp}>
+                    <button className={`${styles.btnOffcanvasMobile} d-lg-none mb-4 w-100`} type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasFilters">
+                        <i className="bi bi-funnel fs-5"></i> Filtri
                     </button>
                     <div className="offcanvas offcanvas-start d-lg-none" tabIndex="-1" id="offcanvasFilters">
                         <div className="offcanvas-header">
@@ -120,102 +131,73 @@ function Product() {
                 <div className="flex-grow-1">
                     {products.length === 0 ? (
                         <div className="d-flex flex-column align-items-center justify-content-center py-5">
-                            <i className="bi bi-sunglasses text-warning" style={{ fontSize: '4rem' }}></i>
+                            <i className="bi bi-sunglasses text-warning icon-xl"></i>
                             <h4 className="mt-3 text-dark">Nessun prodotto trovato</h4>
                         </div>
                     ) : (
                         <>
                             <div className="d-flex text-secondary justify-content-between">
-                                <div className="d-flex justify-content-between align-items-center border-bottom pb-3 mb-4">
+                                <div className="d-flex border-bottom pb-3 mb-3 flex-column">
                                     <h6 className="mb-0 text-muted">
                                         Mostrati <span className="text-dark fw-bold">{products.length}</span> di <span className="text-dark fw-bold">{total}</span>
                                         <span className="ms-1">{filterDescription}</span>
                                     </h6>
+                                    <button
+                                        className={`${styles.btnResetMobile} mt-2 d-lg-none`}
+                                        onClick={() => clearAllFilters()}
+                                    >
+                                        Reset Filtri
+                                    </button>
                                 </div>
-                                <div className="d-flex justify-content-center mb-4 flex-column">
+                                <div className="d-flex justify-content-center mb-3 flex-column">
                                     <div className="d-flex flex-column align-items-center">
                                         <button onClick={() => setView(view === 'column' ? 'row' : 'column')} className="btn btn-pay">
-                                            {view === 'column' ? <i className="bi bi-list-ul"></i> : <i className="bi bi-grid-3x3-gap"></i>}
+                                            {view === 'column' ? <i className="bi bi-list-ul fs-5"></i> : <i className="bi bi-grid-3x3-gap fs-5"></i>}
                                         </button>
                                     </div>
                                 </div>
                             </div>
 
                             <div className={`d-flex flex-wrap gap-3 justify-content-center`}>
-                                {products.map((item) => {
+                                {products.map((item, index) => {
                                     const countCart = cart.find(p => p.id === item.id)
                                     const inCart = cart.some(p => p.id === item.id);
                                     const inWishlist = wishlist.some(p => p.id === item.id);
+
+                                    const commonProps = {
+                                        item,
+                                        inCart,
+                                        inWishlist,
+                                        countCart,
+                                        ...productActions
+                                    };
+
                                     return (
                                         <Link
                                             to={"/products/" + item.slug}
-                                            className="text-decoration-none text-dark"
-                                            style={{ width: view === 'column' ? '18rem' : '100%', display: 'inline-block' }}
-                                            key={item.id}
+                                            key={item.slug}
+                                            className={`text-decoration-none text-dark ${view === "column"
+                                                ? styles.cardLinkColumn
+                                                : styles.cardLinkRow
+                                                }`}
+                                            style={{
+                                                "--index-mobile": index,
+                                                "--index-desktop": Math.floor(index / 3),
+                                                "--index-tablet": Math.floor(index / 2)
+                                            }}
                                         >
-                                            <div className={`card card-product w-100 ${view === 'column' ? 'list-column' : 'list-row'} ${view === 'column' ? '' : 'd-flex flex-column flex-md-row align-items-center p-3 gap-3 rounded-5'}`} style={{ cursor: "pointer" }}>
-                                                <img
-                                                    src={item.image}
-                                                    className={view === 'column' ? 'card-img-top' : 'img-fluid w-25 w-md-25 img-thumbnail border-0 bg-transparent'}
-                                                    alt={item.name}
-                                                    loading="lazy"
-                                                    decoding="async"
+                                            {view === "column" ? (
+                                                <ProductCardGrid
+                                                    {...commonProps}
                                                 />
-                                                <div className={`card-body ${view === 'column' ? 'p-2' : 'flex-grow-1 p-3'}`}>
-                                                    <p className={`card-text text-muted small mt-2 fs-4 fw-semibold ${view === 'column' ? 'd-none' : 'd-none d-md-block'}`}>
-                                                        {descrizioniSostenibili[item.id % descrizioniSostenibili.length]}
-                                                    </p>
-                                                    <h6 className={`card-title fw-bold mt-3 mb-2 ${view === 'column' ? '' : 'fs-3 mt-0'}`}>
-                                                        {item.name}
-                                                    </h6>
-                                                    <div className="d-flex justify-content-between align-items-center">
-                                                        <p className={`card-text fw-bold mb-0 ${view === 'row' ? 'fs-3' : 'small'}`}>
-                                                            {priceFormatter(item.price)}
-                                                        </p>
-                                                        <button
-                                                            type="button"
-                                                            className={`btn rounded-circle ${view === 'row' ? 'btn-lg fs-4' : ''}`}
-                                                            onClick={(e) => { e.preventDefault(); e.stopPropagation(); addToWishlist(item); }}
-                                                        >
-                                                            <i className={`bi ${inWishlist ? "bi-heart-fill" : "bi-heart"}`}></i>
-                                                        </button>
-                                                    </div>
-
-                                                    <div className="addbtn w-100 mt-2" onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}>
-                                                        {!inCart ? (
-                                                            <button
-                                                                type="button"
-                                                                className="btn btn-dark rounded-pill w-100"
-                                                                onClick={(e) => { e.preventDefault(); e.stopPropagation(); addHandler(item); }}
-                                                            >
-                                                                <i className="bi bi-cart me-2"></i> Aggiungi
-                                                            </button>
-                                                        ) : (
-                                                            <div className="btn btn-dark rounded-pill w-100 d-flex justify-content-between align-items-center px-3">
-                                                                <button
-                                                                    className="btn btn-sm text-white p-0"
-                                                                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); countCart.quantity === 1 ? removeHandler(item.id) : updateQuantity(item.id, -1); }}
-                                                                >
-                                                                    <i className="bi bi-dash-lg"></i>
-                                                                </button>
-
-                                                                <div className="d-flex gap-2">
-                                                                    <span className="fw-bold">{countCart.quantity}  </span>
-                                                                    <i className="bi bi-cart-fill"></i>
-                                                                </div>
-                                                                <button
-                                                                    className="btn btn-sm text-white p-0"
-                                                                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); updateQuantity(item.id, +1); }}
-                                                                >
-                                                                    <i className="bi bi-plus-lg"></i>
-                                                                </button>
-                                                            </div>
-                                                        )}
-                                                    </div>
-
-                                                </div>
-                                            </div>
+                                            ) : (
+                                                <ProductCardRow
+                                                    {...commonProps}
+                                                    descrizioniSostenibili={descrizioniSostenibili}
+                                                />
+                                            )}
                                         </Link>
+
                                     );
                                 })}
                             </div>
