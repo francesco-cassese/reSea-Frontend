@@ -40,7 +40,7 @@ function Cart() {
                     </div>
                     <div className="w-100 d-flex align-items-center">
 
-                        <Link to="/checkout" className="btn btn-pay btn-md mt-2 mb-3 mx-auto">
+                        <Link to="/checkout" className="btn btn-pay fw-bold btn-md mt-2 mb-3 mx-auto">
                             Procedi al pagamento
                         </Link>
 

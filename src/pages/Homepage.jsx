@@ -159,7 +159,7 @@ function Homepage() {
                 <div className={`container ${styles.heroContent}`}>
                     <h1 className={styles.heroTitle}>{currentHero.title}</h1>
                     <p className={styles.heroText}>{currentHero.text}</p>
-                    <Link to={currentHero.ctaTo} className="btn btn-primary rounded-pill px-4">
+                    <Link to={currentHero.ctaTo} className="btn btn-pay fw-bold rounded-pill px-4">
                         {currentHero.ctaLabel}
                     </Link>
 
