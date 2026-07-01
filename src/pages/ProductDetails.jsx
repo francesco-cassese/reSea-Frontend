@@ -122,10 +122,6 @@ function ProductDetails() {
                         <i className="bi bi-award text-success"></i>
                         <span className="small text-muted">Materiali certificati sostenibili</span>
                     </div>
-                    <div className="d-flex align-items-center gap-2">
-                        <i className="bi bi-truck text-success"></i>
-                        <span className="small text-muted">Spedizione gratuita sopra €49</span>
-                    </div>
                 </div>
 
                 {/* DIVIDER */}
