@@ -102,7 +102,7 @@ function Structure() {
 
             {/* WISHLIST - agganciare wishlistItems dal context quando pronto */}
 
-            <div className="d-flex justify-content-end mt-3 gap-2 ">
+            <div className="d-flex justify-content-end gap-2 mt-3 mt-lg-0">
               <div className="position-relative">
                 <Link to="/wishlist" className={styles.navBtn}>
                   <i className="bi bi-heart-fill"></i>
