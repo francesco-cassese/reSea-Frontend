@@ -116,3 +116,24 @@
     background: #ff6b6b;
     color: white;
 }
+
+.btnAddToCartGrid {
+    background: linear-gradient(90deg, #00b4d8, #48cae4);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: .5rem 1rem;
+    transition: .3s;
+    cursor: pointer;
+}
+
+.btnAddToCartGrid:hover {
+    background: linear-gradient(90deg, #0B8EAA, #13A8C9);
+    color: white;
+}
+
+.gradientBtn {
+    background: linear-gradient(90deg, #00b4d8, #48cae4);
+    color: white;
+    border: none;
+}
