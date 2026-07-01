@@ -75,15 +75,16 @@
     background: #fff;
     color: #6c757d;
     transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .wishlistBtn:hover {
-    border-color: black;
     color: #dc3545;
 }
 
 .wishlisted {
-    border-color: #dc3545 !important;
     color: #dc3545 !important;
     background-color: #fff5f5 !important;
 }
