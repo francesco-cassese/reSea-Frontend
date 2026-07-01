@@ -33,6 +33,16 @@
   align-items: center;
   gap: 8px;
   padding: 10px 16px;
+  overflow: hidden;
+  transition:
+          width 0.28s ease,
+          height 0.28s ease,
+          border-radius 0.28s ease,
+          padding 0.28s ease,
+          gap 0.28s ease,
+          transform 0.28s ease,
+          box-shadow 0.25s ease,
+          backgroung 0.25s ease;
 }
 
 .assistantWidgetToggle:hover {
@@ -159,18 +169,121 @@
   font-size: 0.8rem;
 }
 
+.toggleIcon {
+  display: none;
+}
+
+.desktopClosed {}
+.desktopOpen {}
+
+.toggleLabel,
+.assistantAvatar {
+  transition: opacity 0.2s ease, transform 0.2 ease;
+}
+
 /*==RESPONSIVE==*/
-@media (max-width: 576px) {
+@media (min-width: 992px){
+   .desktopClosed {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    padding: 0;
+    gap: 0;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .desktopOpen {
+    width: auto;
+    height: 44px;
+    border-radius: 8px;
+    padding: 10px 16px;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .desktopClosed .assistantAvatar {
+    width: 74px;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border: 0;
+    display: block;
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .desktopClosed .toggleLabel {
+    display: none;
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  .desktopOpen .assistantAvatar {
+    display: none;
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  .desktopOpen .toggleLabel {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .toggleIcon {
+    display: none;
+  }
+}
+@media (max-width: 991.98px){
   .assistantWidget {
     right: 10px;
     bottom: 10px;
   }
 
+  .assistantWidgetToggle{
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .toggleLabel,
+  .assistantAvatar{
+    display: none;
+  }
+
+  .toggleIcon{
+    display: block;
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+}
+
+@media (max-width: 576px) {
   .assistantWidgetPanel {
     width: min(92vw, 360px);
   }
 
   .assistantWidgetMessages {
     height: 44vh;
+  }
+  
+}
+
+@media (max-width: 400px) {
+  .assistantWidgetToggle {
+    width: 48px;
+    height: 48px;
+  }
+
+  .toggleIcon {
+    font-size: 1rem;
   }
 }

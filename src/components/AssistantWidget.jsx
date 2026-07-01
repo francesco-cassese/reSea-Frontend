@@ -21,11 +21,6 @@ function AssistantWidget() {
         el.scrollTop = el.scrollHeight;
     };
 
-    const buttonLabel = loading
-        ? "Sto cercando..."
-        : isOpen
-            ? "chiudi chat"
-            : "GretAI Thun";
 
     useEffect(() => {
         if (!isOpen) return;
@@ -69,19 +64,22 @@ function AssistantWidget() {
             <button
                 type="button"
                 onClick={() => setIsOpen((prev) => !prev)}
-                className={`${styles.assistantWidgetToggle} ${!isOpen ? styles.withImage : ''}`}
+                className={styles.assistantWidgetToggle + " " + (isOpen ? styles.desktopOpen : styles.desktopClosed) }
                 aria-expanded={isOpen}
                 aria-controls="assistant-widget-panel"
+                aria-label={isOpen ? "Chiudi chat" : "Apri chat"}
             >
-                {buttonLabel}
-                {!isOpen && (
-                    <img
-                        src="./images/gretai-avatar.jpg"
-                        alt="Avatar GretAI"
-                        className={` d-none d-md-block ${styles.assistantAvatar}`}
-                    />
+                {isOpen ? (
+                    <span className={styles.toggleLabel}>Chiudi chat</span>
+                ):(
+                    <img 
+                        src="/images/no-sfondo-avatar.png"
+                        alt="Avatar GretAI" 
+                        className={styles.assistantAvatar}
+                        />
                 )}
-
+                
+                <i className={`bi bi-chat-left ${styles.toggleIcon}`} aria-hidden="true"></i>
             </button>
 
             {isOpen && (
