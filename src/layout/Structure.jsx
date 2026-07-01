@@ -156,7 +156,7 @@ function Structure() {
                                   className={`btn btn-outline-secondary rounded-circle p-0 d-flex align-items-center justify-content-center ${styles.cartQtyBtnSize}`}
                                   onClick={(e) => { e.stopPropagation(); product.quantity === 1 ? removeHandler(product.id) : updateQuantity(product.id, -1); }}
                                 >
-                                  {product.quantity === 1 ? <i class="bi bi-trash3-fill"></i> : "-"}
+                                  {product.quantity === 1 ? <i className="bi bi-trash3-fill"></i> : "-"}
                                 </button>
 
                                 <span className="fw-bold text-center mx-1">

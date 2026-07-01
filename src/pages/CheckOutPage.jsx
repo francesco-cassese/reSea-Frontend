@@ -155,38 +155,40 @@ function CheckoutPage() {
         <div className="container py-5">
             <h1 className={`text-center mb-5 ${styles.title}`}>Completa il tuo acquisto</h1>
 
-            <div className={styles.checkoutRow}>
+            <section className='container'>
+                <div className={`row ${styles.checkoutRow}`}>
 
-                {/* Colonna 1: Riepilogo */}
-                <div className={styles.checkoutSide}>
-                    <div className={styles.sectionWrapper}>
-                        <div className="mb-3">
-                            <Link to="/cart" className="text-decoration-none d-flex align-items-center">
-                                <i className="bi bi-arrow-left me-2"></i> Torna al carrello
-                            </Link>
+                    {/* Colonna 1: Riepilogo */}
+                    <div className={`col-12 col-lg-6 ${styles.checkoutSide}`}>
+                        <div className={styles.sectionWrapper}>
+                            <div className="mb-3">
+                                <Link to="/cart" className="text-decoration-none d-flex align-items-center">
+                                    <i className="bi bi-arrow-left me-2"></i> Torna al carrello
+                                </Link>
+                            </div>
+                            <OrderSummary cartItems={cartItems} />
                         </div>
-                        <OrderSummary cartItems={cartItems} />
+                    </div>
+
+                    {/* Colonna 2: Form */}
+                    <div className={`col-12 col-lg-6 ${styles.checkoutMain}`}>
+                        <div className={styles.sectionWrapper}>
+                            {step === 'shipping' ? (
+                                <CheckoutForm onNext={handleShippingSubmit} />
+                            ) : (
+                                <PaymentForm
+                                    onBack={() => setStep('shipping')}
+                                    shippingData={shippingData}
+                                    onComplete={(data) => handleFinalOrder(data, cartItems)}
+                                    isSubmitting={isSubmitting}
+                                    setIsSubmitting={setIsSubmitting}
+                                />
+                            )}
+                        </div>
                     </div>
                 </div>
 
-                {/* Colonna 2: Form */}
-                <div className={styles.checkoutMain}>
-                    <div className={styles.sectionWrapper}>
-                        {step === 'shipping' ? (
-                            <CheckoutForm onNext={handleShippingSubmit} />
-                        ) : (
-                            <PaymentForm
-                                onBack={() => setStep('shipping')}
-                                shippingData={shippingData}
-                                onComplete={(data) => handleFinalOrder(data, cartItems)}
-                                isSubmitting={isSubmitting}
-                                setIsSubmitting={setIsSubmitting}
-                            />
-                        )}
-                    </div>
-                </div>
-
-            </div>
+            </section>
         </div>
     );
 }

@@ -26,7 +26,7 @@ function HeroSection() {
 
                         <Link
                             to="/products"
-                            className="btn btn-pay btn-lg mb-3"
+                            className="btn btn-pay btn-lg mb-3 fw-bold"
                         >
                             Scopri la collezione
                         </Link>
