@@ -2,6 +2,7 @@ import React from "react"
 import { Link } from 'react-router-dom'
 import { useAppContext } from '../context/AppContext';
 import styles from "./Wishlist.module.css";
+import { priceFormatter } from "../services/reseaServices";
 
 function Wishlist() {
     const { wishlist, cart, addToWishlist, addHandler, removeHandler, updateQuantity } = useAppContext();
@@ -9,10 +10,10 @@ function Wishlist() {
     return (
         <>
             {wishlist.length === 0 ? (
-                <div className="d-flex flex-column align-items-center justify-content-center py-5">
+                <div className="d-flex flex-column align-items-center justify-content-center text-center py-5">
                     <i className="bi bi-heart text-warning" style={{ fontSize: '4rem' }}></i>
                     <h4 className="mt-3 text-dark">La tua lista dei desideri è attualmente vuota</h4>
-                    <Link to="/products" className={`btn btn-primary rounded-pill mt-3 ${styles.btnAddToCartGrid}`}>Vai allo shop</Link>
+                    <Link to="/products" className={`btn btn-primary rounded-pill mt-3 ${styles.btnAddToCartGrid} fw-bold`}>Vai allo shop</Link>
                 </div>
             ) : (
                 <div className="container py-5">
@@ -25,20 +26,20 @@ function Wishlist() {
 
                             return (
                                 <div key={item.id} className={styles.wishlistCard}>
-                                   <Link to={"/products/" + item.slug}>
-                                    <div className={styles.wishlistImage}>
-                                        
-                                        <img src={item.image} alt={item.name} />
-                                        <span className={styles.wishlistBadge}>
-                                            ♻ Plastica Riciclata
-                                        </span>
-                                        
-                                    </div>
+                                    <Link to={"/products/" + item.slug}>
+                                        <div className={styles.wishlistImage}>
+
+                                            <img src={item.image} alt={item.name} />
+                                            <span className={styles.wishlistBadge}>
+                                                ♻ Plastica Riciclata
+                                            </span>
+
+                                        </div>
                                     </Link>
                                     <div className={styles.wishlistBody}>
                                         <h6>{item.name}</h6>
                                         <p className={styles.wishlistPrice}>
-                                            € {item.price.toFixed(2)}
+                                            {priceFormatter(item.price)}
                                         </p>
                                         <div className={styles.wishlistButtons}>
 
