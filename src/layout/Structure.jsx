@@ -209,61 +209,63 @@ function Structure() {
       </main>
 
       <footer className="custom-footer px-4 py-4 mt-auto border-top">
+
+        {/* Brand + Social: colonna su mobile/tablet, riga da desktop */}
         <div className="container-fluid d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
-          <a className="navbar-brand d-flex align-items-center gap-3 text-decoration-none text-dark" href="/">
-            <div className="brand-text">
-              <img className={styles.footerLogo} src={logo} alt="Logo BB" />
-            </div>
-          </a>
-          <ul className="nav align-items-center gap-3 flex-wrap justify-content-center">
-            <li className="nav-item">
-              <Link to="/privacy" className="text-decoration-none text-dark fw-medium small px-2">
-                Privacy Policy
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/AboutUs" className="text-decoration-none text-dark fw-medium small px-2">
-                About Us
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/terms" className="text-decoration-none text-dark fw-medium small px-2">
-                Terms of Service
-              </Link>
-            </li>
-            <li className="nav-item d-flex align-items-center gap-1 text-dark fw-medium small px-2">
+          <a className="navbar-brand d-flex align-items-center gap-2 text-decoration-none text-dark" href="/">
+            <img className={styles.footerLogo} src={logo} alt="Logo BB" />
+            <span className="d-flex align-items-center gap-1 text-dark fw-medium small">
               <i className="bi bi-globe2 text-dark"></i>
-              <span>Florence, Italy</span>
-            </li>
-          </ul>
+              Florence, Italy
+            </span>
+          </a>
 
-          <div className="text-dark small">
-            <span>© {new Date().getFullYear()} reSea.</span>
-          </div>
-
-        </div>
-
-        <div className="d-flex flex-column align-items-center mt-3">
-          <span className="text-dark fw-bold mb-2">Follow us</span>
-          <div className="d-flex gap-3">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-dark fs-4">
-              <i className="bi bi-facebook"></i>
-            </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-dark fs-4">
-              <i className="bi bi-instagram"></i>
-            </a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-dark fs-4">
-              <i className="bi bi-twitter-x"></i>
-            </a>
-            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="text-dark fs-4">
-              <i className="bi bi-tiktok"></i>
-            </a>
-            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="text-dark fs-4">
-              <i className="bi bi-youtube"></i>
-            </a>
+          <div className="d-flex flex-column align-items-center gap-2">
+            <span className="text-dark fw-bold small">Follow us</span>
+            <div className="d-flex gap-3">
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-dark fs-4">
+                <i className="bi bi-facebook"></i>
+              </a>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-dark fs-4">
+                <i className="bi bi-instagram"></i>
+              </a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-dark fs-4">
+                <i className="bi bi-twitter-x"></i>
+              </a>
+              <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="text-dark fs-4">
+                <i className="bi bi-tiktok"></i>
+              </a>
+              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="text-dark fs-4">
+                <i className="bi bi-youtube"></i>
+              </a>
+            </div>
           </div>
         </div>
 
+        {/* Link legali: riga centrata a tutta larghezza su ogni breakpoint */}
+        <ul className="nav align-items-center gap-3 flex-wrap justify-content-center mt-3">
+          <li>
+            <Link to="/privacy" className="text-decoration-none text-dark fw-medium small px-2">
+              Privacy Policy
+            </Link>
+          </li>
+          <li>
+            <Link to="/AboutUs" className="text-decoration-none text-dark fw-medium small px-2">
+              About Us
+            </Link>
+          </li>
+          <li>
+            <Link to="/terms" className="text-decoration-none text-dark fw-medium small px-2">
+              Terms of Service
+            </Link>
+          </li>
+        </ul>
+
+        <hr className="my-3" />
+
+        <div className="text-center text-dark small">
+          <span>© {new Date().getFullYear()} reSea.</span>
+        </div>
 
       </footer>
     </>

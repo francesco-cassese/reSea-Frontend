@@ -37,7 +37,7 @@ function Wishlist() {
                                         </div>
                                     </Link>
                                     <div className={styles.wishlistBody}>
-                                        <h6>{item.name}</h6>
+                                        <h5 className="fw-semibold">{item.name}</h5>
                                         <p className={styles.wishlistPrice}>
                                             {priceFormatter(item.price)}
                                         </p>
@@ -46,7 +46,7 @@ function Wishlist() {
                                             {!inCart ? (
                                                 <button
                                                     type="button"
-                                                    className={`w-100 me-3 rounded-pill ${styles.btnAddToCartGrid} ${styles.gradientBtn}`}
+                                                    className={`btn btn-pay fw-bold ${styles.btnAddToCartGrid} ${styles.gradientBtn}`}
                                                     onClick={(e) => {
                                                         e.preventDefault();
                                                         e.stopPropagation();

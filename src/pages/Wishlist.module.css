@@ -13,7 +13,7 @@
 }
 
 .wishlistCard {
-    width: 240px;
+    width: 250px;
     background: linear-gradient(180deg, #f8fdff 0%, #eefbfd 45%, #ffffff 100%);
     border-radius: 22px;
     overflow: hidden;
@@ -87,6 +87,7 @@
 .wishlistButtons {
     display: flex;
     gap: .75rem;
+    justify-content: center;
 }
 
 .wishlistCart {
@@ -104,8 +105,8 @@
 }
 
 .wishlistDelete {
-    width: 48px;
-    border-radius: 12px;
+    width: 50px;
+    border-radius: 50%;
     border: 1px solid #ff6b6b;
     color: #ff6b6b;
     background: white;
@@ -117,7 +118,7 @@
     color: white;
 }
 
-.btnAddToCartGrid {
+/* .btnAddToCartGrid {
     background: linear-gradient(90deg, #00b4d8, #48cae4);
     color: white;
     border: none;
@@ -136,4 +137,5 @@
     background: linear-gradient(90deg, #00b4d8, #48cae4);
     color: white;
     border: none;
-}
+    font-weight: bold;
+} */
