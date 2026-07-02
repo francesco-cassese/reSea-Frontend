@@ -9,39 +9,38 @@ function CartList() {
 
     if (cart.length === 0) {
         // Se il carrello è vuoto
-        cartToShow = <p>Attualmente il tuo carrello è vuoto.</p>;
+        cartToShow = <p className={styles.emptyText}>Attualmente il tuo carrello è vuoto.</p>;
     } else {
         // Se il carrello è pieno
         cartToShow = cart.map((item) => (
             <div key={item.id}>
                 <div className={`d-flex flex-wrap p-3 rounded-4 shadow-sm ${styles.cartCard} mb-3`}>
+
                     {/* image */}
                     <div className={`${styles.cartImg} flex-shrink-0 rounded-3 bg-light`} style={{ backgroundImage: `url(${item.image})` }} />
 
                     {/* info */}
-                    <div className={`flex-grow-1  ${styles.infoCol}`}>
-                        <h5 className={`fw-bold mb-1 ${styles.productName}`}>{item.name}</h5>
-                        <div className="d-flex flex-column gap-1 mb-3">
-                            <div className={`d-flex align-items-center ${styles.hideOnSmall} gap-2`}>
+                    <div className={`flex-grow-1 ${styles.infoCol}`}>
+                        <h5 className={`fw-bold fs-4 ${styles.productName}`}>{item.name}</h5>
+                        <div className={`d-flex flex-column gap-1 ${styles.featuresWrap}`}>
+                            <div className={`d-flex align-items-center gap-2`}>
                                 <i className="bi bi-shield-check text-secondary"></i>
-                                <span className="small text-secondary">Protezione UV 100%</span>
+                                <span className={`text-secondary fs-semibold ${styles.metaText}`}>Protezione UV 100%</span>
                             </div>
-                            <div className={`d-flex align-items-center ${styles.hideOnSmall} gap-2`}>
+                            <div className={`d-flex align-items-center gap-2`}>
                                 <i className="bi bi-recycle text-success"></i>
-                                <span className="small text-success">Materiali sostenibili</span>
+                                <span className={`text-success fs-semibold ${styles.metaText}`}>Materiali sostenibili</span>
                             </div>
-                        </div>
 
-                        <div className="d-flex align-items-center gap-1">
-                            <button
-                                className={`btn btn-link p-0 text-decoration-none ${styles.likeBtn}`}
-                                onClick={() => addToWishlist(item)}
-                            >
-                                <i className={`bi ${wishlist.some(w => w.id === item.id) ? 'bi-heart-fill text-danger' : 'bi-heart'} text-muted`}></i>
-                                <span className="small text-muted text-decoration-underline ms-1">
-                                    {wishlist.some(w => w.id === item.id) ? "Rimuovi dai preferiti" : "Aggiungi ai preferiti"}
-                                </span>
-                            </button>
+
+                            <div className={`d-flex align-items-center gap-1 ${styles.likeWrap}`}>
+                                <button className={`btn btn-link p-0 text-decoration-none ${styles.likeBtn}`} onClick={() => addToWishlist(item)}>
+                                    <i className={`bi ${wishlist.some(w => w.id === item.id) ? 'bi-heart-fill text-danger' : 'bi-heart'} text-muted`}></i>
+                                    <span className={`text-muted text-decoration-underline ms-1 ${styles.likeText}`}>
+                                        {wishlist.some(w => w.id === item.id) ? "Rimuovi dai preferiti" : "Aggiungi ai preferiti"}
+                                    </span>
+                                </button>
+                            </div>
                         </div>
                     </div>
 
@@ -54,14 +53,14 @@ function CartList() {
                                 className={`btn btn-sm rounded-circle ${styles.cartQtyBtn}`}
                                 onClick={() => item.quantity === 1 ? removeHandler(item.id) : updateQuantity(item.id, -1)}
                             >
-                                {item.quantity === 1 ? <i className="bi bi-trash text-secondary"></i> : `−`}
+                                {item.quantity === 1 ? <i className="bi bi-trash text-secondary fs-5"></i> : <i className="bi bi-dash-lg fw-bold fs-5"></i>}
                             </button>
-                            <span className="fw-semibold">{item.quantity}</span>
+                            <span className={`fw-semibold ${styles.qtyText}`}>{item.quantity}</span>
                             <button
                                 className={`btn btn-sm rounded-circle ${styles.cartQtyBtn}`}
                                 onClick={() => updateQuantity(item.id, 1)}
                             >
-                                +
+                                <i className="bi bi-plus-lg fs-5 fw-bold"></i>
                             </button>
                         </div>
 
@@ -74,7 +73,7 @@ function CartList() {
                         </button>
 
                         {/* prezzo */}
-                        <span className="fw-bold fs-5 text-dark">
+                        <span className={`fw-bold text-dark ${styles.priceText}`}>
                             {priceFormatter(item.price * item.quantity)}
                         </span>
                     </div>
