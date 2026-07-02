@@ -46,7 +46,7 @@ function Wishlist() {
                                             {!inCart ? (
                                                 <button
                                                     type="button"
-                                                    className={`btn btn-pay fw-bold ${styles.btnAddToCartGrid} ${styles.gradientBtn}`}
+                                                    className={`btn btn-pay fw-bold rounded-pill ${styles.btnAddToCartGrid} ${styles.gradientBtn}`}
                                                     onClick={(e) => {
                                                         e.preventDefault();
                                                         e.stopPropagation();
@@ -59,7 +59,7 @@ function Wishlist() {
                                             ) : (
                                                 <div className={`${styles.btnAddToCartGrid} w-100 d-flex rounded-pill justify-content-between align-items-center px-3 me-3 ${styles.gradientBtn}`}>
                                                     <button
-                                                        className="btn btn-sm text-white p-0"
+                                                        className="btn btn-sm text-white p-0 rounded-pill"
                                                         onClick={(e) => {
                                                             e.preventDefault();
                                                             e.stopPropagation();

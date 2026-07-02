@@ -118,7 +118,7 @@
     color: white;
 }
 
-/* .btnAddToCartGrid {
+.btnAddToCartGrid {
     background: linear-gradient(90deg, #00b4d8, #48cae4);
     color: white;
     border: none;
@@ -138,4 +138,4 @@
     color: white;
     border: none;
     font-weight: bold;
-} */
+} 
