@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from "react-router-dom";
-import CheckoutForm from '../components/CheckOutForm.jsx';
+import CheckoutForm from '../components/CheckoutForm.jsx';
 import OrderSummary from '../components/OrderSummary.jsx';
 import PaymentForm from '../components/PaymentForm.jsx';
 import styles from './CheckOutPage.module.css';
