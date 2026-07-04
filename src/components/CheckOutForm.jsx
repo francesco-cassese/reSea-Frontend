@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styles from './CheckoutForm.module.css';
+import { validatePhoneNumber } from '../services/reseaServices';
 
 function CheckoutForm({ onNext }) {
     const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ function CheckoutForm({ onNext }) {
         billing_address: '',
         phone_number: ''
     });
+    const [error, setError] = useState(null);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -21,9 +23,12 @@ function CheckoutForm({ onNext }) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        setError(null);
 
-        if (formData.phone_number.length < 9) {
-            alert("Per favore, inserisci un numero di telefono valido.");
+        const validation = validatePhoneNumber(formData.phone_number);
+
+        if (!validation.isValid) {
+            setError(validation.message);
             return;
         }
 
@@ -79,6 +84,8 @@ function CheckoutForm({ onNext }) {
                     onChange={handleChange}
                     required />
             </div>
+
+            {error && <div className="alert alert-danger">{error}</div>}
 
             <button className={`${styles.coralButton} btn btn-lg w-100 fw-bold`} type="submit">
                 Continua

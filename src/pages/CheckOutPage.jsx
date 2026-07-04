@@ -5,7 +5,7 @@ import OrderSummary from '../components/OrderSummary.jsx';
 import PaymentForm from '../components/PaymentForm.jsx';
 import styles from './CheckOutPage.module.css';
 import useCheckout from '../hooks/useCheckout.js';
-import { priceFormatter, calculateOrderTotals } from '../services/reseaServices.js';
+import { priceFormatter, weightFormatter, calculateOrderTotals } from '../services/reseaServices.js';
 import { useAppContext } from '../context/AppContext.jsx';
 
 
@@ -119,7 +119,7 @@ function CheckoutPage() {
                             <p className="mb-0 text-muted">
                                 Grazie per aver scelto di proteggere i nostri oceani. Con questo ordine,
                                 hai dato nuova vita
-                                a <strong>{orderDetails?.total_plastic} kg di plastica</strong> che
+                                a <strong>{weightFormatter(orderDetails?.total_plastic)} kg di plastica</strong> che
                                 non inquineranno più il mare.
                             </p>
                         </div>
@@ -140,12 +140,14 @@ function CheckoutPage() {
         return (
             <div className="container py-5">
                 <div className="mb-3">
-                    <Link to="/cart" className="text-decoration-none d-flex align-items-center">
+                    <Link to="/cart" className="text-decoration-none d-flex align-items-center fw-bold">
                         <i className="bi bi-arrow-left me-2"></i> Torna al carrello
                     </Link>
                 </div>
-                <h1>Riepilogo</h1>
-                <p>Il tuo carrello è vuoto!</p>
+                <div className='text-center'>
+                    <h1>Non è stato possibile mostrare il riepilogo</h1>
+                    <p>Il tuo carrello è vuoto!</p>
+                </div>
             </div>
         );
     }
@@ -162,7 +164,7 @@ function CheckoutPage() {
                     <div className={`col-12 col-lg-6 ${styles.checkoutSide}`}>
                         <div className={styles.sectionWrapper}>
                             <div className="mb-3">
-                                <Link to="/cart" className="text-decoration-none d-flex align-items-center">
+                                <Link to="/cart" className="text-decoration-none d-flex align-items-center fw-bold">
                                     <i className="bi bi-arrow-left me-2"></i> Torna al carrello
                                 </Link>
                             </div>

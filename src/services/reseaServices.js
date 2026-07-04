@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
 async function fetchApi(endpoint, options = {}) {
     const response = await fetch(`${BASE_URL}${endpoint}`, options);
@@ -27,6 +27,23 @@ function priceFormatter(number, languageTag = 'it-IT', currency = 'EUR') {
     return formatter.format(numericValue);
 }
 
+function weightFormatter(number, languageTag = 'it-IT') {
+
+    const numericValue = parseFloat(number);
+
+    if (isNaN(numericValue)) {
+        console.error("Il valore passato non è un numero valido:", number);
+        return "Peso non disponibile";
+    }
+
+    const formatter = new Intl.NumberFormat(languageTag, {
+        maximumFractionDigits: 2,
+        minimumFractionDigits: 0,
+    });
+
+    return formatter.format(numericValue);
+}
+
 const validatePayment = (cardNumber, expiry, cvv) => {
 
     const cleanCard = cardNumber.replace(/\s+/g, '');
@@ -44,6 +61,28 @@ const validatePayment = (cardNumber, expiry, cvv) => {
 
     if (!month || !year || month < 1 || month > 12) {
         return { isValid: false, message: "Data di scadenza non valida (MM/AA)." };
+    }
+
+    const currentYear = new Date().getFullYear() % 100;
+    const currentMonth = new Date().getMonth() + 1;
+
+    if (year < currentYear || (year === currentYear && month < currentMonth)) {
+        return { isValid: false, message: "Carta scaduta." };
+    }
+
+    return { isValid: true, message: null };
+};
+
+const validatePhoneNumber = (phone) => {
+
+    const cleanPhone = phone.replace(/[\s()-]+/g, '');
+
+    if (!/^\+?\d+$/.test(cleanPhone)) {
+        return { isValid: false, message: "Il numero di telefono può contenere solo cifre." };
+    }
+
+    if (cleanPhone.length < 9) {
+        return { isValid: false, message: "Per favore, inserisci un numero di telefono valido." };
     }
 
     return { isValid: true, message: null };
@@ -137,7 +176,9 @@ const calculateOrderTotals = (items, ivaRate = 0.22) => {
 export {
     fetchApi,
     priceFormatter,
+    weightFormatter,
     validatePayment,
+    validatePhoneNumber,
     simulatePaymentGateway,
     postAgentPrompt,
     getFilterLabel,
