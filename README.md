@@ -49,7 +49,7 @@ src/
 
 ## Backend
 Il frontend comunica con un'API REST dedicata. Puoi trovare il repository del backend qui:
-[reSea Backend](https://github.com/AbdeslamElFtouh/reSea-Express)
+[reSea Backend](https://github.com/francesco-cassese/reSea-Express)
 
 ## Installazione
 
