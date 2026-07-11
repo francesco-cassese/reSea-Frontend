@@ -1,16 +1,116 @@
-# React + Vite
+# ReSea EyeWear — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+E-commerce frontend per **ReSea EyeWear**, un brand di occhiali sostenibili. L'applicazione offre catalogo prodotti con filtri per categoria, dettaglio prodotto, carrello, wishlist, un flusso di checkout con calcolo IVA e pagamento simulato, e un assistente virtuale AI ("GretAI Thun") integrato per supportare l'utente nella scelta dei prodotti.
 
-Currently, two official plugins are available:
+## Indice
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- [Stack tecnologico](#stack-tecnologico)
+- [Struttura del progetto](#struttura-del-progetto)
+- [Prerequisiti](#prerequisiti)
+- [Installazione](#installazione)
+- [Variabili d'ambiente](#variabili-dambiente)
+- [Utilizzo](#utilizzo)
+- [Routing](#routing)
+- [Deploy](#deploy)
+- [Contributi](#contributi)
+- [Licenza](#licenza)
 
-## React Compiler
+## Stack tecnologico
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **[React 19](https://react.dev/)** — libreria UI a componenti, con Hooks e Context API
+- **[Vite 8](https://vite.dev/)** — build tool e dev server
+- **[React Router 7](https://reactrouter.com/)** — routing lato client (`BrowserRouter`)
+- **[Bootstrap 5](https://getbootstrap.com/)** + **Bootstrap Icons** — layout e componenti UI di base
+- **CSS Modules** — stili scoped per componente (`*.module.css`)
+- **[ESLint 10](https://eslint.org/)** — linting (flat config)
 
-## Expanding the ESLint configuration
+Gestione dello stato tramite React Context (`AppContext` per carrello/wishlist/ricerca, persistiti in `localStorage`; `CategoriesContext` per le categorie prodotto recuperate dall'API).
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Struttura del progetto
+
+```
+src/
+├── assets/         # immagini e risorse statiche
+├── components/      # componenti riutilizzabili (Hero, CartList, ProductCardGrid, ...)
+├── context/          # AppContext (cart/wishlist/search), CategoriesContext
+├── data/            # dati statici locali (es. slide della hero)
+├── hooks/           # hook custom (useFetch, useCheckout)
+├── layout/          # layout principale dell'app (Structure)
+├── pages/           # pagine/route (Homepage, Product, Cart, Checkout, Wishlist, ...)
+├── services/        # client API e funzioni di utilità (reseaServices.js)
+├── App.jsx          # definizione delle route
+└── main.jsx         # entry point
+```
+
+## Prerequisiti
+
+- [Node.js](https://nodejs.org/) 20 o superiore
+- [pnpm](https://pnpm.io/) installato globalmente
+
+## Backend
+Il frontend comunica con un'API REST dedicata. Puoi trovare il repository del backend qui:
+[reSea Backend](https://github.com/AbdeslamElFtouh/reSea-Express)
+
+## Installazione
+
+```bash
+pnpm install
+```
+
+## Variabili d'ambiente
+
+Il frontend comunica con un backend separato tramite la variabile `VITE_API_URL`. Crea un file `.env` nella root del progetto:
+
+```bash
+VITE_API_URL=http://localhost:3000
+```
+
+Se non impostata, l'app utilizza `http://localhost:3000` come valore di default.
+
+## Utilizzo
+
+```bash
+# avvia il server di sviluppo con HMR
+pnpm dev
+
+# genera la build di produzione
+pnpm build
+
+# avvia un server locale per verificare la build di produzione
+pnpm preview
+
+# esegue il linting del codice
+pnpm lint
+```
+
+## Routing
+
+| Percorso           | Descrizione                          |
+| ------------------- | ------------------------------------- |
+| `/homepage`         | Home page                             |
+| `/products`         | Catalogo prodotti                     |
+| `/products/:slug`   | Dettaglio prodotto                    |
+| `/cart`             | Carrello                              |
+| `/wishlist`         | Lista desideri                        |
+| `/checkout`         | Checkout (con calcolo IVA e pagamento simulato) |
+| `/aboutUs`          | Chi siamo                             |
+
+Tutte le rotte sono racchiuse nel layout `Structure`, avvolto dai provider `CategoriesProvider` e `AppProvider`.
+
+## Deploy
+
+Il progetto è configurato per il deploy su **Netlify** (regola di fallback SPA in `public/_redirects`).
+
+## Contributi
+
+Progetto sviluppato dal **Gruppo 2**:
+
+- [Sara Luongo](https://github.com/Sara-Luongo)
+- [Abdeslam ElFtouh](https://github.com/AbdeslamElFtouh)
+- [Raffaele De Pasca](https://github.com/depasca-raffaele)
+- [Antonino Bellia](https://github.com/BelliaNino)
+- [Francesco Cassese](https://github.com/francesco-cassese)
+
+## Licenza
+
+Progetto didattico a uso privato, sviluppato nell'ambito di un project work Boolean.
