@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import styles from './CheckoutForm.module.css';
-import { validatePayment } from '../services/reseaServices';
-import { simulatePaymentGateway } from '../services/reseaServices';
+import styles from './PaymentForm.module.css';
+import { validatePayment, simulatePaymentGateway } from '../services/payment.js';
 
 function PaymentForm({ onBack, shippingData, onComplete, isSubmitting, setIsSubmitting }) {
     const [cardNumber, setCardNumber] = useState('');

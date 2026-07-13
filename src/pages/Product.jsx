@@ -3,11 +3,13 @@ import { Link, useSearchParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import { useCategories } from "../context/CategoriesContext.jsx";
 import ProductSidebar from "../components/ProductSidebar.jsx";
-import { priceFormatter, getFilterLabel, formatCategoryName } from "../services/reseaServices";
+import { priceFormatter, getFilterLabel, formatCategoryName } from "../services/formatters.js";
 import { useAppContext } from "../context/AppContext.jsx";
 import styles from "./Product.module.css";
+import cardStyles from "../components/ProductCard.module.css";
 import ProductCardGrid from "../components/ProductCardGrid.jsx";
 import ProductCardRow from "../components/ProductCardRow.jsx";
+import { descrizioniSostenibili } from "../data/productDescriptions.js";
 
 function Product() {
     const { categories, categoriesLoading, categoriesError } = useCategories();
@@ -81,14 +83,6 @@ function Product() {
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }, [endpoint]);
-
-    const descrizioniSostenibili = [
-        "Un accessorio nato dal mare e progettato per la terra. Realizzato al 100% con plastica riciclata recuperata dagli oceani, unendo eco-responsabilità e design d'avanguardia.",
-        "Ogni pezzo di questa collezione contribuisce a rimuovere i rifiuti plastici dalle nostre coste. Leggero, resistente e pensato per chi protegge il pianeta con stile.",
-        "Unisciti al cambiamento con un design minimalista. Realizzato interamente dando una seconda vita ai materiali marini recuperati, garantendo massima durabilità e comfort.",
-        "Anima green e linee moderne. Questo prodotto trasforma l'inquinamento oceanico in un elemento unico di alta moda, riducendo drasticamente l'impatto ambientale.",
-        "Qualità eccellente e zero sprechi. Un pezzo unico nato dalle operazioni di pulizia dei nostri mari, perfetto per chi cerca un look sofisticato, etico e consapevole."
-    ];
 
     const sidebarProps = {
         searchInput, setSearchInput, applySearch, handleSearchKeyDown,
@@ -179,8 +173,8 @@ function Product() {
                                             to={"/products/" + item.slug}
                                             key={item.slug}
                                             className={`text-decoration-none text-dark ${view === "column"
-                                                ? styles.cardLinkColumn
-                                                : styles.cardLinkRow
+                                                ? cardStyles.cardLinkColumn
+                                                : cardStyles.cardLinkRow
                                                 }`}
                                             style={{
                                                 "--index-mobile": index,
