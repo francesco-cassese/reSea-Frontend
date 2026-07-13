@@ -1,17 +1,14 @@
 import { Link } from "react-router-dom";
 import CartList from "../components/CartList.jsx"
 import { useAppContext } from "../context/AppContext.jsx";
-import { priceFormatter } from "../services/reseaServices.js";
+import { priceFormatter } from "../services/formatters.js";
+import { calculateOrderTotals } from "../services/orders.js";
 import styles from "./Cart.module.css";
 
 
 function Cart() {
     const { cart } = useAppContext();
-    let totale = 0;
-
-    for (let i = 0; i < cart.length; i++) {
-        totale = totale + (Number(cart[i].price) * cart[i].quantity);
-    }
+    const { subtotal: totale } = calculateOrderTotals(cart);
 
     return (
         <>
