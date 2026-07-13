@@ -34,10 +34,10 @@ src/
 ├── components/      # componenti riutilizzabili (Hero, CartList, ProductCardGrid, ...)
 ├── context/          # AppContext (cart/wishlist/search), CategoriesContext
 ├── data/            # dati statici locali (es. slide della hero)
-├── hooks/           # hook custom (useFetch, useCheckout)
+├── hooks/           # hook custom (useFetch, useCheckout, useAssistantChat)
 ├── layout/          # layout principale dell'app (Structure)
 ├── pages/           # pagine/route (Homepage, Product, Cart, Checkout, Wishlist, ...)
-├── services/        # client API e funzioni di utilità (reseaServices.js)
+├── services/        # client API e funzioni di utilità (api, orders, payment, validators, formatters)
 ├── App.jsx          # definizione delle route
 └── main.jsx         # entry point
 ```
