@@ -1,0 +1,14 @@
+/*==INPUT & BOTTONI==*/
+.input {
+    border: 1px solid #001f3f !important;
+}
+
+.coralButton {
+    background-color: #0DCAF0 !important;
+    color: #fff !important;
+    border: none !important;
+}
+
+.coralButton:hover {
+    background-color: #0dcaf0cd !important;
+}

@@ -2,6 +2,14 @@ import { useState, createContext, useContext, useEffect } from "react";
 
 const AppContext = createContext();
 
+function persistCart(cart) {
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+function persistWishlist(wishlist) {
+    localStorage.setItem('wishlist', JSON.stringify(wishlist));
+}
+
 function AppProvider({ children }) {
 
     const cartData = localStorage.getItem('cart');
@@ -34,16 +42,8 @@ function AppProvider({ children }) {
             newWishlist = [...wishlist, product];
         }
         setWishlist(newWishlist);
-        localStorage.setItem('wishlist', JSON.stringify(newWishlist));
+        persistWishlist(newWishlist);
     };
-
-
-    const toggleCart = (id) => {
-        setCart(prev =>
-            prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]
-        );
-    };
-
 
     const addHandler = (productToAdd) => {
 
@@ -66,7 +66,7 @@ function AppProvider({ children }) {
         }
 
         setCart(newCart);
-        localStorage.setItem('cart', JSON.stringify(newCart));
+        persistCart(newCart);
     };
 
     const removeHandler = (idProductToRemove) => {
@@ -74,7 +74,7 @@ function AppProvider({ children }) {
             return product.id !== idProductToRemove;
         });
         setCart(newCart);
-        localStorage.setItem('cart', JSON.stringify(newCart));
+        persistCart(newCart);
     };
 
     const updateQuantity = (id, amount) => {
@@ -90,7 +90,7 @@ function AppProvider({ children }) {
             }
         });
         setCart(newCart);
-        localStorage.setItem('cart', JSON.stringify(newCart));
+        persistCart(newCart);
     };
 
     const removePurchasedProducts = () => {
@@ -111,7 +111,6 @@ function AppProvider({ children }) {
             setSearch,
             wishlist,
             addToWishlist,
-            toggleCart,
             addHandler,
             removeHandler,
             updateQuantity,

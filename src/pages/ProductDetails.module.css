@@ -64,6 +64,15 @@
     color: #1a1a2e;
 }
 
+.productTitle {
+    font-size: 2.2rem;
+    line-height: 1.2;
+}
+
+.priceValue {
+    font-size: 2rem;
+}
+
 .addToCartBtn {
     background-color: #0DCAF0;
     color: #fff;

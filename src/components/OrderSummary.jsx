@@ -1,6 +1,6 @@
-import { priceFormatter, } from '../services/reseaServices';
+import { priceFormatter } from '../services/formatters.js';
 import styles from './OrderSummary.module.css';
-import { calculateOrderTotals } from '../services/reseaServices.js';
+import { calculateOrderTotals } from '../services/orders.js';
 
 function OrderSummary({ cartItems }) {
     const totals = calculateOrderTotals(cartItems);

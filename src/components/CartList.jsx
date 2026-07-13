@@ -1,6 +1,7 @@
 import { useAppContext } from '../context/AppContext.jsx';
-import { priceFormatter } from '../services/reseaServices.js';
+import { priceFormatter } from '../services/formatters.js';
 import styles from './CartList.module.css';
+import QuantityStepper from './QuantityStepper.jsx';
 
 function CartList() {
 
@@ -48,21 +49,17 @@ function CartList() {
                     <div className={`flex-fill d-flex flex-column align-items-center justify-content-center gap-2 ${styles.actionsCol}`}>
 
                         {/* + e - in alto, più larghi */}
-                        <div className="d-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-light w-100 justify-content-center">
-                            <button
-                                className={`btn btn-sm rounded-circle ${styles.cartQtyBtn}`}
-                                onClick={() => item.quantity === 1 ? removeHandler(item.id) : updateQuantity(item.id, -1)}
-                            >
-                                {item.quantity === 1 ? <i className="bi bi-trash text-secondary fs-5"></i> : <i className="bi bi-dash-lg fw-bold fs-5"></i>}
-                            </button>
-                            <span className={`fw-semibold ${styles.qtyText}`}>{item.quantity}</span>
-                            <button
-                                className={`btn btn-sm rounded-circle ${styles.cartQtyBtn}`}
-                                onClick={() => updateQuantity(item.id, 1)}
-                            >
-                                <i className="bi bi-plus-lg fs-5 fw-bold"></i>
-                            </button>
-                        </div>
+                        <QuantityStepper
+                            quantity={item.quantity}
+                            onIncrement={() => updateQuantity(item.id, 1)}
+                            onDecrement={() => updateQuantity(item.id, -1)}
+                            onRemove={() => removeHandler(item.id)}
+                            wrapperClassName="d-flex align-items-center gap-2 px-3 py-2 rounded-pill bg-light w-100 justify-content-center"
+                            buttonClassName={`btn btn-sm rounded-circle ${styles.cartQtyBtn}`}
+                            renderMinus={item.quantity === 1 ? <i className="bi bi-trash text-secondary fs-5"></i> : <i className="bi bi-dash-lg fw-bold fs-5"></i>}
+                            renderCenter={<span className={`fw-semibold ${styles.qtyText}`}>{item.quantity}</span>}
+                            renderPlus={<i className="bi bi-plus-lg fs-5 fw-bold"></i>}
+                        />
 
                         {/* rimuovi centrato */}
                         <button

@@ -1,6 +1,22 @@
 import { useState } from 'react';
 import styles from './CheckoutForm.module.css';
-import { validatePhoneNumber } from '../services/reseaServices';
+import { validatePhoneNumber } from '../services/validators.js';
+
+function FormField({ label, name, type = 'text', placeholder, onChange }) {
+    return (
+        <div className="mb-3">
+            <label className="form-label" htmlFor={name}>{label}</label>
+            <input
+                className={`${styles.input} form-control`}
+                id={name}
+                name={name}
+                type={type}
+                placeholder={placeholder}
+                onChange={onChange}
+                required />
+        </div>
+    );
+}
 
 function CheckoutForm({ onNext }) {
     const [formData, setFormData] = useState({
@@ -40,50 +56,41 @@ function CheckoutForm({ onNext }) {
         <form className={`${styles.form} needs-validation`} onSubmit={handleSubmit}>
             <h2 className="mb-4">Dove dobbiamo spedire?</h2>
 
-            <div className="mb-3">
-                <input
-                    className={`${styles.input} form-control`}
-                    name="client_name"
-                    placeholder="Nome e Cognome"
-                    onChange={handleChange}
-                    required />
-            </div>
+            <FormField
+                label="Nome e Cognome"
+                name="client_name"
+                placeholder="Nome e Cognome"
+                onChange={handleChange}
+            />
 
-            <div className="mb-3">
-                <input
-                    className={`${styles.input} form-control`}
-                    name="email_client"
-                    type="email"
-                    placeholder="Email"
-                    onChange={handleChange}
-                    required />
-            </div>
+            <FormField
+                label="Email"
+                name="email_client"
+                type="email"
+                placeholder="Email"
+                onChange={handleChange}
+            />
 
-            <div className="mb-3">
-                <input className={`${styles.input} form-control`}
-                    name="shipping_address"
-                    placeholder="Indirizzo di spedizione"
-                    onChange={handleChange}
-                    required />
-            </div>
+            <FormField
+                label="Indirizzo di spedizione"
+                name="shipping_address"
+                placeholder="Indirizzo di spedizione"
+                onChange={handleChange}
+            />
 
-            <div className="mb-3">
-                <input
-                    className={`${styles.input} form-control`}
-                    name="billing_address"
-                    placeholder="Indirizzo di fatturazione"
-                    onChange={handleChange}
-                    required />
-            </div>
+            <FormField
+                label="Indirizzo di fatturazione"
+                name="billing_address"
+                placeholder="Indirizzo di fatturazione"
+                onChange={handleChange}
+            />
 
-            <div className="mb-3">
-                <input
-                    className={`${styles.input} form-control`}
-                    name="phone_number"
-                    placeholder="Telefono"
-                    onChange={handleChange}
-                    required />
-            </div>
+            <FormField
+                label="Telefono"
+                name="phone_number"
+                placeholder="Telefono"
+                onChange={handleChange}
+            />
 
             {error && <div className="alert alert-danger">{error}</div>}
 

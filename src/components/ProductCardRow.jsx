@@ -1,4 +1,5 @@
-import styles from '../pages/Product.module.css'
+import styles from './ProductCard.module.css'
+import QuantityStepper from './QuantityStepper.jsx';
 
 function ProductCardRow({
     item,
@@ -76,35 +77,19 @@ function ProductCardRow({
                             <i className="bi bi-cart fs-6" />
                         </button>
                     ) : (
-                        <div className={`btn btn-dark rounded-pill d-flex justify-content-between align-items-center px-3 ${styles.gradientBtn}`}>
-                            <button
-                                className="btn btn-sm text-white p-0"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                    countCart.quantity === 1
-                                        ? removeHandler(item.id)
-                                        : updateQuantity(item.id, -1);
-                                }}
-                            >
-                                <i className="bi bi-dash-lg" />
-                            </button>
-
-                            <span className="fw-bold mx-2">
-                                {countCart.quantity}
-                            </span>
-
-                            <button
-                                className="btn btn-sm text-white p-0"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                    updateQuantity(item.id, +1);
-                                }}
-                            >
-                                <i className="bi bi-plus-lg" />
-                            </button>
-                        </div>
+                        <QuantityStepper
+                            quantity={countCart.quantity}
+                            onIncrement={() => updateQuantity(item.id, +1)}
+                            onDecrement={() => updateQuantity(item.id, -1)}
+                            onRemove={() => removeHandler(item.id)}
+                            wrapperClassName={`btn btn-dark rounded-pill d-flex justify-content-between align-items-center px-3 ${styles.gradientBtn}`}
+                            buttonClassName="btn btn-sm text-white p-0"
+                            renderMinus={<i className="bi bi-dash-lg" />}
+                            renderCenter={<span className="fw-bold mx-2">{countCart.quantity}</span>}
+                            renderPlus={<i className="bi bi-plus-lg" />}
+                            stopPropagation
+                            preventDefault
+                        />
                     )}
 
                 </div>

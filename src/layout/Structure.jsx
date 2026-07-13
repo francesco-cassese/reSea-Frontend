@@ -1,20 +1,16 @@
 import { Link, Outlet } from "react-router-dom";
 import { useAppContext } from "../context/AppContext.jsx";
 import logo from '../assets/logoneutro.png';
-import { priceFormatter } from "../services/reseaServices.js";
+import { priceFormatter } from "../services/formatters.js";
+import { calculateOrderTotals } from "../services/orders.js";
 import { useRef, useEffect } from "react";
 import styles from "./Structure.module.css";
+import QuantityStepper from "../components/QuantityStepper.jsx";
 
 function Structure() {
   const { cart, totalQuantity, removeHandler, wishlist, addHandler, updateQuantity } = useAppContext();
 
-  let totale = 0;
-
-  for (let i = 0; i < cart.length; i++) {
-    let prezzoProdotto = Number(cart[i].price);
-    let quantitaProdotto = cart[i].quantity;
-    totale += prezzoProdotto * quantitaProdotto;
-  }
+  const { subtotal: totale } = calculateOrderTotals(cart);
 
   const endOfListRef = useRef(null);
   const navMenuRef = useRef(null);
@@ -152,25 +148,18 @@ function Structure() {
                                 </p>
                                 <p className="mb-0 small text-muted">{priceFormatter(product.price)}</p>
                               </div>
-                              <div className="d-flex align-items-center gap-2">
-                                <button
-                                  className={`btn btn-outline-secondary rounded-circle p-0 d-flex align-items-center justify-content-center ${styles.cartQtyBtnSize}`}
-                                  onClick={(e) => { e.stopPropagation(); product.quantity === 1 ? removeHandler(product.id) : updateQuantity(product.id, -1); }}
-                                >
-                                  {product.quantity === 1 ? <i className="bi bi-trash3-fill"></i> : "-"}
-                                </button>
-
-                                <span className="fw-bold text-center mx-1">
-                                  {product.quantity}
-                                </span>
-
-                                <button
-                                  className={`btn btn-outline-secondary rounded-circle p-0 d-flex align-items-center justify-content-center ${styles.cartQtyBtnSize}`}
-                                  onClick={(e) => { e.stopPropagation(); updateQuantity(product.id, +1); }}
-                                >
-                                  +
-                                </button>
-                              </div>
+                              <QuantityStepper
+                                quantity={product.quantity}
+                                onIncrement={() => updateQuantity(product.id, +1)}
+                                onDecrement={() => updateQuantity(product.id, -1)}
+                                onRemove={() => removeHandler(product.id)}
+                                wrapperClassName="d-flex align-items-center gap-2"
+                                buttonClassName={`btn btn-outline-secondary rounded-circle p-0 d-flex align-items-center justify-content-center ${styles.cartQtyBtnSize}`}
+                                renderMinus={product.quantity === 1 ? <i className="bi bi-trash3-fill"></i> : "-"}
+                                renderCenter={<span className="fw-bold text-center mx-1">{product.quantity}</span>}
+                                renderPlus="+"
+                                stopPropagation
+                              />
 
                             </div>
                           </div>
