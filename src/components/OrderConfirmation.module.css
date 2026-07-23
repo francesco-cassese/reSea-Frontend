@@ -1,0 +1,55 @@
+.continueButton {
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .continueButton {
+        width: auto;
+    }
+}
+
+/* Riduce spaziature e icone quando l'altezza disponibile è limitata (es. laptop 15") */
+@media (max-height: 800px) {
+    .compactWrapper {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+    }
+
+    .compactCard {
+        padding: 1.25rem !important;
+    }
+
+    .compactIcon {
+        margin-bottom: 0.5rem !important;
+    }
+
+    .compactIcon i {
+        font-size: 2.5rem !important;
+    }
+
+    .compactHeading {
+        margin-bottom: 0.5rem !important;
+    }
+
+    .compactText {
+        margin-bottom: 0.5rem !important;
+    }
+
+    .compactBox {
+        margin-bottom: 0.5rem !important;
+        padding: 0.75rem !important;
+    }
+
+    .compactImpact {
+        margin-top: 0.5rem !important;
+        padding: 0.75rem !important;
+    }
+
+    .compactImpact i {
+        font-size: 1.5rem !important;
+    }
+
+    .continueButton {
+        margin-top: 0.5rem !important;
+    }
+}

@@ -1,4 +1,5 @@
-import styles from '../pages/Product.module.css'
+import styles from './ProductCard.module.css'
+import QuantityStepper from './QuantityStepper.jsx';
 
 function ProductCardGrid({
     item,
@@ -54,38 +55,24 @@ function ProductCardGrid({
                             Aggiungi
                         </button>
                     ) : (
-                        <div className={`${styles.btnAddToCartGrid} w-100 d-flex justify-content-between align-items-center px-3 me-3 ${styles.gradientBtn}`}>
-
-                            <button
-                                className="btn btn-sm text-white p-0"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                    countCart.quantity === 1
-                                        ? removeHandler(item.id)
-                                        : updateQuantity(item.id, -1);
-                                }}
-                            >
-                                <i className="bi bi-dash-lg" />
-                            </button>
-
-                            <div className="d-flex gap-2 align-items-center">
-                                <span className="fw-bold">{countCart.quantity}</span>
-                                <i className="bi bi-cart-fill fs-5" />
-                            </div>
-
-                            <button
-                                className="btn btn-sm text-white p-0"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                    updateQuantity(item.id, +1);
-                                }}
-                            >
-                                <i className="bi bi-plus-lg" />
-                            </button>
-
-                        </div>
+                        <QuantityStepper
+                            quantity={countCart.quantity}
+                            onIncrement={() => updateQuantity(item.id, +1)}
+                            onDecrement={() => updateQuantity(item.id, -1)}
+                            onRemove={() => removeHandler(item.id)}
+                            wrapperClassName={`${styles.btnAddToCartGrid} w-100 d-flex justify-content-between align-items-center px-3 me-3 ${styles.gradientBtn}`}
+                            buttonClassName="btn btn-sm text-white p-0"
+                            renderMinus={<i className="bi bi-dash-lg" />}
+                            renderCenter={
+                                <div className="d-flex gap-2 align-items-center">
+                                    <span className="fw-bold">{countCart.quantity}</span>
+                                    <i className="bi bi-cart-fill fs-5" />
+                                </div>
+                            }
+                            renderPlus={<i className="bi bi-plus-lg" />}
+                            stopPropagation
+                            preventDefault
+                        />
                     )}
                     <button
                         type="button"

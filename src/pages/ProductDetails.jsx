@@ -1,9 +1,10 @@
 import { useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import { useAppContext } from "../context/AppContext";
-import { priceFormatter } from "../services/reseaServices";
+import { priceFormatter } from "../services/formatters.js";
 import { Link } from 'react-router-dom';
 import styles from './ProductDetails.module.css';
+import QuantityStepper from '../components/QuantityStepper.jsx';
 
 function ProductDetails() {
 
@@ -88,7 +89,7 @@ function ProductDetails() {
                             <span className={`badge rounded-pill mb-3 px-3 py-2 ${styles.categoryBadge}`}>
                                 <i className="bi bi-water me-1"></i> Collezione Mare
                             </span>
-                            <h1 className="fw-bold mb-2" style={{ fontSize: '2.2rem', lineHeight: 1.2 }}>
+                            <h1 className={`fw-bold mb-2 ${styles.productTitle}`}>
                                 {product.name}
                             </h1>
                             <p className="text-muted mb-0 fs-6 fw-bold">{product.description}</p>
@@ -126,7 +127,7 @@ function ProductDetails() {
                         <div className="d-flex align-items-center justify-content-between flex-wrap gap-3">
                             <div>
                                 <span className="text-muted small d-block mb-1 fw-bold">Prezzo</span>
-                                <span className={`fw-bold ${styles.price}`} style={{ fontSize: '2rem' }}>
+                                <span className={`fw-bold ${styles.price} ${styles.priceValue}`}>
                                     {priceFormatter(product.price)}
                                 </span>
                             </div>
@@ -141,32 +142,22 @@ function ProductDetails() {
                                         Aggiungi al carrello
                                     </button>
                                 ) : (
-                                    <div className={`d-flex align-items-center justify-content-between rounded-pill px-3 ${styles.addToCartBtn}`}>
-                                        <button
-                                            type="button"
-                                            className="btn btn-sm text-white p-0"
-                                            onClick={() =>
-                                                countCart.quantity === 1
-                                                    ? removeHandler(product.id)
-                                                    : updateQuantity(product.id, -1)
-                                            }
-                                        >
-                                            <i className="bi bi-dash-lg" />
-                                        </button>
-
-                                        <div className="d-flex gap-2 align-items-center">
-                                            <span className="fw-bold">{countCart.quantity}</span>
-                                            <i className="bi bi-cart-fill fs-5" />
-                                        </div>
-
-                                        <button
-                                            type="button"
-                                            className="btn btn-sm text-white p-0"
-                                            onClick={() => updateQuantity(product.id, +1)}
-                                        >
-                                            <i className="bi bi-plus-lg" />
-                                        </button>
-                                    </div>
+                                    <QuantityStepper
+                                        quantity={countCart.quantity}
+                                        onIncrement={() => updateQuantity(product.id, +1)}
+                                        onDecrement={() => updateQuantity(product.id, -1)}
+                                        onRemove={() => removeHandler(product.id)}
+                                        wrapperClassName={`d-flex align-items-center justify-content-between rounded-pill px-3 ${styles.addToCartBtn}`}
+                                        buttonClassName="btn btn-sm text-white p-0"
+                                        renderMinus={<i className="bi bi-dash-lg" />}
+                                        renderCenter={
+                                            <div className="d-flex gap-2 align-items-center">
+                                                <span className="fw-bold">{countCart.quantity}</span>
+                                                <i className="bi bi-cart-fill fs-5" />
+                                            </div>
+                                        }
+                                        renderPlus={<i className="bi bi-plus-lg" />}
+                                    />
                                 )}
 
                                 <button

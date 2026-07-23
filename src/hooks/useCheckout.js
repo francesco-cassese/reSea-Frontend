@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { fetchApi } from '../services/reseaServices';
+import { fetchApi } from '../services/api.js';
 
 function useCheckout() {
     const [loading, setLoading] = useState(false);

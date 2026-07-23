@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { fetchApi } from "../services/reseaServices";
+import { fetchApi } from "../services/api.js";
 
 const CategoriesContext = createContext();
 

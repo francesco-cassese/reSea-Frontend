@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import styles from './CheckoutForm.module.css';
-import { validatePayment } from '../services/reseaServices';
-import { simulatePaymentGateway } from '../services/reseaServices';
+import styles from './PaymentForm.module.css';
+import { validatePayment, simulatePaymentGateway } from '../services/payment.js';
 
 function PaymentForm({ onBack, shippingData, onComplete, isSubmitting, setIsSubmitting }) {
     const [cardNumber, setCardNumber] = useState('');
@@ -46,7 +45,9 @@ function PaymentForm({ onBack, shippingData, onComplete, isSubmitting, setIsSubm
             <h2 className="mb-4">Metodo di pagamento</h2>
 
             <div className="mb-3">
+                <label htmlFor="cardNumber" className="form-label">Numero carta</label>
                 <input
+                    id="cardNumber"
                     className={`form-control ${styles.input}`}
                     placeholder="Numero carta (16 cifre)"
                     value={cardNumber}
@@ -56,7 +57,9 @@ function PaymentForm({ onBack, shippingData, onComplete, isSubmitting, setIsSubm
 
             <div className="row">
                 <div className="col-md-6 mb-3">
+                    <label htmlFor="expiry" className="form-label">Scadenza</label>
                     <input
+                        id="expiry"
                         className={`form-control ${styles.input}`}
                         placeholder="MM/AA"
                         value={expiry}
@@ -64,7 +67,9 @@ function PaymentForm({ onBack, shippingData, onComplete, isSubmitting, setIsSubm
                     />
                 </div>
                 <div className="col-md-6 mb-3">
+                    <label htmlFor="cvv" className="form-label">CVV</label>
                     <input
+                        id="cvv"
                         className={`form-control ${styles.input}`}
                         placeholder="CVV"
                         value={cvv}
