@@ -8,7 +8,7 @@ function useAssistantChat() {
     const [messages, setMessages] = useState([
         {
             role: "assistant",
-            html: "<p>Ciao! Sono GretAI Thun. Posso supportarti sui prodotti.</p>"
+            html: "<p>Ciao! Sono Nino Bell-IA. Posso supportarti sui prodotti.</p>"
         }
     ]);
     const [error, setError] = useState("");

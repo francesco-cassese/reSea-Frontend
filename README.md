@@ -1,9 +1,10 @@
 # ReSea EyeWear — Frontend
 
-E-commerce frontend per **ReSea EyeWear**, un brand di occhiali sostenibili. L'applicazione offre catalogo prodotti con filtri per categoria, dettaglio prodotto, carrello, wishlist, un flusso di checkout con calcolo IVA e pagamento simulato, e un assistente virtuale AI ("GretAI Thun") integrato per supportare l'utente nella scelta dei prodotti.
+E-commerce frontend per **ReSea EyeWear**, un brand di occhiali sostenibili. L'applicazione offre catalogo prodotti con filtri per categoria, dettaglio prodotto, carrello, wishlist, un flusso di checkout con calcolo IVA e pagamento simulato, e un assistente virtuale AI ("Nino Bell-IA") integrato per supportare l'utente nella scelta dei prodotti.
 
 ## Indice
 
+- [Screenshot](#screenshot)
 - [Stack tecnologico](#stack-tecnologico)
 - [Struttura del progetto](#struttura-del-progetto)
 - [Prerequisiti](#prerequisiti)
@@ -14,6 +15,24 @@ E-commerce frontend per **ReSea EyeWear**, un brand di occhiali sostenibili. L'a
 - [Deploy](#deploy)
 - [Contributi](#contributi)
 - [Licenza](#licenza)
+
+## Screenshot
+
+| Home | Catalogo prodotti |
+| --- | --- |
+| ![Homepage](docs/screenshots/homepage.jpg) | ![Catalogo prodotti](docs/screenshots/catalogo.jpg) |
+
+| Dettaglio prodotto | Carrello |
+| --- | --- |
+| ![Dettaglio prodotto](docs/screenshots/dettaglio-prodotto.jpg) | ![Carrello](docs/screenshots/carrello.jpg) |
+
+| Wishlist | Checkout |
+| --- | --- |
+| ![Wishlist](docs/screenshots/wishlist.jpg) | ![Checkout](docs/screenshots/checkout.jpg) |
+
+| Chi siamo | Assistente virtuale Nino Bell-IA |
+| --- | --- |
+| ![Chi siamo](docs/screenshots/chi-siamo.jpg) | ![Assistente virtuale Nino Bell-IA](docs/screenshots/chatbot.jpg) |
 
 ## Stack tecnologico
 

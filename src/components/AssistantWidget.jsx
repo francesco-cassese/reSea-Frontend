@@ -29,7 +29,7 @@ function AssistantWidget() {
                 ):(
                     <img 
                         src="/images/no-sfondo-avatar.png"
-                        alt="Avatar GretAI" 
+                        alt="Avatar Nino Bell-IA"
                         className={styles.assistantAvatar}
                         />
                 )}
@@ -40,14 +40,14 @@ function AssistantWidget() {
             {isOpen && (
                 <section id="assistant-widget-panel" className={`${styles.assistantWidgetPanel} card mt-2`}>
                     <header className={styles.assistantWidgetHeader}>
-                        <h2 className={styles.assistantWidgetTitle}>GretAI Thun</h2>
+                        <h2 className={styles.assistantWidgetTitle}>Nino Bell-IA</h2>
                         <p className={styles.assistantWidgetSubtitle}>Risposte rapide sul catalogo</p>
                     </header>
 
                     <div className={styles.assistantWidgetMessages} ref={messagesContainerRef}>
                         {messages.map((message, index) => (
                             <article key={index} className={`${styles.assistantBubble} ${message.role === "user" ? styles.assistantBubbleUser : styles.assistantBubbleAi}`}>
-                                <p className={styles.assistantBubbleLabel}>{message.role === "user" ? "Tu" : "GretAI Thun"}</p>
+                                <p className={styles.assistantBubbleLabel}>{message.role === "user" ? "Tu" : "Nino Bell-IA"}</p>
                                 {message.role === "user" ? (
                                     <p className={styles.assistantBubbleText}>{message.text}</p>
                                 ) : (
